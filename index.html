@@ -20,9 +20,19 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background .3s,color .3s;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 55% 35% at 8% 8%,#5bffc018 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#a78bfa14 0%,transparent 60%);pointer-events:none;z-index:0;}
-[data-theme="light"] body::before{background:radial-gradient(ellipse 55% 35% at 8% 8%,#0a8a5c10 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#6d28d910 0%,transparent 60%);}
-
+body::before{content:'';position:fixed;inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-family='Georgia,serif' font-size='18' fill='%235bffc0' opacity='0.04'%3EAbc%3C/text%3E%3Ctext x='60' y='65' font-family='Georgia,serif' font-size='14' fill='%23a78bfa' opacity='0.04'%3E%E2%9C%93%3C/text%3E%3Ctext x='5' y='80' font-family='Georgia,serif' font-size='12' fill='%23ffd166' opacity='0.035'%3EEng%3C/text%3E%3Ctext x='70' y='100' font-family='Georgia,serif' font-size='16' fill='%235bffc0' opacity='0.04'%3E?%3C/text%3E%3Ctext x='30' y='110' font-family='Georgia,serif' font-size='11' fill='%23a78bfa' opacity='0.04'%3EXyz%3C/text%3E%3Ctext x='85' y='30' font-family='Georgia,serif' font-size='13' fill='%23ffd166' opacity='0.03'%3E!%3C/text%3E%3C/svg%3E");
+  background-size: 120px 120px;
+  background-repeat: repeat;
+  pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 55% 35% at 8% 8%,#5bffc022 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#a78bfa18 0%,transparent 60%),radial-gradient(ellipse 30% 30% at 50% 50%,#0e0f1488 0%,transparent 100%);
+  pointer-events:none;z-index:0;}
+[data-theme="light"] body::before{
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-family='Georgia,serif' font-size='18' fill='%230a8a5c' opacity='0.05'%3EAbc%3C/text%3E%3Ctext x='60' y='65' font-family='Georgia,serif' font-size='14' fill='%236d28d9' opacity='0.05'%3E%E2%9C%93%3C/text%3E%3Ctext x='5' y='80' font-family='Georgia,serif' font-size='12' fill='%23b07d00' opacity='0.04'%3EEng%3C/text%3E%3Ctext x='70' y='100' font-family='Georgia,serif' font-size='16' fill='%230a8a5c' opacity='0.05'%3E?%3C/text%3E%3Ctext x='30' y='110' font-family='Georgia,serif' font-size='11' fill='%236d28d9' opacity='0.04'%3EXyz%3C/text%3E%3Ctext x='85' y='30' font-family='Georgia,serif' font-size='13' fill='%23b07d00' opacity='0.04'%3E!%3C/text%3E%3C/svg%3E");
+  background-size: 120px 120px;}
+[data-theme="light"] body::after{background:radial-gradient(ellipse 55% 35% at 8% 8%,#0a8a5c14 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#6d28d912 0%,transparent 60%);}
+ 
 /* HEADER */
 header{padding:18px 32px;display:flex;align-items:center;gap:14px;position:relative;z-index:10;border-bottom:1px solid var(--border);backdrop-filter:blur(8px);background:var(--bg)cc;flex-wrap:wrap;gap:10px;}
 .logo{background:var(--accent);color:#0e0f14;font-family:'Syne',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:5px 11px;border-radius:6px;}
@@ -32,24 +42,24 @@ header h1 span{color:var(--accent);}
 .theme-toggle{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:16px;color:var(--text);transition:all .2s;}
 .theme-toggle:hover{border-color:var(--accent);}
 .version-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
-
+ 
 /* NAV TABS */
 .nav{display:flex;gap:2px;padding:16px 32px 0;position:relative;z-index:5;overflow-x:auto;scrollbar-width:none;}
 .nav::-webkit-scrollbar{display:none;}
 .tab{padding:9px 18px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--surface);color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;flex-shrink:0;}
 .tab:hover{color:var(--text);}
 .tab.active{background:var(--card);color:var(--accent);border-color:var(--border);}
-
+ 
 /* MAIN */
 main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:28px 32px 80px;}
 .panel{display:none;}
 .panel.active{display:block;animation:fadeUp .3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
+ 
 /* CARDS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:18px;transition:background .3s,border-color .3s;}
 .card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:16px;letter-spacing:0.3px;}
-
+ 
 /* FORM */
 label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:0.6px;text-transform:uppercase;}
 input[type=text],select,textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;outline:none;transition:border-color .2s,background .3s;margin-bottom:14px;}
@@ -58,7 +68,7 @@ select option{background:var(--card);}
 textarea{resize:vertical;min-height:100px;}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-
+ 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;}
 .btn-primary{background:var(--accent);color:#0e0f14;}
@@ -69,23 +79,23 @@ textarea{resize:vertical;min-height:100px;}
 .btn-ghost:hover{color:var(--text);}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;filter:none!important;}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
-
+ 
 /* BADGES */
 .badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:var(--border);color:var(--muted);margin-left:6px;vertical-align:middle;}
 .badge-accent{background:var(--accent)22;color:var(--accent);}
 .badge-warn{background:var(--accent3)22;color:var(--accent3);}
 .badge-danger{background:var(--accent2)22;color:var(--accent2);}
-
+ 
 /* SPINNER */
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
+ 
 .empty-state{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px;}
 .empty-state .icon{font-size:38px;margin-bottom:12px;}
-
+ 
 /* DIVIDER */
 .divider{height:1px;background:var(--border);margin:20px 0;}
-
+ 
 /* ======== LESSON ======== */
 .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
 .vocab-item{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:12px;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;}
@@ -102,7 +112,7 @@ textarea{resize:vertical;min-height:100px;}
 .topic-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
 .chip{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;}
 .chip:hover,.chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent)11;}
-
+ 
 /* ======== QUIZ ======== */
 .score-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px;display:flex;align-items:center;gap:18px;margin-bottom:18px;}
 .score-num{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--accent);}
@@ -122,7 +132,7 @@ textarea{resize:vertical;min-height:100px;}
 .feedback.show{display:block;}
 .feedback.correct{background:var(--accent)18;color:var(--accent);}
 .feedback.wrong{background:var(--accent2)18;color:var(--accent2);}
-
+ 
 /* ======== FLASHCARDS ======== */
 .flashcard-area{perspective:1000px;margin:20px 0;}
 .flashcard{width:100%;max-width:500px;margin:0 auto;height:220px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);}
@@ -141,7 +151,7 @@ textarea{resize:vertical;min-height:100px;}
 .fc-dot.known{background:var(--accent);}
 .fc-dot.unsure{background:var(--accent3);}
 .fc-dot.current{background:var(--accent4);transform:scale(1.3);}
-
+ 
 /* ======== GRAMMAR CHECKER ======== */
 .grammar-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:14px;}
 .grammar-item{border-left:3px solid var(--accent3);padding:10px 14px;margin-bottom:10px;background:var(--accent3)08;border-radius:0 8px 8px 0;}
@@ -150,7 +160,8 @@ textarea{resize:vertical;min-height:100px;}
 .grammar-label.good{color:var(--accent);}
 .grammar-text{font-size:13px;color:var(--text);line-height:1.6;}
 .grammar-fix{font-size:12px;color:var(--accent);margin-top:5px;font-family:'DM Mono',monospace;}
-
+.style-item{border-color:var(--accent4);background:var(--accent4)08;}
+ 
 /* ======== WORD GAMES ======== */
 .game-select{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
 .game-card{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all .2s;text-align:center;}
@@ -174,7 +185,7 @@ textarea{resize:vertical;min-height:100px;}
 .scramble-area{text-align:center;}
 .scrambled-word{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent3);letter-spacing:8px;margin:20px 0;text-transform:uppercase;}
 .scramble-input{max-width:300px;margin:0 auto 14px;display:block;text-align:center;font-size:18px;letter-spacing:3px;text-transform:uppercase;}
-
+ 
 /* ======== PROGRESS ======== */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:18px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
@@ -186,7 +197,7 @@ textarea{resize:vertical;min-height:100px;}
 .history-title{font-size:13px;font-weight:500;color:var(--text);}
 .history-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
 .history-score{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent);}
-
+ 
 /* DICTIONARY */
 .dict-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:14px;}
 .dict-word{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);margin-bottom:4px;}
@@ -194,7 +205,7 @@ textarea{resize:vertical;min-height:100px;}
 .pos-tag{display:inline-block;background:var(--accent3)22;color:var(--accent3);font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;margin-bottom:8px;text-transform:uppercase;}
 .dict-def{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:3px;}
 .dict-ex{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:5px;}
-
+ 
 /* PRINT */
 @media print{
   header,.nav,.btn-row,.speak-icon,.theme-toggle,.version-badge,#panel-quiz,#panel-flashcards,#panel-grammar,#panel-games,#panel-progress,#panel-dictionary{display:none!important;}
@@ -202,7 +213,7 @@ textarea{resize:vertical;min-height:100px;}
   .card{border:1px solid #ccc;box-shadow:none;}
   #panel-lesson{display:block!important;}
 }
-
+ 
 /* RESPONSIVE */
 @media(max-width:640px){
   header{padding:14px 16px;}
@@ -218,7 +229,7 @@ textarea{resize:vertical;min-height:100px;}
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="logo">EL</div>
   <h1>English<span>Lab</span></h1>
@@ -227,7 +238,7 @@ textarea{resize:vertical;min-height:100px;}
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
   </div>
 </header>
-
+ 
 <div class="nav">
   <button class="tab active" onclick="switchTab('lesson',this)">📋 Lesson</button>
   <button class="tab" onclick="switchTab('quiz',this)">🎯 Quiz</button>
@@ -237,15 +248,14 @@ textarea{resize:vertical;min-height:100px;}
   <button class="tab" onclick="switchTab('progress',this)">📊 Progress</button>
   <button class="tab" onclick="switchTab('dictionary',this)">📖 Dictionary</button>
 </div>
-
+ 
 <main>
-
+ 
 <!-- ===== LESSON ===== -->
 <div id="panel-lesson" class="panel active">
   <div class="card">
     <div class="card-title">⚡ Generate Lesson Plan</div>
-    <label>Quick Topic Picker</label>
-    <div class="topic-chips" id="topic-chips"></div>
+    <div class="topic-chips" id="topic-chips" style="display:none;"></div>
     <div class="row">
       <div>
         <label>Topic / Theme</label>
@@ -297,7 +307,7 @@ textarea{resize:vertical;min-height:100px;}
       <button class="btn btn-secondary" onclick="clearLesson()">Clear</button>
     </div>
   </div>
-
+ 
   <div id="lesson-output" style="display:none;">
     <div class="card" id="vocab-card">
       <div class="card-title">📚 Vocabulary <span class="badge" id="vocab-badge">0 words</span> <span style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-left:8px;">🔊 click to hear</span></div>
@@ -317,7 +327,7 @@ textarea{resize:vertical;min-height:100px;}
     </div>
   </div>
 </div>
-
+ 
 <!-- ===== QUIZ ===== -->
 <div id="panel-quiz" class="panel">
   <div class="card">
@@ -370,7 +380,7 @@ textarea{resize:vertical;min-height:100px;}
   </div>
   <div id="quiz-container"><div class="empty-state"><div class="icon">🎯</div>Load a quiz to begin!</div></div>
 </div>
-
+ 
 <!-- ===== FLASHCARDS ===== -->
 <div id="panel-flashcards" class="panel">
   <div class="card">
@@ -414,7 +424,7 @@ textarea{resize:vertical;min-height:100px;}
     </div>
   </div>
 </div>
-
+ 
 <!-- ===== GRAMMAR ===== -->
 <div id="panel-grammar" class="panel">
   <div class="card">
@@ -429,7 +439,7 @@ textarea{resize:vertical;min-height:100px;}
   </div>
   <div id="grammar-output"></div>
 </div>
-
+ 
 <!-- ===== GAMES ===== -->
 <div id="panel-games" class="panel">
   <div class="card">
@@ -458,7 +468,7 @@ textarea{resize:vertical;min-height:100px;}
   </div>
   <div id="game-area"><div class="empty-state"><div class="icon">🎮</div>Pick a game and start playing!</div></div>
 </div>
-
+ 
 <!-- ===== PROGRESS ===== -->
 <div id="panel-progress" class="panel">
   <div class="card">
@@ -477,7 +487,7 @@ textarea{resize:vertical;min-height:100px;}
     <div id="known-words-list"><div style="color:var(--muted);font-size:13px;">No words marked as known yet.</div></div>
   </div>
 </div>
-
+ 
 <!-- ===== DICTIONARY ===== -->
 <div id="panel-dictionary" class="panel">
   <div class="card">
@@ -494,9 +504,9 @@ textarea{resize:vertical;min-height:100px;}
     <div id="wotd"><button class="btn btn-secondary" onclick="loadWOTD()">🎲 Random Academic Word</button></div>
   </div>
 </div>
-
+ 
 </main>
-
+ 
 <script>
 // ======== THEME ========
 let isDark = true;
@@ -506,7 +516,7 @@ function toggleTheme() {
   document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
   saveProgress();
 }
-
+ 
 // ======== TABS ========
 function switchTab(name, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -515,7 +525,7 @@ function switchTab(name, el) {
   document.getElementById('panel-' + name).classList.add('active');
   if (name === 'progress') renderProgress();
 }
-
+ 
 // ======== TTS ========
 function speak(text, rate = 0.95) {
   if (!window.speechSynthesis) return;
@@ -525,7 +535,7 @@ function speak(text, rate = 0.95) {
   window.speechSynthesis.speak(u);
 }
 function stopSpeaking() { window.speechSynthesis.cancel(); }
-
+ 
 // ======== VOCAB DATA ========
 const TOPICS = [
   { name: "Climate Change", emoji: "🌍", words: [
@@ -625,7 +635,7 @@ const TOPICS = [
     {w:"improvisation",d:"Creating or performing spontaneously without preparation.",e:"Jazz musicians are skilled in improvisation."},
   ]},
 ];
-
+ 
 // Build topic chips and selects
 function initTopics() {
   const chips = document.getElementById('topic-chips');
@@ -649,16 +659,16 @@ function initTopics() {
     gameSelect.appendChild(opt2);
   });
 }
-
+ 
 function getTopicData(name) {
   return TOPICS.find(t => t.name.toLowerCase() === name.toLowerCase()) ||
     TOPICS.find(t => name.toLowerCase().includes(t.name.toLowerCase())) ||
     TOPICS[0];
 }
-
+ 
 // ======== LESSON ========
 let currentVocab = [], lessonText = '';
-
+ 
 function generateLesson() {
   const topic = document.getElementById('lesson-topic').value.trim();
   if (!topic) { alert('Please enter or pick a topic!'); return; }
@@ -666,14 +676,14 @@ function generateLesson() {
   const duration = document.getElementById('lesson-duration').value;
   const skill = document.getElementById('lesson-skill').value;
   const size = document.getElementById('lesson-size').value;
-
+ 
   const btn = document.getElementById('btn-gen-lesson');
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Generating...';
-
+ 
   setTimeout(() => {
     const tData = getTopicData(topic);
     currentVocab = tData.words;
-
+ 
     const grid = document.getElementById('vocab-grid');
     grid.innerHTML = '';
     currentVocab.forEach(item => {
@@ -684,18 +694,18 @@ function generateLesson() {
       </div>`;
     });
     document.getElementById('vocab-badge').textContent = currentVocab.length + ' words';
-
+ 
     const planHTML = buildPlan(topic, level, duration, skill, size);
     document.getElementById('lesson-plan-content').innerHTML = planHTML;
     lessonText = planHTML.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-
+ 
     document.getElementById('lesson-output').style.display = 'block';
     btn.disabled = false; btn.innerHTML = '✦ Generate Lesson';
-
+ 
     logActivity('lesson', `Lesson: ${topic}`, level, null);
   }, 500);
 }
-
+ 
 function buildPlan(topic, level, duration, skill, size) {
   const mins = parseInt(duration);
   const warm = Math.floor(mins * .15), main1 = Math.floor(mins * .30),
@@ -711,7 +721,7 @@ function buildPlan(topic, level, duration, skill, size) {
   const sizeNote = size.includes('1–5') ? 'Students can work 1-to-1 with the teacher. Maximise speaking time.' :
     size.includes('20–30') ? 'Use group work and stations to manage participation.' :
     'Pair work is ideal for this class size.';
-
+ 
   return `
     <div class="lesson-section"><h3>🎯 Objectives</h3><ul>
       <li>Understand and use key vocabulary related to <strong>${topic}</strong></li>
@@ -734,7 +744,7 @@ function buildPlan(topic, level, duration, skill, size) {
       <p>Write 80–120 words about <strong>${topic}</strong> using at least 5 vocabulary words from today.</p>
     </div>`;
 }
-
+ 
 function clearLesson() {
   document.getElementById('lesson-topic').value = '';
   document.getElementById('lesson-output').style.display = 'none';
@@ -756,14 +766,14 @@ function autoQuiz() {
   document.querySelector('.tab:nth-child(2)').click();
   loadQuiz();
 }
-
+ 
 // ======== QUIZ ========
 let quizAnswers = {}, quizTotal = 0;
-
+ 
 function decodeHTML(s) {
   const t = document.createElement('textarea'); t.innerHTML = s; return t.value;
 }
-
+ 
 async function loadQuiz() {
   const cat = document.getElementById('quiz-cat').value;
   const diff = document.getElementById('quiz-diff').value;
@@ -781,7 +791,7 @@ async function loadQuiz() {
   }
   btn.disabled = false; btn.innerHTML = '✦ Load Quiz';
 }
-
+ 
 function renderQuiz(questions) {
   quizAnswers = {}; quizTotal = questions.length;
   document.getElementById('score-section').style.display = 'block';
@@ -802,7 +812,7 @@ function renderQuiz(questions) {
     </div>`;
   });
 }
-
+ 
 function answer(idx, chosen, correct, btn) {
   if (quizAnswers[idx] !== undefined) return;
   const isCorrect = chosen === correct;
@@ -824,23 +834,23 @@ function answer(idx, chosen, correct, btn) {
   }
   speak(isCorrect ? 'Correct!' : `The answer is: ${correct}`);
 }
-
+ 
 function updateScore(pts, answered, total) {
   document.getElementById('score-display').textContent = pts;
   document.getElementById('score-pct').textContent = total ? Math.round(pts/total*100)+'%' : '0%';
   document.getElementById('score-sub').textContent = `${answered} / ${total}`;
   document.getElementById('score-fill').style.width = total ? (pts/total*100)+'%' : '0%';
 }
-
+ 
 function resetQuiz() {
   quizAnswers = {};
   document.getElementById('quiz-container').innerHTML = '<div class="empty-state"><div class="icon">🎯</div>Load a quiz to begin!</div>';
   document.getElementById('score-section').style.display = 'none';
 }
-
+ 
 // ======== FLASHCARDS ========
 let fcDeck = [], fcIndex = 0, fcRatings = {};
-
+ 
 function loadFlashcards() {
   const topicName = document.getElementById('fc-topic').value;
   if (!topicName) return;
@@ -850,7 +860,7 @@ function loadFlashcards() {
   document.getElementById('fc-area').style.display = 'block';
   renderCard();
 }
-
+ 
 function renderCard() {
   if (!fcDeck.length) return;
   const item = fcDeck[fcIndex];
@@ -861,7 +871,7 @@ function renderCard() {
   document.getElementById('flashcard').classList.remove('flipped');
   renderDots();
 }
-
+ 
 function renderDots() {
   const dots = document.getElementById('fc-dots');
   dots.innerHTML = '';
@@ -871,9 +881,9 @@ function renderDots() {
     dots.appendChild(d);
   });
 }
-
+ 
 function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
-
+ 
 function fcRate(rating) {
   fcRatings[fcIndex] = rating;
   if (rating === 'known') {
@@ -890,51 +900,168 @@ function fcRate(rating) {
 function fcNext() { fcIndex = (fcIndex + 1) % fcDeck.length; renderCard(); }
 function fcPrev() { fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length; renderCard(); }
 function shuffleDeck() { fcDeck.sort(() => Math.random() - .5); fcIndex = 0; fcRatings = {}; renderCard(); }
-
-// ======== GRAMMAR CHECKER ========
-const grammarRules = [
-  { re: /\b(i)\b(?!')/g, fix: "I", msg: "The pronoun 'I' should always be capitalised.", type: "error" },
-  { re: /\b(goed|wented|runned|drived|catched|buyed|thinked|knowed|leaved|speaked)\b/gi, fix: null, msg: "Irregular past tense used incorrectly.", type: "error" },
-  { re: /\b(more\s+\w+er|most\s+\w+est)\b/gi, fix: null, msg: "Double comparatives (e.g. 'more faster') are incorrect.", type: "error" },
-  { re: /\b(a)\s+([aeiou])/gi, fix: "an", msg: "Use 'an' before words starting with a vowel sound.", type: "error" },
-  { re: /\b(they is|he are|she are|it are|we is|you is)\b/gi, fix: null, msg: "Subject-verb agreement error.", type: "error" },
-  { re: /\b(very very|really really|quite quite)\b/gi, fix: null, msg: "Avoid repeating intensifiers.", type: "style" },
-  { re: /\b(alot)\b/gi, fix: "a lot", msg: "'Alot' should be written as two words: 'a lot'.", type: "error" },
-  { re: /\b(its')\b/gi, fix: "its / it's", msg: "'its'' is not a valid form. Use 'its' (possessive) or 'it\\'s' (it is).", type: "error" },
-  { re: /\b(dont|cant|wont|shouldnt|wouldnt|couldnt|doesnt|didnt|isnt|arent|wasnt|werent)\b/gi, fix: null, msg: "Missing apostrophe in contraction.", type: "error" },
-  { re: /\s{2,}/g, fix: " ", msg: "Extra spaces detected.", type: "style" },
+ 
+// ======== GRAMMAR CHECKER (comprehensive) ========
+ 
+// Irregular verbs: [base, past simple, past participle]
+const IRREGULAR_VERBS = [
+  ['go','went','gone'],['do','did','done'],['have','had','had'],['make','made','made'],
+  ['take','took','taken'],['come','came','come'],['see','saw','seen'],['know','knew','known'],
+  ['get','got','got'],['give','gave','given'],['find','found','found'],['think','thought','thought'],
+  ['say','said','said'],['tell','told','told'],['become','became','become'],['show','showed','shown'],
+  ['leave','left','left'],['feel','felt','felt'],['put','put','put'],['bring','brought','brought'],
+  ['begin','began','begun'],['keep','kept','kept'],['hold','held','held'],['write','wrote','written'],
+  ['stand','stood','stood'],['hear','heard','heard'],['let','let','let'],['mean','meant','meant'],
+  ['set','set','set'],['meet','met','met'],['run','ran','run'],['pay','paid','paid'],
+  ['sit','sat','sat'],['speak','spoke','spoken'],['lie','lay','lain'],['lead','led','led'],
+  ['read','read','read'],['grow','grew','grown'],['lose','lost','lost'],['fall','fell','fallen'],
+  ['send','sent','sent'],['build','built','built'],['understand','understood','understood'],
+  ['draw','drew','drawn'],['break','broke','broken'],['spend','spent','spent'],['cut','cut','cut'],
+  ['rise','rose','risen'],['drive','drove','driven'],['buy','bought','bought'],['wear','wore','worn'],
+  ['choose','chose','chosen'],['win','won','won'],['catch','caught','caught'],['teach','taught','taught'],
+  ['sleep','slept','slept'],['sell','sold','sold'],['throw','threw','thrown'],['swim','swam','swum'],
+  ['ride','rode','ridden'],['fly','flew','flown'],['drink','drank','drunk'],['eat','ate','eaten'],
+  ['hit','hit','hit'],['bite','bit','bitten'],['hide','hid','hidden'],['shake','shook','shaken'],
+  ['wake','woke','woken'],['forget','forgot','forgotten'],['forgive','forgave','forgiven'],
+  ['freeze','froze','frozen'],['steal','stole','stolen'],['swing','swung','swung'],
 ];
-
+ 
+// Wrong past forms students commonly make (verb+ed on irregular)
+const WRONG_PAST = {
+  'goed':'went','comed':'came','runned':'ran','drived':'drove','taked':'took',
+  'buyed':'bought','catched':'caught','throwed':'threw','swimmed':'swam',
+  'speaked':'spoke','weared':'wore','drinked':'drank','ated':'ate','sitted':'sat',
+  'standed':'stood','leaved':'left','thinked':'thought','knowed':'knew',
+  'falled':'fell','writed':'wrote','hitted':'hit','finded':'found','sended':'sent',
+  'builded':'built','breaked':'broke','spended':'spent','teached':'taught',
+  'sleeped':'slept','selled':'sold','hided':'hid','waked':'woke','forgotted':'forgot',
+  'stealed':'stole','beated':'beat','bited':'bit','flied':'flew','rided':'rode',
+  'holded':'held','keeped':'kept','feeled':'felt','bringed':'brought','beginned':'began',
+  'losted':'lost','payed':'paid','meeted':'met','maked':'made','sayed':'said',
+  'telled':'told','putted':'put','letted':'let','readed':'read','growed':'grew',
+  'gaved':'gave','choosed':'chose','winned':'won','understanded':'understood',
+};
+ 
+// Tense confusion patterns
+const TENSE_RULES = [
+  // Past simple with time markers but wrong tense
+  { re: /\b(yesterday|last\s+\w+|ago|\w+\s+ago)\b.*?\b(go|come|do|have|see|make|take|get|give|find|think|say|tell|leave|feel|bring|begin|keep|hold|write|stand|hear|run|pay|sit|speak|grow|lose|fall|send|build|break|spend|buy|wear|choose|win|catch|teach|sleep|sell|throw|swim|ride|fly|drink|eat)\b/gi,
+    msg: "Past time marker detected (e.g. 'yesterday', 'last week'). You may need the past simple tense here.", type: "tense", fix: null },
+  // Present continuous for habits (should be simple present)
+  { re: /\b(always|usually|often|sometimes|never|every\s+\w+)\b.*?\b(am|is|are)\s+\w+ing\b/gi,
+    msg: "Frequency adverbs (always, usually, often...) are used with the present simple, not continuous.", type: "tense", fix: null },
+  // Future: going to + past form
+  { re: /\b(going to|gonna)\s+(went|came|did|had|made|took|got|gave|found|thought|said|told|left|felt|brought|began|kept|held|wrote|stood|heard|ran|paid|sat|spoke|grew|lost|fell|sent|built|broke|spent|bought|wore|won|caught|taught|slept|sold|threw|swam|rode|flew|drank|ate)\b/gi,
+    msg: "After 'going to', use the base verb form (infinitive), not the past tense.", type: "tense", fix: null },
+  // Since/for confusion
+  { re: /\b(since)\s+\d+\s+(minutes?|hours?|days?|weeks?|months?|years?)\b/gi,
+    msg: "Use 'for' with a duration (for 3 days). Use 'since' with a point in time (since Monday).", type: "tense", fix: null },
+  // Used to + ing (wrong)
+  { re: /\bused to\s+\w+ing\b/gi,
+    msg: "'Used to' is followed by the base verb (infinitive), not -ing. E.g. 'used to play', not 'used to playing'.", type: "tense", fix: null },
+  // Will + past (mixing future and past)
+  { re: /\bwill\s+(went|came|did|had|made|took|got|gave|found|thought|said|told|left)\b/gi,
+    msg: "After 'will', use the base verb (infinitive), not a past form.", type: "tense", fix: null },
+  // Have/has + base verb (missing past participle)
+  { re: /\b(have|has)\s+(go|come|do|make|take|get|give|find|think|say|tell|leave|feel|bring|keep|hold|write|stand|hear|run|pay|sit|speak|grow|lose|fall|send|build|break|spend|buy|wear|choose|win|catch|teach|sleep|sell|throw|swim|ride|fly|drink|eat)\b/gi,
+    msg: "After 'have/has', use the past participle (e.g. 'have gone', not 'have go').", type: "tense", fix: null },
+];
+ 
+const GRAMMAR_RULES = [
+  // Capitalisation
+  { re: /(?<![.!?]\s)\bi\b(?!')/g, fix: "I", msg: "The pronoun 'I' must always be capitalised.", type: "error" },
+  // Wrong irregular past forms
+  ...Object.entries(WRONG_PAST).map(([wrong, correct]) => ({
+    re: new RegExp(`\\b${wrong}\\b`, 'gi'),
+    fix: correct,
+    msg: `"${wrong}" is not a valid English word. The correct past tense of this verb is "${correct}".`,
+    type: "error"
+  })),
+  // a/an
+  { re: /\ba\s+([aeiouAEIOU])/g, fix: "an", msg: "Use 'an' before words beginning with a vowel sound (a, e, i, o, u).", type: "error" },
+  // Double comparatives
+  { re: /\bmore\s+\w+(er)\b/gi, fix: null, msg: "Avoid double comparatives like 'more faster'. Use either 'more fast' or 'faster', not both.", type: "error" },
+  { re: /\bmost\s+\w+(est)\b/gi, fix: null, msg: "Avoid double superlatives like 'most fastest'. Use either 'most fast' or 'fastest', not both.", type: "error" },
+  // Subject-verb agreement
+  { re: /\b(he|she|it)\s+are\b/gi, fix: "is", msg: "Subject-verb agreement error. Use 'is' with he/she/it, not 'are'.", type: "error" },
+  { re: /\b(they|we|you)\s+is\b/gi, fix: "are", msg: "Subject-verb agreement error. Use 'are' with they/we/you, not 'is'.", type: "error" },
+  { re: /\bi\s+am\s+not\b.*\bgoing\b|\bi\s+aren't\b/gi, fix: null, msg: "Use 'I am not' or 'I'm not' — 'I aren't' is incorrect.", type: "error" },
+  { re: /\bhe\s+don't\b|\bshe\s+don't\b|\bit\s+don't\b/gi, fix: "doesn't", msg: "Use 'doesn't' with he/she/it, not 'don't'.", type: "error" },
+  { re: /\bhe\s+have\b|\bshe\s+have\b|\bit\s+have\b/gi, fix: "has", msg: "Use 'has' with he/she/it, not 'have'.", type: "error" },
+  // Missing apostrophes
+  { re: /\b(dont|cant|wont|shouldnt|wouldnt|couldnt|doesnt|didnt|isnt|arent|wasnt|werent|havent|hasnt|hadnt|mustnt|neednt|shant)\b/gi, fix: null, msg: "Missing apostrophe in contraction. (e.g. 'dont' → 'don't')", type: "error" },
+  // Common spelling/usage
+  { re: /\balot\b/gi, fix: "a lot", msg: "'Alot' is not a word. Write it as two words: 'a lot'.", type: "error" },
+  { re: /\btheir\s+is\b|\btheir\s+are\b/gi, fix: "there is / there are", msg: "Use 'there is/are' to say something exists. 'Their' is possessive (their book).", type: "error" },
+  { re: /\byour\s+welcome\b/gi, fix: "you're welcome", msg: "'Your welcome' should be 'You're welcome' (you are welcome).", type: "error" },
+  { re: /\bshould\s+of\b|\bcould\s+of\b|\bwould\s+of\b|\bmust\s+of\b/gi, fix: "should have / could have / would have", msg: "Use 'have' not 'of' after modal verbs. E.g. 'should have gone', not 'should of gone'.", type: "error" },
+  { re: /\bto\s+\w+\s+to\b/gi, fix: null, msg: "Check your use of 'to' — you may have a double 'to' or a word order issue.", type: "style" },
+  // Style
+  { re: /\b(very very|really really|quite quite|very|really)\s+(very|really)\b/gi, fix: null, msg: "Avoid repeating intensifiers. Try a stronger single word instead (e.g. 'extremely', 'incredibly').", type: "style" },
+  { re: /\b(stuff|things)\b/gi, fix: null, msg: "Vague word detected. Try to be more specific — what 'stuff' or 'things' exactly?", type: "style" },
+  { re: /\bgot\s+got\b/gi, fix: null, msg: "Repeated word: 'got got'. Check this phrase.", type: "error" },
+  { re: /\s{2,}/g, fix: " ", msg: "Extra space detected.", type: "style" },
+];
+ 
 function checkGrammar() {
   const text = document.getElementById('grammar-input').value.trim();
   if (!text) { alert('Please enter some text first.'); return; }
+ 
+  const seen = new Set();
   const issues = [];
-  grammarRules.forEach(rule => {
+ 
+  // Check tense rules first
+  TENSE_RULES.forEach(rule => {
     const matches = text.match(rule.re);
     if (matches) {
       matches.forEach(m => {
-        issues.push({ original: m, fix: rule.fix, msg: rule.msg, type: rule.type });
+        const key = rule.msg;
+        if (!seen.has(key)) { seen.add(key); issues.push({ original: m.trim(), fix: rule.fix, msg: rule.msg, type: rule.type }); }
       });
     }
   });
-
-  // Sentence length
-  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
-  sentences.forEach(s => {
-    const words = s.trim().split(/\s+/);
-    if (words.length > 35) issues.push({ original: s.substring(0,40)+'...', fix: null, msg: "This sentence may be too long. Consider splitting it.", type: "style" });
+ 
+  // Check grammar rules
+  GRAMMAR_RULES.forEach(rule => {
+    const matches = text.match(rule.re);
+    if (matches) {
+      matches.forEach(m => {
+        const key = m.toLowerCase() + rule.msg;
+        if (!seen.has(key)) { seen.add(key); issues.push({ original: m.trim(), fix: rule.fix, msg: rule.msg, type: rule.type }); }
+      });
+    }
   });
-
+ 
+  // Sentence length
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 4);
+  sentences.forEach(s => {
+    if (s.trim().split(/\s+/).length > 35) {
+      issues.push({ original: s.trim().substring(0,45)+'...', fix: null, msg: "This sentence is very long. Consider splitting it into two shorter sentences.", type: "style" });
+    }
+  });
+ 
+  // Count errors vs style
+  const errors = issues.filter(i => i.type === 'error');
+  const tense = issues.filter(i => i.type === 'tense');
+  const style = issues.filter(i => i.type === 'style');
+ 
   const out = document.getElementById('grammar-output');
   if (!issues.length) {
-    out.innerHTML = `<div class="grammar-result"><div class="grammar-item good"><div class="grammar-label good">✓ Looking Good!</div><div class="grammar-text">No obvious errors detected. Your writing looks clear and correct.</div></div></div>`;
+    out.innerHTML = `<div class="grammar-result"><div class="grammar-item good"><div class="grammar-label good">✓ Looking Good!</div><div class="grammar-text">No obvious errors detected. Your writing looks clear and correct!</div></div></div>`;
   } else {
-    let html = `<div class="grammar-result"><p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-family:'DM Mono',monospace;">${issues.length} suggestion${issues.length>1?'s':''} found:</p>`;
+    let html = `<div class="grammar-result">
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+        ${errors.length ? `<span class="badge badge-danger">⚠ ${errors.length} grammar error${errors.length>1?'s':''}</span>` : ''}
+        ${tense.length ? `<span class="badge badge-warn">⏱ ${tense.length} tense issue${tense.length>1?'s':''}</span>` : ''}
+        ${style.length ? `<span class="badge badge-accent">✦ ${style.length} style tip${style.length>1?'s':''}</span>` : ''}
+      </div>`;
     issues.forEach(issue => {
-      html += `<div class="grammar-item">
-        <div class="grammar-label">${issue.type === 'error' ? '⚠ Error' : '✦ Style'}: "${issue.original}"</div>
+      const icon = issue.type === 'error' ? '⚠' : issue.type === 'tense' ? '⏱' : '✦';
+      const label = issue.type === 'error' ? 'Grammar Error' : issue.type === 'tense' ? 'Tense' : 'Style Tip';
+      html += `<div class="grammar-item${issue.type==='style'?' style-item':''}">
+        <div class="grammar-label${issue.type==='style'?' good':''}">${icon} ${label}: <em>"${issue.original}"</em></div>
         <div class="grammar-text">${issue.msg}</div>
-        ${issue.fix ? `<div class="grammar-fix">→ Suggestion: "${issue.fix}"</div>` : ''}
+        ${issue.fix ? `<div class="grammar-fix">→ Correction: "${issue.fix}"</div>` : ''}
       </div>`;
     });
     html += '</div>';
@@ -942,28 +1069,30 @@ function checkGrammar() {
   }
   logActivity('grammar', 'Grammar check', `${issues.length} issues found`, null);
 }
-
+ 
 function grammarExample() {
   const examples = [
-    "Yesterday i goed to the store and buyed alot of apple.",
-    "She are very very smart and she dont like making mistakes.",
-    "This is a example of a sentence that could be improved.",
-    "They is going to the park but they cant find it.",
+    "Yesterday i goed to the store and buyed alot of apple. She don't know their going to the park.",
+    "He have been working since 3 hours and he are very tired. I should of called him.",
+    "She always is eating pizza on Friday. They is going to the cinema last night.",
+    "I have go to school yesterday. He catched the ball and throwed it to his friend.",
+    "We was playing football when it started raining. I am going to went to London next week.",
+    "She speaked to the teacher and telled him she forgotted her homework.",
   ];
   document.getElementById('grammar-input').value = examples[Math.floor(Math.random()*examples.length)];
 }
-
+ 
 // ======== WORD GAMES ========
 let currentGame = 'hangman';
 let gameWord = '', gameGuesses = [], gameMistakes = 0;
 let scrambleWord = '', scrambleAnswer = '';
-
+ 
 function selectGame(game) {
   currentGame = game;
   document.querySelectorAll('.game-card').forEach(c => c.classList.remove('active'));
   document.getElementById('gc-' + game).classList.add('active');
 }
-
+ 
 function startGame() {
   const topicName = document.getElementById('game-topic').value;
   if (!topicName) { alert('Pick a topic!'); return; }
@@ -973,7 +1102,7 @@ function startGame() {
   if (currentGame === 'hangman') startHangman(picked);
   else startScramble(picked);
 }
-
+ 
 // HANGMAN
 const BODY_PARTS = [
   '<line x1="90" y1="20" x2="90" y2="60"/>',  // head placeholder
@@ -984,31 +1113,31 @@ const BODY_PARTS = [
   '<line x1="90" y1="120" x2="60" y2="155"/>',
   '<line x1="90" y1="120" x2="120" y2="155"/>',
 ];
-
+ 
 function startHangman(word) {
   gameWord = word.toLowerCase();
   gameGuesses = []; gameMistakes = 0;
   renderHangman();
 }
-
+ 
 function renderHangman() {
   const won = gameWord.split('').every(l => gameGuesses.includes(l));
   const lost = gameMistakes >= BODY_PARTS.length;
   let svgParts = `<line x1="20" y1="170" x2="160" y2="170"/><line x1="50" y1="170" x2="50" y2="10"/><line x1="50" y1="10" x2="90" y2="10"/><line x1="90" y1="10" x2="90" y2="20"/>`;
   for (let i = 0; i < gameMistakes; i++) svgParts += BODY_PARTS[i];
-
+ 
   const blanks = gameWord.split('').map(l =>
     `<div class="letter-blank">${gameGuesses.includes(l) || lost ? l.toUpperCase() : ''}</div>`).join('');
-
+ 
   const keyboard = 'abcdefghijklmnopqrstuvwxyz'.split('').map(l => {
     const hit = gameGuesses.includes(l) && gameWord.includes(l);
     const miss = gameGuesses.includes(l) && !gameWord.includes(l);
     return `<button class="key${hit?' hit':''}${miss?' miss':''}" onclick="guessLetter('${l}')" ${gameGuesses.includes(l)||won||lost?'disabled':''}>${l.toUpperCase()}</button>`;
   }).join('');
-
+ 
   const status = won ? `<p style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">🎉 You got it!</p>`
     : lost ? `<p style="color:var(--accent2);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">💀 The word was: <em>${gameWord}</em></p>` : '';
-
+ 
   document.getElementById('game-area').innerHTML = `
     <div class="card hangman-area">
       <svg class="hangman-svg" viewBox="0 0 180 180">${svgParts}</svg>
@@ -1020,14 +1149,14 @@ function renderHangman() {
   if (won) logActivity('game', 'Hangman — Won!', gameWord, 100);
   if (lost) logActivity('game', 'Hangman — Lost', gameWord, 0);
 }
-
+ 
 function guessLetter(l) {
   if (gameGuesses.includes(l)) return;
   gameGuesses.push(l);
   if (!gameWord.includes(l)) gameMistakes++;
   renderHangman();
 }
-
+ 
 // SCRAMBLE
 function startScramble(word) {
   scrambleAnswer = word.toLowerCase();
@@ -1047,7 +1176,7 @@ function startScramble(word) {
       <div id="scramble-feedback" style="margin-top:14px;font-family:'DM Mono',monospace;font-size:13px;text-align:center;"></div>
     </div>`;
 }
-
+ 
 function checkScramble() {
   const ans = document.getElementById('scramble-ans').value.trim().toLowerCase();
   const fb = document.getElementById('scramble-feedback');
@@ -1059,13 +1188,13 @@ function checkScramble() {
     fb.innerHTML = `<span style="color:var(--accent2)">✗ Try again!</span>`;
   }
 }
-
+ 
 // ======== PROGRESS (localStorage) ========
 function getProgress() { return JSON.parse(localStorage.getItem('el_progress') || '{"history":[],"stats":{}}'); }
 function saveProgressData(p) { localStorage.setItem('el_progress', JSON.stringify(p)); }
 function getKnownWords() { return JSON.parse(localStorage.getItem('el_known') || '[]'); }
 function saveKnownWords(w) { localStorage.setItem('el_known', JSON.stringify(w)); }
-
+ 
 function logActivity(type, title, detail, score) {
   const p = getProgress();
   p.history.unshift({ type, title, detail, score, date: new Date().toLocaleDateString() });
@@ -1073,17 +1202,17 @@ function logActivity(type, title, detail, score) {
   p.stats[type] = (p.stats[type] || 0) + 1;
   saveProgressData(p);
 }
-
+ 
 function renderProgress() {
   const p = getProgress();
   const known = getKnownWords();
   const icons = { lesson:'📋', quiz:'🎯', flashcard:'🃏', grammar:'📝', game:'🎮' };
-
+ 
   // Stats
   const total = Object.values(p.stats).reduce((a,b) => a+b, 0);
   const quizSessions = p.history.filter(h => h.type === 'quiz' && h.score !== null);
   const avgScore = quizSessions.length ? Math.round(quizSessions.reduce((a,h) => a+h.score,0)/quizSessions.length) : 0;
-
+ 
   document.getElementById('stat-grid').innerHTML = `
     <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">activities</div></div>
     <div class="stat-card"><div class="stat-num">${p.stats.lesson||0}</div><div class="stat-label">lessons</div></div>
@@ -1092,7 +1221,7 @@ function renderProgress() {
     <div class="stat-card"><div class="stat-num">${avgScore}%</div><div class="stat-label">avg quiz score</div></div>
     <div class="stat-card"><div class="stat-num">${p.stats.game||0}</div><div class="stat-label">games played</div></div>
   `;
-
+ 
   // History
   const hl = document.getElementById('history-list');
   if (!p.history.length) {
@@ -1108,7 +1237,7 @@ function renderProgress() {
         ${h.score !== null ? `<div class="history-score">${h.score}%</div>` : ''}
       </div>`).join('');
   }
-
+ 
   // Known words
   const kl = document.getElementById('known-words-list');
   if (!known.length) {
@@ -1119,7 +1248,7 @@ function renderProgress() {
     ).join('')}</div>`;
   }
 }
-
+ 
 function clearProgress() {
   if (confirm('Reset all progress? This cannot be undone.')) {
     localStorage.removeItem('el_progress');
@@ -1127,7 +1256,7 @@ function clearProgress() {
     renderProgress();
   }
 }
-
+ 
 // ======== DICTIONARY ========
 async function lookupWord() {
   const word = document.getElementById('dict-input').value.trim();
@@ -1143,7 +1272,7 @@ async function lookupWord() {
     out.innerHTML = `<div class="dict-result"><div class="dict-word">"${word}"</div><p style="color:var(--muted);font-size:13px;">No definition found. Try another spelling!</p></div>`;
   }
 }
-
+ 
 function renderDict(entry, container) {
   const phonetic = entry.phonetics?.find(p => p.text)?.text || '';
   let html = `<div class="dict-result">
@@ -1164,7 +1293,7 @@ function renderDict(entry, container) {
   html += '</div>';
   container.innerHTML = html;
 }
-
+ 
 const randomWords = ['eloquent','perseverance','ambiguous','scrutinise','inevitable','benevolent','meticulous','pragmatic','rhetoric','profound','resilience','empathy','altruistic','plausible','concise','lucid','diligent','tenacious'];
 async function loadWOTD() {
   const w = randomWords[Math.floor(Math.random()*randomWords.length)];
@@ -1177,7 +1306,7 @@ async function loadWOTD() {
     renderDict(data[0], out);
   } catch { out.innerHTML = `<div class="dict-result"><p style="color:var(--muted)">Couldn't load definition.</p></div>`; }
 }
-
+ 
 // ======== INIT ========
 initTopics();
 renderProgress();
