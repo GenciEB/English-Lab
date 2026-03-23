@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EnglishLab v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#0e0f14; --surface:#16181f; --card:#1d1f29; --border:#2a2d3a;
+  --accent:#5bffc0; --accent2:#ff6b6b; --accent3:#ffd166; --accent4:#a78bfa;
+  --text:#e8eaf0; --muted:#7c8098; --radius:14px;
+  --shadow: 0 4px 24px #0008;
+}
+[data-theme="light"] {
+  --bg:#f4f5f0; --surface:#ffffff; --card:#f9fafb; --border:#e2e4ec;
+  --accent:#0a8a5c; --accent2:#d93025; --accent3:#b07d00; --accent4:#6d28d9;
+  --text:#1a1c24; --muted:#6b7280; --shadow: 0 4px 24px #0001;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background .3s,color .3s;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 55% 35% at 8% 8%,#5bffc018 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#a78bfa14 0%,transparent 60%);pointer-events:none;z-index:0;}
+[data-theme="light"] body::before{background:radial-gradient(ellipse 55% 35% at 8% 8%,#0a8a5c10 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#6d28d910 0%,transparent 60%);}
+
+/* HEADER */
+header{padding:18px 32px;display:flex;align-items:center;gap:14px;position:relative;z-index:10;border-bottom:1px solid var(--border);backdrop-filter:blur(8px);background:var(--bg)cc;flex-wrap:wrap;gap:10px;}
+.logo{background:var(--accent);color:#0e0f14;font-family:'Syne',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:5px 11px;border-radius:6px;}
+header h1{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;}
+header h1 span{color:var(--accent);}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.theme-toggle{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:16px;color:var(--text);transition:all .2s;}
+.theme-toggle:hover{border-color:var(--accent);}
+.version-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
+
+/* NAV TABS */
+.nav{display:flex;gap:2px;padding:16px 32px 0;position:relative;z-index:5;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.tab{padding:9px 18px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--surface);color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;flex-shrink:0;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--card);color:var(--accent);border-color:var(--border);}
+
+/* MAIN */
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:28px 32px 80px;}
+.panel{display:none;}
+.panel.active{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:18px;transition:background .3s,border-color .3s;}
+.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:16px;letter-spacing:0.3px;}
+
+/* FORM */
+label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:0.6px;text-transform:uppercase;}
+input[type=text],select,textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;outline:none;transition:border-color .2s,background .3s;margin-bottom:14px;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--accent);}
+select option{background:var(--card);}
+textarea{resize:vertical;min-height:100px;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;}
+.btn-primary{background:var(--accent);color:#0e0f14;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.btn-ghost{background:transparent;color:var(--muted);border:none;padding:6px 10px;}
+.btn-ghost:hover{color:var(--text);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;filter:none!important;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+
+/* BADGES */
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:var(--border);color:var(--muted);margin-left:6px;vertical-align:middle;}
+.badge-accent{background:var(--accent)22;color:var(--accent);}
+.badge-warn{background:var(--accent3)22;color:var(--accent3);}
+.badge-danger{background:var(--accent2)22;color:var(--accent2);}
+
+/* SPINNER */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.empty-state{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px;}
+.empty-state .icon{font-size:38px;margin-bottom:12px;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* ======== LESSON ======== */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+.vocab-item{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:12px;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;}
+.vocab-item:hover{border-color:var(--accent);transform:translateY(-2px);}
+.vocab-word{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px;}
+.vocab-def{font-size:11px;color:var(--muted);line-height:1.5;}
+.speak-icon{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px;transition:color .2s;}
+.speak-icon:hover{color:var(--accent);}
+.lesson-section{margin-bottom:18px;}
+.lesson-section h3{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;}
+.lesson-section p,.lesson-section li{font-size:13px;line-height:1.75;color:var(--text);}
+.lesson-section ul{padding-left:18px;}
+.lesson-section li{margin-bottom:3px;}
+.topic-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.chip{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;}
+.chip:hover,.chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent)11;}
+
+/* ======== QUIZ ======== */
+.score-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px;display:flex;align-items:center;gap:18px;margin-bottom:18px;}
+.score-num{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--accent);}
+.score-track{flex:1;height:5px;background:var(--border);border-radius:99px;overflow:hidden;}
+.score-fill{height:100%;background:var(--accent);border-radius:99px;transition:width 1s ease;}
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px;transition:border-color .2s;}
+.quiz-q.correct{border-color:var(--accent);}
+.quiz-q.wrong{border-color:var(--accent2);}
+.q-text{font-size:13px;font-weight:500;margin-bottom:12px;line-height:1.65;}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.option{padding:9px 13px;border-radius:7px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:12px;cursor:pointer;transition:all .15s;text-align:left;font-family:'DM Sans',sans-serif;}
+.option:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+.option.correct{background:var(--accent)1a;border-color:var(--accent);color:var(--accent);}
+.option.wrong{background:var(--accent2)1a;border-color:var(--accent2);color:var(--accent2);}
+.option:disabled{cursor:default;}
+.feedback{font-size:11px;margin-top:8px;padding:7px 11px;border-radius:6px;display:none;font-family:'DM Mono',monospace;}
+.feedback.show{display:block;}
+.feedback.correct{background:var(--accent)18;color:var(--accent);}
+.feedback.wrong{background:var(--accent2)18;color:var(--accent2);}
+
+/* ======== FLASHCARDS ======== */
+.flashcard-area{perspective:1000px;margin:20px 0;}
+.flashcard{width:100%;max-width:500px;margin:0 auto;height:220px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.flashcard.flipped{transform:rotateY(180deg);}
+.card-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;backface-visibility:hidden;border:2px solid var(--border);}
+.card-front{background:var(--card);}
+.card-back{background:var(--accent)18;border-color:var(--accent)44;transform:rotateY(180deg);}
+.card-word{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent);text-align:center;margin-bottom:10px;}
+.card-hint{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
+.card-def{font-size:14px;color:var(--text);text-align:center;line-height:1.6;}
+.card-ex{font-size:12px;color:var(--muted);font-style:italic;text-align:center;margin-top:10px;}
+.fc-controls{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+.fc-progress{text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:16px;}
+.fc-dots{display:flex;gap:5px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.fc-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s;}
+.fc-dot.known{background:var(--accent);}
+.fc-dot.unsure{background:var(--accent3);}
+.fc-dot.current{background:var(--accent4);transform:scale(1.3);}
+
+/* ======== GRAMMAR CHECKER ======== */
+.grammar-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:14px;}
+.grammar-item{border-left:3px solid var(--accent3);padding:10px 14px;margin-bottom:10px;background:var(--accent3)08;border-radius:0 8px 8px 0;}
+.grammar-item.good{border-color:var(--accent);background:var(--accent)08;}
+.grammar-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;font-weight:600;}
+.grammar-label.good{color:var(--accent);}
+.grammar-text{font-size:13px;color:var(--text);line-height:1.6;}
+.grammar-fix{font-size:12px;color:var(--accent);margin-top:5px;font-family:'DM Mono',monospace;}
+
+/* ======== WORD GAMES ======== */
+.game-select{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.game-card{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all .2s;text-align:center;}
+.game-card:hover,.game-card.active{border-color:var(--accent);background:var(--accent)0a;}
+.game-card .game-icon{font-size:28px;margin-bottom:8px;}
+.game-card .game-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
+.game-card .game-desc{font-size:11px;color:var(--muted);margin-top:4px;}
+/* HANGMAN */
+.hangman-area{text-align:center;}
+.hangman-svg{width:180px;height:180px;margin:0 auto 16px;}
+.hangman-svg line,.hangman-svg circle{stroke:var(--accent2);stroke-width:3;stroke-linecap:round;}
+.word-display{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;}
+.letter-blank{width:32px;height:40px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--accent);transition:color .2s;}
+.keyboard{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:400px;margin:0 auto;}
+.key{width:36px;height:36px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;cursor:pointer;transition:all .15s;}
+.key:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+.key.hit{background:var(--accent)22;border-color:var(--accent);color:var(--accent);}
+.key.miss{background:var(--accent2)18;border-color:var(--accent2);color:var(--accent2);}
+.key:disabled{opacity:.5;cursor:default;}
+/* SCRAMBLE */
+.scramble-area{text-align:center;}
+.scrambled-word{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent3);letter-spacing:8px;margin:20px 0;text-transform:uppercase;}
+.scramble-input{max-width:300px;margin:0 auto 14px;display:block;text-align:center;font-size:18px;letter-spacing:3px;text-transform:uppercase;}
+
+/* ======== PROGRESS ======== */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:18px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent);}
+.stat-label{font-size:11px;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace;}
+.history-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+.history-icon{font-size:20px;flex-shrink:0;}
+.history-info{flex:1;}
+.history-title{font-size:13px;font-weight:500;color:var(--text);}
+.history-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
+.history-score{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent);}
+
+/* DICTIONARY */
+.dict-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:14px;}
+.dict-word{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);margin-bottom:4px;}
+.dict-phonetic{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:14px;}
+.pos-tag{display:inline-block;background:var(--accent3)22;color:var(--accent3);font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;margin-bottom:8px;text-transform:uppercase;}
+.dict-def{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:3px;}
+.dict-ex{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:5px;}
+
+/* PRINT */
+@media print{
+  header,.nav,.btn-row,.speak-icon,.theme-toggle,.version-badge,#panel-quiz,#panel-flashcards,#panel-grammar,#panel-games,#panel-progress,#panel-dictionary{display:none!important;}
+  body{background:white;color:black;}
+  .card{border:1px solid #ccc;box-shadow:none;}
+  #panel-lesson{display:block!important;}
+}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  header{padding:14px 16px;}
+  .nav{padding:12px 16px 0;}
+  main{padding:16px 16px 60px;}
+  .row,.row3{grid-template-columns:1fr;}
+  .options{grid-template-columns:1fr;}
+  .game-select{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .flashcard{height:190px;}
+  .card-word{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">EL</div>
+  <h1>English<span>Lab</span></h1>
+  <div class="header-right">
+    <span class="version-badge">v2.0</span>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
+  </div>
+</header>
+
+<div class="nav">
+  <button class="tab active" onclick="switchTab('lesson',this)">📋 Lesson</button>
+  <button class="tab" onclick="switchTab('quiz',this)">🎯 Quiz</button>
+  <button class="tab" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+  <button class="tab" onclick="switchTab('grammar',this)">📝 Grammar</button>
+  <button class="tab" onclick="switchTab('games',this)">🎮 Games</button>
+  <button class="tab" onclick="switchTab('progress',this)">📊 Progress</button>
+  <button class="tab" onclick="switchTab('dictionary',this)">📖 Dictionary</button>
+</div>
+
+<main>
+
+<!-- ===== LESSON ===== -->
+<div id="panel-lesson" class="panel active">
+  <div class="card">
+    <div class="card-title">⚡ Generate Lesson Plan</div>
+    <label>Quick Topic Picker</label>
+    <div class="topic-chips" id="topic-chips"></div>
+    <div class="row">
+      <div>
+        <label>Topic / Theme</label>
+        <input type="text" id="lesson-topic" placeholder="e.g. Climate Change, AI, Sports..."/>
+      </div>
+      <div>
+        <label>English Level</label>
+        <select id="lesson-level">
+          <option value="A1">A1 – Beginner</option>
+          <option value="A2">A2 – Elementary</option>
+          <option value="B1" selected>B1 – Intermediate</option>
+          <option value="B2">B2 – Upper Intermediate</option>
+          <option value="C1">C1 – Advanced</option>
+        </select>
+      </div>
+    </div>
+    <div class="row3">
+      <div>
+        <label>Duration</label>
+        <select id="lesson-duration">
+          <option>30 minutes</option>
+          <option selected>45 minutes</option>
+          <option>60 minutes</option>
+          <option>90 minutes</option>
+        </select>
+      </div>
+      <div>
+        <label>Focus Skill</label>
+        <select id="lesson-skill">
+          <option>Reading & Vocabulary</option>
+          <option>Speaking & Discussion</option>
+          <option>Writing</option>
+          <option>Grammar in Context</option>
+          <option>Listening Comprehension</option>
+        </select>
+      </div>
+      <div>
+        <label>Class Size</label>
+        <select id="lesson-size">
+          <option>1–5 (small group)</option>
+          <option selected>10–20 (standard)</option>
+          <option>20–30 (large class)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="generateLesson()" id="btn-gen-lesson">✦ Generate Lesson</button>
+      <button class="btn btn-secondary" onclick="window.print()">🖨️ Print / Export PDF</button>
+      <button class="btn btn-secondary" onclick="clearLesson()">Clear</button>
+    </div>
+  </div>
+
+  <div id="lesson-output" style="display:none;">
+    <div class="card" id="vocab-card">
+      <div class="card-title">📚 Vocabulary <span class="badge" id="vocab-badge">0 words</span> <span style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-left:8px;">🔊 click to hear</span></div>
+      <div class="vocab-grid" id="vocab-grid"></div>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn btn-secondary" onclick="sendToFlashcards()">🃏 Study as Flashcards</button>
+      </div>
+    </div>
+    <div class="card" id="lesson-plan-card">
+      <div class="card-title">🗓️ Lesson Plan</div>
+      <div id="lesson-plan-content"></div>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn btn-secondary" onclick="speakLesson()">🔊 Read Aloud</button>
+        <button class="btn btn-secondary" onclick="stopSpeaking()">⏹ Stop</button>
+        <button class="btn btn-secondary" onclick="autoQuiz()">🎯 Auto-Quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="panel-quiz" class="panel">
+  <div class="card">
+    <div class="card-title">🎯 Quiz Settings</div>
+    <div class="row">
+      <div>
+        <label>Category</label>
+        <select id="quiz-cat">
+          <option value="0">Any Category</option>
+          <option value="9">General Knowledge</option>
+          <option value="10">Books & Literature</option>
+          <option value="23">History</option>
+          <option value="22">Geography</option>
+          <option value="17">Science & Nature</option>
+          <option value="11">Film</option>
+          <option value="21">Sports</option>
+        </select>
+      </div>
+      <div>
+        <label>Difficulty</label>
+        <select id="quiz-diff">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Questions</label>
+        <select id="quiz-count">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="loadQuiz()" id="btn-load-quiz">✦ Load Quiz</button>
+      <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+    </div>
+  </div>
+  <div id="score-section" style="display:none;">
+    <div class="score-bar">
+      <div><div class="score-num" id="score-display">0</div><div style="font-size:11px;color:var(--muted);">points</div></div>
+      <div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+      <div style="text-align:right;"><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;" id="score-pct">0%</div><div style="font-size:11px;color:var(--muted);" id="score-sub">0 / 0</div></div>
+    </div>
+  </div>
+  <div id="quiz-container"><div class="empty-state"><div class="icon">🎯</div>Load a quiz to begin!</div></div>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div id="panel-flashcards" class="panel">
+  <div class="card">
+    <div class="card-title">🃏 Flashcard Deck</div>
+    <div class="row">
+      <div>
+        <label>Topic</label>
+        <select id="fc-topic" onchange="loadFlashcards()">
+          <option value="">-- Select topic --</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;padding-bottom:14px;">
+        <button class="btn btn-primary" onclick="loadFlashcards()">✦ Start Deck</button>
+      </div>
+    </div>
+  </div>
+  <div id="fc-area" style="display:none;">
+    <div class="fc-progress" id="fc-progress">Card 1 of 10</div>
+    <div class="fc-dots" id="fc-dots"></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="card-face card-front" id="card-front">
+          <div class="card-word" id="fc-word">word</div>
+          <div class="card-hint">tap to reveal definition</div>
+        </div>
+        <div class="card-face card-back" id="card-back">
+          <div class="card-def" id="fc-def">definition</div>
+          <div class="card-ex" id="fc-ex"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="btn btn-secondary" onclick="fcRate('unsure')">🤔 Still Learning</button>
+      <button class="btn btn-primary" onclick="fcRate('known')">✓ Got It!</button>
+      <button class="btn btn-ghost" onclick="speak(document.getElementById('fc-word').textContent)">🔊</button>
+    </div>
+    <div class="btn-row" style="justify-content:center;margin-top:12px;">
+      <button class="btn btn-ghost" onclick="fcPrev()">← Prev</button>
+      <button class="btn btn-ghost" onclick="fcNext()">Next →</button>
+      <button class="btn btn-ghost" onclick="shuffleDeck()">🔀 Shuffle</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GRAMMAR ===== -->
+<div id="panel-grammar" class="panel">
+  <div class="card">
+    <div class="card-title">📝 Grammar & Writing Checker</div>
+    <label>Paste your text below</label>
+    <textarea id="grammar-input" placeholder="Type or paste a sentence or short paragraph here. e.g. 'Yesterday I goed to the store and buyed some apple.'"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkGrammar()">✦ Check Grammar</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('grammar-input').value='';document.getElementById('grammar-output').innerHTML=''">Clear</button>
+      <button class="btn btn-secondary" onclick="grammarExample()">Try an Example</button>
+    </div>
+  </div>
+  <div id="grammar-output"></div>
+</div>
+
+<!-- ===== GAMES ===== -->
+<div id="panel-games" class="panel">
+  <div class="card">
+    <div class="card-title">🎮 Word Games</div>
+    <div class="game-select">
+      <div class="game-card active" id="gc-hangman" onclick="selectGame('hangman')">
+        <div class="game-icon">🪢</div>
+        <div class="game-name">Hangman</div>
+        <div class="game-desc">Guess the word letter by letter</div>
+      </div>
+      <div class="game-card" id="gc-scramble" onclick="selectGame('scramble')">
+        <div class="game-icon">🔀</div>
+        <div class="game-name">Word Scramble</div>
+        <div class="game-desc">Unscramble the jumbled word</div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Topic</label>
+        <select id="game-topic"></select>
+      </div>
+      <div style="display:flex;align-items:flex-end;padding-bottom:14px;">
+        <button class="btn btn-primary" onclick="startGame()">✦ New Game</button>
+      </div>
+    </div>
+  </div>
+  <div id="game-area"><div class="empty-state"><div class="icon">🎮</div>Pick a game and start playing!</div></div>
+</div>
+
+<!-- ===== PROGRESS ===== -->
+<div id="panel-progress" class="panel">
+  <div class="card">
+    <div class="card-title">📊 Your Progress</div>
+    <div class="stat-grid" id="stat-grid"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="clearProgress()">🗑️ Reset Progress</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📅 Recent Activity</div>
+    <div id="history-list"><div class="empty-state"><div class="icon">📊</div>No activity yet. Start learning!</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🧠 Known Vocabulary</div>
+    <div id="known-words-list"><div style="color:var(--muted);font-size:13px;">No words marked as known yet.</div></div>
+  </div>
+</div>
+
+<!-- ===== DICTIONARY ===== -->
+<div id="panel-dictionary" class="panel">
+  <div class="card">
+    <div class="card-title">📖 Dictionary Lookup</div>
+    <label>Enter a word</label>
+    <div style="display:flex;gap:10px;">
+      <input type="text" id="dict-input" placeholder="e.g. perseverance, eloquent..." style="margin-bottom:0;" onkeydown="if(event.key==='Enter')lookupWord()"/>
+      <button class="btn btn-primary" onclick="lookupWord()">Search</button>
+    </div>
+  </div>
+  <div id="dict-output"></div>
+  <div class="card" style="margin-top:18px;">
+    <div class="card-title">✨ Discover a Word</div>
+    <div id="wotd"><button class="btn btn-secondary" onclick="loadWOTD()">🎲 Random Academic Word</button></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ======== THEME ========
+let isDark = true;
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+  saveProgress();
+}
+
+// ======== TABS ========
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'progress') renderProgress();
+}
+
+// ======== TTS ========
+function speak(text, rate = 0.95) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = rate; u.pitch = 1;
+  window.speechSynthesis.speak(u);
+}
+function stopSpeaking() { window.speechSynthesis.cancel(); }
+
+// ======== VOCAB DATA ========
+const TOPICS = [
+  { name: "Climate Change", emoji: "🌍", words: [
+    {w:"fossil fuels",d:"Natural fuels (coal, oil, gas) formed from ancient organisms.",e:"Burning fossil fuels releases carbon dioxide."},
+    {w:"carbon emissions",d:"CO₂ released into the atmosphere from burning fuel.",e:"Countries are pledging to reduce carbon emissions."},
+    {w:"renewable energy",d:"Energy from naturally replenished sources like sun or wind.",e:"Solar panels generate renewable energy."},
+    {w:"greenhouse gas",d:"A gas that traps heat in the atmosphere.",e:"Methane is a powerful greenhouse gas."},
+    {w:"sustainability",d:"Using resources without depleting them for future generations.",e:"The company adopted sustainability practices."},
+    {w:"deforestation",d:"Large-scale clearing of forests.",e:"Deforestation threatens many animal species."},
+    {w:"biodiversity",d:"The variety of life in an ecosystem.",e:"Rainforests have incredible biodiversity."},
+    {w:"ecosystem",d:"A community of living things interacting with their environment.",e:"Oceans are a vital ecosystem."},
+    {w:"carbon footprint",d:"Total greenhouse gas emissions caused by an individual.",e:"Flying increases your carbon footprint."},
+    {w:"drought",d:"A prolonged period of abnormally low rainfall.",e:"Severe droughts are becoming more frequent."},
+  ]},
+  { name: "Social Media", emoji: "📱", words: [
+    {w:"algorithm",d:"Rules a computer uses to decide what content you see.",e:"The algorithm shows you posts based on your likes."},
+    {w:"influencer",d:"A person with a large online following who affects opinions.",e:"She became an influencer after her videos went viral."},
+    {w:"engagement",d:"Likes, shares, and comments on social media posts.",e:"High engagement helps posts reach more people."},
+    {w:"viral",d:"Spreading rapidly and widely across the internet.",e:"The video went viral overnight."},
+    {w:"misinformation",d:"False information spread without intending to deceive.",e:"Misinformation about health can be dangerous."},
+    {w:"digital footprint",d:"The trail of data you leave when using the internet.",e:"Think carefully about your digital footprint."},
+    {w:"cyberbullying",d:"Using digital technology to bully someone.",e:"Schools are tackling cyberbullying with new policies."},
+    {w:"privacy",d:"The right to keep personal information secret.",e:"Many apps collect data without respecting privacy."},
+    {w:"platform",d:"A website or app where people share content.",e:"Instagram is a popular social media platform."},
+    {w:"filter bubble",d:"When algorithms only show you content you already agree with.",e:"Filter bubbles can distort our view of the world."},
+  ]},
+  { name: "Technology", emoji: "💻", words: [
+    {w:"artificial intelligence",d:"Computer systems that perform tasks requiring human-like intelligence.",e:"AI can now write essays and create images."},
+    {w:"automation",d:"Using machines or software to perform tasks automatically.",e:"Automation is changing many industries."},
+    {w:"cybersecurity",d:"Protection of computer systems from digital attacks.",e:"Cybersecurity is a growing career field."},
+    {w:"virtual reality",d:"A simulated 3D environment experienced through a headset.",e:"Virtual reality is used in gaming and training."},
+    {w:"bandwidth",d:"The amount of data that can be transferred over a connection.",e:"Streaming videos requires high bandwidth."},
+    {w:"cloud computing",d:"Storing and accessing data over the internet.",e:"Many businesses use cloud computing for storage."},
+    {w:"machine learning",d:"AI that improves through experience and data.",e:"Machine learning powers recommendation systems."},
+    {w:"encryption",d:"Converting data into a code to prevent unauthorised access.",e:"End-to-end encryption protects your messages."},
+    {w:"data breach",d:"Unauthorised access to confidential data.",e:"The company suffered a major data breach."},
+    {w:"interface",d:"The point of interaction between a user and a computer.",e:"A good interface makes software easy to use."},
+  ]},
+  { name: "Travel", emoji: "✈️", words: [
+    {w:"itinerary",d:"A detailed plan or route of a journey.",e:"She planned a week-long itinerary through Italy."},
+    {w:"accommodation",d:"A place where someone lives or stays temporarily.",e:"The accommodation included breakfast."},
+    {w:"culture shock",d:"Disorientation when experiencing a very different culture.",e:"Moving abroad can cause culture shock."},
+    {w:"landmark",d:"A recognisable feature marking a location.",e:"The Eiffel Tower is a famous landmark."},
+    {w:"expedition",d:"A journey undertaken for a specific purpose.",e:"They joined an expedition to the Arctic."},
+    {w:"customs",d:"The official process of checking goods at a border.",e:"You must declare items at customs."},
+    {w:"jet lag",d:"Tiredness after crossing several time zones.",e:"She had terrible jet lag after the 12-hour flight."},
+    {w:"excursion",d:"A short journey or trip, often for pleasure.",e:"We booked a day excursion to the volcano."},
+    {w:"visa",d:"An official endorsement allowing entry to a country.",e:"You need a visa to visit some countries."},
+    {w:"backpacking",d:"Travelling independently with minimal luggage.",e:"He spent a summer backpacking through Southeast Asia."},
+  ]},
+  { name: "Health & Wellbeing", emoji: "🏃", words: [
+    {w:"nutrition",d:"The process of taking in food for growth and health.",e:"Good nutrition is essential for children."},
+    {w:"immunity",d:"The ability of an organism to resist infection.",e:"Exercise can boost your immunity."},
+    {w:"cardiovascular",d:"Relating to the heart and blood vessels.",e:"Running is great cardiovascular exercise."},
+    {w:"mental health",d:"A person's psychological and emotional wellbeing.",e:"Talking about mental health reduces stigma."},
+    {w:"sedentary",d:"Characterised by much sitting and little physical activity.",e:"A sedentary lifestyle can lead to health problems."},
+    {w:"symptom",d:"A physical or mental feature indicating a condition.",e:"Fever is a common symptom of infection."},
+    {w:"therapy",d:"Treatment for physical or mental health problems.",e:"Cognitive therapy can help with anxiety."},
+    {w:"pandemic",d:"An outbreak of disease spreading across a large region.",e:"The pandemic changed how we live and work."},
+    {w:"resilience",d:"The ability to recover quickly from difficulties.",e:"Resilience is an important life skill."},
+    {w:"hydration",d:"The process of maintaining enough water in the body.",e:"Proper hydration improves concentration."},
+  ]},
+  { name: "Education", emoji: "📚", words: [
+    {w:"curriculum",d:"The subjects making up a course of study.",e:"The school updated its curriculum last year."},
+    {w:"assessment",d:"An evaluation of a student's understanding.",e:"Continuous assessment replaces final exams in some schools."},
+    {w:"collaborative",d:"Involving people working together toward a shared goal.",e:"Collaborative projects develop teamwork skills."},
+    {w:"critical thinking",d:"Analysing facts to form a judgement.",e:"Critical thinking is valued in higher education."},
+    {w:"literacy",d:"The ability to read and write.",e:"Digital literacy is as important as traditional literacy."},
+    {w:"pedagogy",d:"The method and practice of teaching.",e:"Modern pedagogy focuses on student engagement."},
+    {w:"scholarship",d:"A grant awarded to support a student's education.",e:"She received a scholarship to study abroad."},
+    {w:"motivation",d:"The reason for acting in a particular way.",e:"Motivation affects academic performance."},
+    {w:"peer review",d:"Evaluation of work by others in the same field.",e:"Students exchanged essays for peer review."},
+    {w:"extracurricular",d:"Activities outside the regular academic curriculum.",e:"She joined many extracurricular clubs."},
+  ]},
+  { name: "Environment", emoji: "🌿", words: [
+    {w:"conservation",d:"Protection of the natural environment.",e:"Conservation efforts saved the species."},
+    {w:"pollution",d:"Contamination of the environment with harmful substances.",e:"Air pollution causes respiratory problems."},
+    {w:"habitat",d:"The natural home of an animal or plant.",e:"Wetlands are an important habitat for birds."},
+    {w:"endangered",d:"At serious risk of extinction.",e:"The tiger is an endangered species."},
+    {w:"reforestation",d:"Replanting trees in deforested areas.",e:"Reforestation helps absorb CO₂."},
+    {w:"compost",d:"Decayed organic material used as fertiliser.",e:"She used kitchen waste to make compost."},
+    {w:"carbon neutral",d:"Not adding net carbon dioxide to the atmosphere.",e:"The airline aims to be carbon neutral by 2030."},
+    {w:"recycling",d:"Converting waste into reusable material.",e:"Recycling reduces landfill waste."},
+    {w:"invasive species",d:"A species introduced to an area where it causes harm.",e:"Invasive species can destroy local ecosystems."},
+    {w:"marine",d:"Relating to the sea.",e:"Marine biologists study ocean life."},
+  ]},
+  { name: "Arts & Culture", emoji: "🎨", words: [
+    {w:"aesthetic",d:"Concerned with beauty or the appreciation of art.",e:"The gallery has a minimal aesthetic."},
+    {w:"narrative",d:"A spoken or written account of events.",e:"The film had a powerful narrative."},
+    {w:"symbolism",d:"The use of symbols to represent ideas.",e:"The dove is a symbol of peace."},
+    {w:"genre",d:"A style or category of art, music, or literature.",e:"Mystery is her favourite literary genre."},
+    {w:"interpretation",d:"An explanation or way of understanding something.",e:"His interpretation of the poem was unique."},
+    {w:"perspective",d:"A particular point of view or attitude.",e:"The novel offers a fresh perspective on war."},
+    {w:"critique",d:"A detailed analysis and assessment of something.",e:"She wrote a critique of the exhibition."},
+    {w:"contemporary",d:"Belonging to or occurring in the present.",e:"Contemporary art often challenges traditions."},
+    {w:"heritage",d:"Traditions and achievements passed down from previous generations.",e:"The city is proud of its cultural heritage."},
+    {w:"improvisation",d:"Creating or performing spontaneously without preparation.",e:"Jazz musicians are skilled in improvisation."},
+  ]},
+];
+
+// Build topic chips and selects
+function initTopics() {
+  const chips = document.getElementById('topic-chips');
+  const fcSelect = document.getElementById('fc-topic');
+  const gameSelect = document.getElementById('game-topic');
+  TOPICS.forEach(t => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = t.emoji + ' ' + t.name;
+    chip.onclick = () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.getElementById('lesson-topic').value = t.name;
+    };
+    chips.appendChild(chip);
+    const opt1 = document.createElement('option');
+    opt1.value = t.name; opt1.textContent = t.emoji + ' ' + t.name;
+    fcSelect.appendChild(opt1);
+    const opt2 = document.createElement('option');
+    opt2.value = t.name; opt2.textContent = t.emoji + ' ' + t.name;
+    gameSelect.appendChild(opt2);
+  });
+}
+
+function getTopicData(name) {
+  return TOPICS.find(t => t.name.toLowerCase() === name.toLowerCase()) ||
+    TOPICS.find(t => name.toLowerCase().includes(t.name.toLowerCase())) ||
+    TOPICS[0];
+}
+
+// ======== LESSON ========
+let currentVocab = [], lessonText = '';
+
+function generateLesson() {
+  const topic = document.getElementById('lesson-topic').value.trim();
+  if (!topic) { alert('Please enter or pick a topic!'); return; }
+  const level = document.getElementById('lesson-level').value;
+  const duration = document.getElementById('lesson-duration').value;
+  const skill = document.getElementById('lesson-skill').value;
+  const size = document.getElementById('lesson-size').value;
+
+  const btn = document.getElementById('btn-gen-lesson');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Generating...';
+
+  setTimeout(() => {
+    const tData = getTopicData(topic);
+    currentVocab = tData.words;
+
+    const grid = document.getElementById('vocab-grid');
+    grid.innerHTML = '';
+    currentVocab.forEach(item => {
+      grid.innerHTML += `<div class="vocab-item" onclick="speak('${item.w.replace(/'/g,"\\'")}')">
+        <div class="vocab-word">📌 ${item.w}</div>
+        <div class="vocab-def">${item.d}</div>
+        <button class="speak-icon" onclick="event.stopPropagation();speak('${item.w.replace(/'/g,"\\'")}')">🔊</button>
+      </div>`;
+    });
+    document.getElementById('vocab-badge').textContent = currentVocab.length + ' words';
+
+    const planHTML = buildPlan(topic, level, duration, skill, size);
+    document.getElementById('lesson-plan-content').innerHTML = planHTML;
+    lessonText = planHTML.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+
+    document.getElementById('lesson-output').style.display = 'block';
+    btn.disabled = false; btn.innerHTML = '✦ Generate Lesson';
+
+    logActivity('lesson', `Lesson: ${topic}`, level, null);
+  }, 500);
+}
+
+function buildPlan(topic, level, duration, skill, size) {
+  const mins = parseInt(duration);
+  const warm = Math.floor(mins * .15), main1 = Math.floor(mins * .30),
+        main2 = Math.floor(mins * .30), wrap = mins - Math.floor(mins*.15) - Math.floor(mins*.30) - Math.floor(mins*.30);
+  const acts = {
+    "Reading & Vocabulary": {a:"Pre-reading: Match vocabulary to definitions using word cards",b:"Read a text about the topic; underline unknown words",c:"Comprehension questions + gap-fill using vocabulary"},
+    "Speaking & Discussion": {a:"Think–Pair–Share: What do you already know about this topic?",b:"Structured mini-debate or role-play scenario",c:"Class discussion + peer feedback on language use"},
+    "Writing": {a:"Brainstorm ideas using a mind map on the board",b:"Draft a paragraph with guided prompts and sentence starters",c:"Peer review using a checklist + self-correction"},
+    "Grammar in Context": {a:"Spot the structure: find grammar patterns in example sentences",b:"Form-meaning-use mini-lesson + controlled practice",c:"Personalised sentences: write your own using the grammar"},
+    "Listening Comprehension": {a:"Pre-listening: predict what you will hear",b:"Listen and answer comprehension questions",c:"Dictogloss — reconstruct the text from notes"},
+  };
+  const a = acts[skill] || acts["Reading & Vocabulary"];
+  const sizeNote = size.includes('1–5') ? 'Students can work 1-to-1 with the teacher. Maximise speaking time.' :
+    size.includes('20–30') ? 'Use group work and stations to manage participation.' :
+    'Pair work is ideal for this class size.';
+
+  return `
+    <div class="lesson-section"><h3>🎯 Objectives</h3><ul>
+      <li>Understand and use key vocabulary related to <strong>${topic}</strong></li>
+      <li>Practise ${skill.toLowerCase()} skills at <strong>${level}</strong> level</li>
+      <li>Communicate ideas about the topic with confidence</li>
+    </ul></div>
+    <div class="lesson-section"><h3>⏱️ Timeline (${duration})</h3><ul>
+      <li><strong>${warm} min</strong> — Warm-up: ${a.a}</li>
+      <li><strong>${main1} min</strong> — Main Activity 1: ${a.b}</li>
+      <li><strong>${main2} min</strong> — Main Activity 2: ${a.c}</li>
+      <li><strong>${wrap} min</strong> — Wrap-up: Exit ticket — 3 words I learned today</li>
+    </ul></div>
+    <div class="lesson-section"><h3>💡 Teacher Notes</h3><ul>
+      <li>${sizeNote}</li>
+      <li>Encourage guessing word meanings from context first</li>
+      <li>At ${level} level, use sentence starters and word banks to scaffold tasks</li>
+      <li>Celebrate creative answers — accuracy improves with exposure</li>
+    </ul></div>
+    <div class="lesson-section"><h3>📝 Homework</h3>
+      <p>Write 80–120 words about <strong>${topic}</strong> using at least 5 vocabulary words from today.</p>
+    </div>`;
+}
+
+function clearLesson() {
+  document.getElementById('lesson-topic').value = '';
+  document.getElementById('lesson-output').style.display = 'none';
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+}
+function speakLesson() { if (lessonText) speak(lessonText, 0.88); }
+function sendToFlashcards() {
+  const topic = document.getElementById('lesson-topic').value.trim();
+  const sel = document.getElementById('fc-topic');
+  for (let i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value.toLowerCase() === getTopicData(topic).name.toLowerCase()) {
+      sel.selectedIndex = i; break;
+    }
+  }
+  loadFlashcards();
+  document.querySelector('.tab:nth-child(3)').click();
+}
+function autoQuiz() {
+  document.querySelector('.tab:nth-child(2)').click();
+  loadQuiz();
+}
+
+// ======== QUIZ ========
+let quizAnswers = {}, quizTotal = 0;
+
+function decodeHTML(s) {
+  const t = document.createElement('textarea'); t.innerHTML = s; return t.value;
+}
+
+async function loadQuiz() {
+  const cat = document.getElementById('quiz-cat').value;
+  const diff = document.getElementById('quiz-diff').value;
+  const count = document.getElementById('quiz-count').value;
+  const btn = document.getElementById('btn-load-quiz');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Loading...';
+  const catP = cat !== '0' ? `&category=${cat}` : '';
+  try {
+    const res = await fetch(`https://opentdb.com/api.php?amount=${count}&type=multiple&difficulty=${diff}${catP}`);
+    const data = await res.json();
+    if (data.response_code !== 0 || !data.results.length) throw new Error();
+    renderQuiz(data.results);
+  } catch {
+    document.getElementById('quiz-container').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div>Couldn't load. Check connection and retry.</div>`;
+  }
+  btn.disabled = false; btn.innerHTML = '✦ Load Quiz';
+}
+
+function renderQuiz(questions) {
+  quizAnswers = {}; quizTotal = questions.length;
+  document.getElementById('score-section').style.display = 'block';
+  updateScore(0, 0, quizTotal);
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const opts = [...q.incorrect_answers, q.correct_answer].sort(() => Math.random() - .5).map(decodeHTML);
+    const qText = decodeHTML(q.question);
+    const correct = decodeHTML(q.correct_answer);
+    const optHTML = opts.map((o,j) =>
+      `<button class="option" onclick="answer(${i},'${o.replace(/'/g,"\\'").replace(/"/g,'&quot;')}','${correct.replace(/'/g,"\\'").replace(/"/g,'&quot;')}',this)">${o}</button>`
+    ).join('');
+    container.innerHTML += `<div class="quiz-q" id="q-${i}">
+      <div class="q-text"><strong>Q${i+1}.</strong> ${qText} <span class="badge">${q.category}</span></div>
+      <div class="options">${optHTML}</div>
+      <div class="feedback" id="fb-${i}"></div>
+    </div>`;
+  });
+}
+
+function answer(idx, chosen, correct, btn) {
+  if (quizAnswers[idx] !== undefined) return;
+  const isCorrect = chosen === correct;
+  quizAnswers[idx] = isCorrect;
+  document.querySelectorAll(`#q-${idx} .option`).forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+  const fb = document.getElementById(`fb-${idx}`);
+  fb.textContent = isCorrect ? '✓ Correct!' : `✗ Answer: "${correct}"`;
+  fb.className = `feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+  document.getElementById(`q-${idx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+  const answered = Object.keys(quizAnswers).length;
+  const pts = Object.values(quizAnswers).filter(Boolean).length;
+  updateScore(pts, answered, quizTotal);
+  if (answered === quizTotal) {
+    logActivity('quiz', 'Quiz completed', `${pts}/${quizTotal}`, Math.round(pts/quizTotal*100));
+  }
+  speak(isCorrect ? 'Correct!' : `The answer is: ${correct}`);
+}
+
+function updateScore(pts, answered, total) {
+  document.getElementById('score-display').textContent = pts;
+  document.getElementById('score-pct').textContent = total ? Math.round(pts/total*100)+'%' : '0%';
+  document.getElementById('score-sub').textContent = `${answered} / ${total}`;
+  document.getElementById('score-fill').style.width = total ? (pts/total*100)+'%' : '0%';
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  document.getElementById('quiz-container').innerHTML = '<div class="empty-state"><div class="icon">🎯</div>Load a quiz to begin!</div>';
+  document.getElementById('score-section').style.display = 'none';
+}
+
+// ======== FLASHCARDS ========
+let fcDeck = [], fcIndex = 0, fcRatings = {};
+
+function loadFlashcards() {
+  const topicName = document.getElementById('fc-topic').value;
+  if (!topicName) return;
+  const tData = getTopicData(topicName);
+  fcDeck = [...tData.words];
+  fcIndex = 0; fcRatings = {};
+  document.getElementById('fc-area').style.display = 'block';
+  renderCard();
+}
+
+function renderCard() {
+  if (!fcDeck.length) return;
+  const item = fcDeck[fcIndex];
+  document.getElementById('fc-word').textContent = item.w;
+  document.getElementById('fc-def').textContent = item.d;
+  document.getElementById('fc-ex').textContent = item.e ? `"${item.e}"` : '';
+  document.getElementById('fc-progress').textContent = `Card ${fcIndex+1} of ${fcDeck.length}`;
+  document.getElementById('flashcard').classList.remove('flipped');
+  renderDots();
+}
+
+function renderDots() {
+  const dots = document.getElementById('fc-dots');
+  dots.innerHTML = '';
+  fcDeck.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'fc-dot' + (i === fcIndex ? ' current' : '') + (fcRatings[i] === 'known' ? ' known' : '') + (fcRatings[i] === 'unsure' ? ' unsure' : '');
+    dots.appendChild(d);
+  });
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+
+function fcRate(rating) {
+  fcRatings[fcIndex] = rating;
+  if (rating === 'known') {
+    const word = fcDeck[fcIndex].w;
+    const known = getKnownWords();
+    if (!known.includes(word)) { known.push(word); saveKnownWords(known); }
+  }
+  fcNext();
+  if (fcIndex === 0 && Object.keys(fcRatings).length >= fcDeck.length) {
+    const knownCount = Object.values(fcRatings).filter(r => r === 'known').length;
+    logActivity('flashcard', `Flashcards: ${document.getElementById('fc-topic').value}`, `${knownCount}/${fcDeck.length} known`, Math.round(knownCount/fcDeck.length*100));
+  }
+}
+function fcNext() { fcIndex = (fcIndex + 1) % fcDeck.length; renderCard(); }
+function fcPrev() { fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length; renderCard(); }
+function shuffleDeck() { fcDeck.sort(() => Math.random() - .5); fcIndex = 0; fcRatings = {}; renderCard(); }
+
+// ======== GRAMMAR CHECKER ========
+const grammarRules = [
+  { re: /\b(i)\b(?!')/g, fix: "I", msg: "The pronoun 'I' should always be capitalised.", type: "error" },
+  { re: /\b(goed|wented|runned|drived|catched|buyed|thinked|knowed|leaved|speaked)\b/gi, fix: null, msg: "Irregular past tense used incorrectly.", type: "error" },
+  { re: /\b(more\s+\w+er|most\s+\w+est)\b/gi, fix: null, msg: "Double comparatives (e.g. 'more faster') are incorrect.", type: "error" },
+  { re: /\b(a)\s+([aeiou])/gi, fix: "an", msg: "Use 'an' before words starting with a vowel sound.", type: "error" },
+  { re: /\b(they is|he are|she are|it are|we is|you is)\b/gi, fix: null, msg: "Subject-verb agreement error.", type: "error" },
+  { re: /\b(very very|really really|quite quite)\b/gi, fix: null, msg: "Avoid repeating intensifiers.", type: "style" },
+  { re: /\b(alot)\b/gi, fix: "a lot", msg: "'Alot' should be written as two words: 'a lot'.", type: "error" },
+  { re: /\b(its')\b/gi, fix: "its / it's", msg: "'its'' is not a valid form. Use 'its' (possessive) or 'it\\'s' (it is).", type: "error" },
+  { re: /\b(dont|cant|wont|shouldnt|wouldnt|couldnt|doesnt|didnt|isnt|arent|wasnt|werent)\b/gi, fix: null, msg: "Missing apostrophe in contraction.", type: "error" },
+  { re: /\s{2,}/g, fix: " ", msg: "Extra spaces detected.", type: "style" },
+];
+
+function checkGrammar() {
+  const text = document.getElementById('grammar-input').value.trim();
+  if (!text) { alert('Please enter some text first.'); return; }
+  const issues = [];
+  grammarRules.forEach(rule => {
+    const matches = text.match(rule.re);
+    if (matches) {
+      matches.forEach(m => {
+        issues.push({ original: m, fix: rule.fix, msg: rule.msg, type: rule.type });
+      });
+    }
+  });
+
+  // Sentence length
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  sentences.forEach(s => {
+    const words = s.trim().split(/\s+/);
+    if (words.length > 35) issues.push({ original: s.substring(0,40)+'...', fix: null, msg: "This sentence may be too long. Consider splitting it.", type: "style" });
+  });
+
+  const out = document.getElementById('grammar-output');
+  if (!issues.length) {
+    out.innerHTML = `<div class="grammar-result"><div class="grammar-item good"><div class="grammar-label good">✓ Looking Good!</div><div class="grammar-text">No obvious errors detected. Your writing looks clear and correct.</div></div></div>`;
+  } else {
+    let html = `<div class="grammar-result"><p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-family:'DM Mono',monospace;">${issues.length} suggestion${issues.length>1?'s':''} found:</p>`;
+    issues.forEach(issue => {
+      html += `<div class="grammar-item">
+        <div class="grammar-label">${issue.type === 'error' ? '⚠ Error' : '✦ Style'}: "${issue.original}"</div>
+        <div class="grammar-text">${issue.msg}</div>
+        ${issue.fix ? `<div class="grammar-fix">→ Suggestion: "${issue.fix}"</div>` : ''}
+      </div>`;
+    });
+    html += '</div>';
+    out.innerHTML = html;
+  }
+  logActivity('grammar', 'Grammar check', `${issues.length} issues found`, null);
+}
+
+function grammarExample() {
+  const examples = [
+    "Yesterday i goed to the store and buyed alot of apple.",
+    "She are very very smart and she dont like making mistakes.",
+    "This is a example of a sentence that could be improved.",
+    "They is going to the park but they cant find it.",
+  ];
+  document.getElementById('grammar-input').value = examples[Math.floor(Math.random()*examples.length)];
+}
+
+// ======== WORD GAMES ========
+let currentGame = 'hangman';
+let gameWord = '', gameGuesses = [], gameMistakes = 0;
+let scrambleWord = '', scrambleAnswer = '';
+
+function selectGame(game) {
+  currentGame = game;
+  document.querySelectorAll('.game-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('gc-' + game).classList.add('active');
+}
+
+function startGame() {
+  const topicName = document.getElementById('game-topic').value;
+  if (!topicName) { alert('Pick a topic!'); return; }
+  const tData = getTopicData(topicName);
+  const words = tData.words.map(w => w.w).filter(w => !w.includes(' '));
+  const picked = words[Math.floor(Math.random() * words.length)] || tData.words[0].w;
+  if (currentGame === 'hangman') startHangman(picked);
+  else startScramble(picked);
+}
+
+// HANGMAN
+const BODY_PARTS = [
+  '<line x1="90" y1="20" x2="90" y2="60"/>',  // head placeholder
+  '<circle cx="90" cy="40" r="20" fill="none"/>',
+  '<line x1="90" y1="60" x2="90" y2="120"/>',
+  '<line x1="90" y1="70" x2="60" y2="100"/>',
+  '<line x1="90" y1="70" x2="120" y2="100"/>',
+  '<line x1="90" y1="120" x2="60" y2="155"/>',
+  '<line x1="90" y1="120" x2="120" y2="155"/>',
+];
+
+function startHangman(word) {
+  gameWord = word.toLowerCase();
+  gameGuesses = []; gameMistakes = 0;
+  renderHangman();
+}
+
+function renderHangman() {
+  const won = gameWord.split('').every(l => gameGuesses.includes(l));
+  const lost = gameMistakes >= BODY_PARTS.length;
+  let svgParts = `<line x1="20" y1="170" x2="160" y2="170"/><line x1="50" y1="170" x2="50" y2="10"/><line x1="50" y1="10" x2="90" y2="10"/><line x1="90" y1="10" x2="90" y2="20"/>`;
+  for (let i = 0; i < gameMistakes; i++) svgParts += BODY_PARTS[i];
+
+  const blanks = gameWord.split('').map(l =>
+    `<div class="letter-blank">${gameGuesses.includes(l) || lost ? l.toUpperCase() : ''}</div>`).join('');
+
+  const keyboard = 'abcdefghijklmnopqrstuvwxyz'.split('').map(l => {
+    const hit = gameGuesses.includes(l) && gameWord.includes(l);
+    const miss = gameGuesses.includes(l) && !gameWord.includes(l);
+    return `<button class="key${hit?' hit':''}${miss?' miss':''}" onclick="guessLetter('${l}')" ${gameGuesses.includes(l)||won||lost?'disabled':''}>${l.toUpperCase()}</button>`;
+  }).join('');
+
+  const status = won ? `<p style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">🎉 You got it!</p>`
+    : lost ? `<p style="color:var(--accent2);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">💀 The word was: <em>${gameWord}</em></p>` : '';
+
+  document.getElementById('game-area').innerHTML = `
+    <div class="card hangman-area">
+      <svg class="hangman-svg" viewBox="0 0 180 180">${svgParts}</svg>
+      <div class="word-display">${blanks}</div>
+      ${status}
+      <div class="keyboard" style="margin:14px 0;">${keyboard}</div>
+      <p style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;">${BODY_PARTS.length - gameMistakes} attempts remaining</p>
+    </div>`;
+  if (won) logActivity('game', 'Hangman — Won!', gameWord, 100);
+  if (lost) logActivity('game', 'Hangman — Lost', gameWord, 0);
+}
+
+function guessLetter(l) {
+  if (gameGuesses.includes(l)) return;
+  gameGuesses.push(l);
+  if (!gameWord.includes(l)) gameMistakes++;
+  renderHangman();
+}
+
+// SCRAMBLE
+function startScramble(word) {
+  scrambleAnswer = word.toLowerCase();
+  let arr = word.split('');
+  do { arr.sort(() => Math.random() - .5); } while (arr.join('') === word);
+  scrambleWord = arr.join('').toUpperCase();
+  document.getElementById('game-area').innerHTML = `
+    <div class="card scramble-area">
+      <p style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:10px;">Unscramble this word:</p>
+      <div class="scrambled-word">${scrambleWord}</div>
+      <input type="text" class="scramble-input" id="scramble-ans" placeholder="Your answer..." onkeydown="if(event.key==='Enter')checkScramble()"/>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-primary" onclick="checkScramble()">✦ Check</button>
+        <button class="btn btn-secondary" onclick="startGame()">🔀 New Word</button>
+        <button class="btn btn-ghost" onclick="speak('${scrambleAnswer}')">🔊 Hear it</button>
+      </div>
+      <div id="scramble-feedback" style="margin-top:14px;font-family:'DM Mono',monospace;font-size:13px;text-align:center;"></div>
+    </div>`;
+}
+
+function checkScramble() {
+  const ans = document.getElementById('scramble-ans').value.trim().toLowerCase();
+  const fb = document.getElementById('scramble-feedback');
+  if (ans === scrambleAnswer) {
+    fb.innerHTML = `<span style="color:var(--accent)">✓ Correct! The word is "${scrambleAnswer}".</span>`;
+    speak('Correct!');
+    logActivity('game', 'Word Scramble — Won!', scrambleAnswer, 100);
+  } else {
+    fb.innerHTML = `<span style="color:var(--accent2)">✗ Try again!</span>`;
+  }
+}
+
+// ======== PROGRESS (localStorage) ========
+function getProgress() { return JSON.parse(localStorage.getItem('el_progress') || '{"history":[],"stats":{}}'); }
+function saveProgressData(p) { localStorage.setItem('el_progress', JSON.stringify(p)); }
+function getKnownWords() { return JSON.parse(localStorage.getItem('el_known') || '[]'); }
+function saveKnownWords(w) { localStorage.setItem('el_known', JSON.stringify(w)); }
+
+function logActivity(type, title, detail, score) {
+  const p = getProgress();
+  p.history.unshift({ type, title, detail, score, date: new Date().toLocaleDateString() });
+  if (p.history.length > 30) p.history = p.history.slice(0, 30);
+  p.stats[type] = (p.stats[type] || 0) + 1;
+  saveProgressData(p);
+}
+
+function renderProgress() {
+  const p = getProgress();
+  const known = getKnownWords();
+  const icons = { lesson:'📋', quiz:'🎯', flashcard:'🃏', grammar:'📝', game:'🎮' };
+
+  // Stats
+  const total = Object.values(p.stats).reduce((a,b) => a+b, 0);
+  const quizSessions = p.history.filter(h => h.type === 'quiz' && h.score !== null);
+  const avgScore = quizSessions.length ? Math.round(quizSessions.reduce((a,h) => a+h.score,0)/quizSessions.length) : 0;
+
+  document.getElementById('stat-grid').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">activities</div></div>
+    <div class="stat-card"><div class="stat-num">${p.stats.lesson||0}</div><div class="stat-label">lessons</div></div>
+    <div class="stat-card"><div class="stat-num">${p.stats.quiz||0}</div><div class="stat-label">quizzes</div></div>
+    <div class="stat-card"><div class="stat-num">${known.length}</div><div class="stat-label">words known</div></div>
+    <div class="stat-card"><div class="stat-num">${avgScore}%</div><div class="stat-label">avg quiz score</div></div>
+    <div class="stat-card"><div class="stat-num">${p.stats.game||0}</div><div class="stat-label">games played</div></div>
+  `;
+
+  // History
+  const hl = document.getElementById('history-list');
+  if (!p.history.length) {
+    hl.innerHTML = '<div class="empty-state"><div class="icon">📊</div>No activity yet. Start learning!</div>';
+  } else {
+    hl.innerHTML = p.history.map(h => `
+      <div class="history-item">
+        <div class="history-icon">${icons[h.type]||'📌'}</div>
+        <div class="history-info">
+          <div class="history-title">${h.title}</div>
+          <div class="history-meta">${h.detail} · ${h.date}</div>
+        </div>
+        ${h.score !== null ? `<div class="history-score">${h.score}%</div>` : ''}
+      </div>`).join('');
+  }
+
+  // Known words
+  const kl = document.getElementById('known-words-list');
+  if (!known.length) {
+    kl.innerHTML = '<div style="color:var(--muted);font-size:13px;">No words marked as known yet. Use Flashcards and tap "Got It!"</div>';
+  } else {
+    kl.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:8px;">${known.map(w =>
+      `<span style="background:var(--accent)18;color:var(--accent);font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--accent)33;">${w}</span>`
+    ).join('')}</div>`;
+  }
+}
+
+function clearProgress() {
+  if (confirm('Reset all progress? This cannot be undone.')) {
+    localStorage.removeItem('el_progress');
+    localStorage.removeItem('el_known');
+    renderProgress();
+  }
+}
+
+// ======== DICTIONARY ========
+async function lookupWord() {
+  const word = document.getElementById('dict-input').value.trim();
+  if (!word) return;
+  const out = document.getElementById('dict-output');
+  out.innerHTML = '<div class="card"><span class="spinner"></span> Looking up...</div>';
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    renderDict(data[0], out);
+  } catch {
+    out.innerHTML = `<div class="dict-result"><div class="dict-word">"${word}"</div><p style="color:var(--muted);font-size:13px;">No definition found. Try another spelling!</p></div>`;
+  }
+}
+
+function renderDict(entry, container) {
+  const phonetic = entry.phonetics?.find(p => p.text)?.text || '';
+  let html = `<div class="dict-result">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+      <div class="dict-word">${entry.word}</div>
+      <button class="btn btn-secondary" style="padding:6px 12px;font-size:11px;" onclick="speak('${entry.word}')">🔊 Pronounce</button>
+    </div>
+    <div class="dict-phonetic">${phonetic}</div>`;
+  entry.meanings?.slice(0,3).forEach(m => {
+    html += `<div style="margin-bottom:14px;"><span class="pos-tag">${m.partOfSpeech}</span>`;
+    m.definitions?.slice(0,2).forEach(d => {
+      html += `<div class="dict-def">• ${d.definition}</div>`;
+      if (d.example) html += `<div class="dict-ex">"${d.example}"</div>`;
+    });
+    if (m.synonyms?.length) html += `<div style="font-size:11px;color:var(--muted);margin-top:5px;">Synonyms: <span style="color:var(--accent3)">${m.synonyms.slice(0,5).join(', ')}</span></div>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+const randomWords = ['eloquent','perseverance','ambiguous','scrutinise','inevitable','benevolent','meticulous','pragmatic','rhetoric','profound','resilience','empathy','altruistic','plausible','concise','lucid','diligent','tenacious'];
+async function loadWOTD() {
+  const w = randomWords[Math.floor(Math.random()*randomWords.length)];
+  document.getElementById('dict-input').value = w;
+  const out = document.getElementById('dict-output');
+  out.innerHTML = '<div class="card"><span class="spinner"></span> Loading...</div>';
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${w}`);
+    const data = await res.json();
+    renderDict(data[0], out);
+  } catch { out.innerHTML = `<div class="dict-result"><p style="color:var(--muted)">Couldn't load definition.</p></div>`; }
+}
+
+// ======== INIT ========
+initTopics();
+renderProgress();
+</script>
+</body>
+</html>
