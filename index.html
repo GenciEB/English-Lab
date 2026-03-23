@@ -152,7 +152,32 @@ textarea{resize:vertical;min-height:100px;}
 .fc-dot.unsure{background:var(--accent3);}
 .fc-dot.current{background:var(--accent4);transform:scale(1.3);}
  
-/* ======== GRAMMAR CHECKER ======== */
+/* ======== PPP LESSON PLAN ======== */
+.ppp-header{margin-bottom:18px;}
+.ppp-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.ppp-meta-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.ppp-label{display:block;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px;}
+.ppp-val{font-size:13px;font-weight:600;color:var(--text);}
+.ppp-section{margin-bottom:12px;}
+.ppp-row{display:flex;gap:10px;}
+.ppp-block{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.ppp-block-title{font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;font-weight:600;}
+.ppp-block-body{font-size:13px;color:var(--text);line-height:1.6;}
+.ppp-list{padding-left:16px;margin:0;}
+.ppp-list li{margin-bottom:4px;}
+.ppp-stage{border-radius:10px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border);}
+.ppp-stage-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;}
+.ppp-stage-tag{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;}
+.ppp-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.ppp-stage-body{padding:12px 16px;font-size:13px;line-height:1.7;color:var(--text);background:var(--surface);}
+.ppp-intro .ppp-stage-header{background:var(--accent4)22;} .ppp-intro .ppp-stage-tag{color:var(--accent4);}
+.ppp-warm  .ppp-stage-header{background:var(--accent3)22;} .ppp-warm  .ppp-stage-tag{color:var(--accent3);}
+.ppp-pres  .ppp-stage-header{background:var(--accent)22;}  .ppp-pres  .ppp-stage-tag{color:var(--accent);}
+.ppp-prac  .ppp-stage-header{background:#60a5fa22;}        .ppp-prac  .ppp-stage-tag{color:#60a5fa;}
+.ppp-prod  .ppp-stage-header{background:var(--accent2)22;} .ppp-prod  .ppp-stage-tag{color:var(--accent2);}
+.ppp-eval  .ppp-stage-header{background:var(--accent4)22;} .ppp-eval  .ppp-stage-tag{color:var(--accent4);}
+.ppp-assign .ppp-stage-header{background:var(--border);}   .ppp-assign .ppp-stage-tag{color:var(--muted);}
+@media(max-width:640px){.ppp-meta-grid{grid-template-columns:1fr 1fr;}.ppp-row{flex-direction:column;}}
 .grammar-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:14px;}
 .grammar-item{border-left:3px solid var(--accent3);padding:10px 14px;margin-bottom:10px;background:var(--accent3)08;border-radius:0 8px 8px 0;}
 .grammar-item.good{border-color:var(--accent);background:var(--accent)08;}
@@ -206,7 +231,8 @@ textarea{resize:vertical;min-height:100px;}
 .dict-def{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:3px;}
 .dict-ex{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:5px;}
  
-/* PRINT */
+.score-final-card{background:var(--accent)14;border:1px solid var(--accent)44;border-radius:var(--radius);padding:20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;}
+#word-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
 @media print{
   header,.nav,.btn-row,.speak-icon,.theme-toggle,.version-badge,#panel-quiz,#panel-flashcards,#panel-grammar,#panel-games,#panel-progress,#panel-dictionary{display:none!important;}
   body{background:white;color:black;}
@@ -235,129 +261,54 @@ textarea{resize:vertical;min-height:100px;}
   <h1>English<span>Lab</span></h1>
   <div class="header-right">
     <span class="version-badge">v2.0</span>
+    <button class="theme-toggle" onclick="toggleLang()" id="lang-btn" title="Switch language">🇬🇧 EN</button>
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
   </div>
 </header>
  
 <div class="nav">
-  <button class="tab active" onclick="switchTab('lesson',this)">📋 Lesson</button>
-  <button class="tab" onclick="switchTab('quiz',this)">🎯 Quiz</button>
-  <button class="tab" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
-  <button class="tab" onclick="switchTab('grammar',this)">📝 Grammar</button>
-  <button class="tab" onclick="switchTab('games',this)">🎮 Games</button>
-  <button class="tab" onclick="switchTab('progress',this)">📊 Progress</button>
-  <button class="tab" onclick="switchTab('dictionary',this)">📖 Dictionary</button>
+  <button class="tab active" onclick="switchTab('quiz',this)">🎯 <span class="t" data-en="Quiz" data-sq="Kuiz">Quiz</span></button>
+  <button class="tab" onclick="switchTab('flashcards',this)">🃏 <span class="t" data-en="Flashcards" data-sq="Kartela">Flashcards</span></button>
+  <button class="tab" onclick="switchTab('grammar',this)">📝 <span class="t" data-en="Grammar" data-sq="Gramatikë">Grammar</span></button>
+  <button class="tab" onclick="switchTab('writing',this)">✍️ <span class="t" data-en="Writing" data-sq="Shkrimi">Writing</span></button>
+  <button class="tab" onclick="switchTab('reading',this)">📖 <span class="t" data-en="Reading" data-sq="Leximi">Reading</span></button>
+  <button class="tab" onclick="switchTab('games',this)">🎮 <span class="t" data-en="Games" data-sq="Lojëra">Games</span></button>
+  <button class="tab" onclick="switchTab('progress',this)">📊 <span class="t" data-en="Progress" data-sq="Progresi">Progress</span></button>
+  <button class="tab" onclick="switchTab('dictionary',this)">📖 <span class="t" data-en="Dictionary" data-sq="Fjalor">Dictionary</span></button>
 </div>
  
 <main>
  
-<!-- ===== LESSON ===== -->
-<div id="panel-lesson" class="panel active">
-  <div class="card">
-    <div class="card-title">⚡ Generate Lesson Plan</div>
-    <div class="topic-chips" id="topic-chips" style="display:none;"></div>
-    <div class="row">
-      <div>
-        <label>Topic / Theme</label>
-        <input type="text" id="lesson-topic" placeholder="e.g. Climate Change, AI, Sports..."/>
-      </div>
-      <div>
-        <label>English Level</label>
-        <select id="lesson-level">
-          <option value="A1">A1 – Beginner</option>
-          <option value="A2">A2 – Elementary</option>
-          <option value="B1" selected>B1 – Intermediate</option>
-          <option value="B2">B2 – Upper Intermediate</option>
-          <option value="C1">C1 – Advanced</option>
-        </select>
-      </div>
-    </div>
-    <div class="row3">
-      <div>
-        <label>Duration</label>
-        <select id="lesson-duration">
-          <option>30 minutes</option>
-          <option selected>45 minutes</option>
-          <option>60 minutes</option>
-          <option>90 minutes</option>
-        </select>
-      </div>
-      <div>
-        <label>Focus Skill</label>
-        <select id="lesson-skill">
-          <option>Reading & Vocabulary</option>
-          <option>Speaking & Discussion</option>
-          <option>Writing</option>
-          <option>Grammar in Context</option>
-          <option>Listening Comprehension</option>
-        </select>
-      </div>
-      <div>
-        <label>Class Size</label>
-        <select id="lesson-size">
-          <option>1–5 (small group)</option>
-          <option selected>10–20 (standard)</option>
-          <option>20–30 (large class)</option>
-        </select>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="generateLesson()" id="btn-gen-lesson">✦ Generate Lesson</button>
-      <button class="btn btn-secondary" onclick="window.print()">🖨️ Print / Export PDF</button>
-      <button class="btn btn-secondary" onclick="clearLesson()">Clear</button>
-    </div>
-  </div>
- 
-  <div id="lesson-output" style="display:none;">
-    <div class="card" id="vocab-card">
-      <div class="card-title">📚 Vocabulary <span class="badge" id="vocab-badge">0 words</span> <span style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-left:8px;">🔊 click to hear</span></div>
-      <div class="vocab-grid" id="vocab-grid"></div>
-      <div class="btn-row" style="margin-top:14px;">
-        <button class="btn btn-secondary" onclick="sendToFlashcards()">🃏 Study as Flashcards</button>
-      </div>
-    </div>
-    <div class="card" id="lesson-plan-card">
-      <div class="card-title">🗓️ Lesson Plan</div>
-      <div id="lesson-plan-content"></div>
-      <div class="btn-row" style="margin-top:14px;">
-        <button class="btn btn-secondary" onclick="speakLesson()">🔊 Read Aloud</button>
-        <button class="btn btn-secondary" onclick="stopSpeaking()">⏹ Stop</button>
-        <button class="btn btn-secondary" onclick="autoQuiz()">🎯 Auto-Quiz</button>
-      </div>
-    </div>
-  </div>
-</div>
- 
 <!-- ===== QUIZ ===== -->
-<div id="panel-quiz" class="panel">
+<div id="panel-quiz" class="panel active">
   <div class="card">
-    <div class="card-title">🎯 Quiz Settings</div>
+    <div class="card-title">🎯 <span class="t" data-en="Quiz Settings" data-sq="Cilësimet e Kuizit">Quiz Settings</span></div>
     <div class="row">
       <div>
-        <label>Category</label>
+        <label class="t" data-en="Student Name" data-sq="Emri i Nxënësit">Student Name</label>
+        <input type="text" id="student-name" placeholder="Enter your name..." style="margin-bottom:0;"/>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px;">
+      <div>
+        <label class="t" data-en="Category" data-sq="Kategoria">Category</label>
         <select id="quiz-cat">
-          <option value="0">Any Category</option>
-          <option value="9">General Knowledge</option>
           <option value="10">Books & Literature</option>
-          <option value="23">History</option>
-          <option value="22">Geography</option>
-          <option value="17">Science & Nature</option>
-          <option value="11">Film</option>
-          <option value="21">Sports</option>
+          <option value="0">English Language (Mixed)</option>
         </select>
       </div>
       <div>
-        <label>Difficulty</label>
+        <label class="t" data-en="Difficulty" data-sq="Vështirësia">Difficulty</label>
         <select id="quiz-diff">
-          <option value="easy">Easy</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Hard</option>
+          <option value="easy" class="t" data-en="Easy" data-sq="E lehtë">Easy</option>
+          <option value="medium" selected class="t" data-en="Medium" data-sq="Mesatare">Medium</option>
+          <option value="hard" class="t" data-en="Hard" data-sq="E vështirë">Hard</option>
         </select>
       </div>
     </div>
     <div class="row">
       <div>
-        <label>Questions</label>
+        <label class="t" data-en="Questions" data-sq="Pyetje">Questions</label>
         <select id="quiz-count">
           <option value="5">5</option>
           <option value="10" selected>10</option>
@@ -367,18 +318,25 @@ textarea{resize:vertical;min-height:100px;}
       </div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-primary" onclick="loadQuiz()" id="btn-load-quiz">✦ Load Quiz</button>
-      <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+      <button class="btn btn-primary" onclick="loadQuiz()" id="btn-load-quiz">✦ <span class="t" data-en="Load Quiz" data-sq="Ngarko Kuizin">Load Quiz</span></button>
+      <button class="btn btn-secondary" onclick="resetQuiz()"><span class="t" data-en="Reset" data-sq="Rivendos">Reset</span></button>
     </div>
   </div>
   <div id="score-section" style="display:none;">
     <div class="score-bar">
-      <div><div class="score-num" id="score-display">0</div><div style="font-size:11px;color:var(--muted);">points</div></div>
+      <div>
+        <div class="score-num" id="score-display">0</div>
+        <div style="font-size:11px;color:var(--muted);" id="student-name-display"></div>
+      </div>
       <div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
-      <div style="text-align:right;"><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;" id="score-pct">0%</div><div style="font-size:11px;color:var(--muted);" id="score-sub">0 / 0</div></div>
+      <div style="text-align:right;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;" id="score-pct">0%</div>
+        <div style="font-size:11px;color:var(--muted);" id="score-sub">0 / 0</div>
+      </div>
     </div>
+    <div id="score-final" style="display:none;"></div>
   </div>
-  <div id="quiz-container"><div class="empty-state"><div class="icon">🎯</div>Load a quiz to begin!</div></div>
+  <div id="quiz-container"><div class="empty-state"><div class="icon">🎯</div><span class="t" data-en="Load a quiz to begin!" data-sq="Ngarko një kuiz për të filluar!">Load a quiz to begin!</span></div></div>
 </div>
  
 <!-- ===== FLASHCARDS ===== -->
@@ -440,6 +398,105 @@ textarea{resize:vertical;min-height:100px;}
   <div id="grammar-output"></div>
 </div>
  
+<!-- ===== WRITING ===== -->
+<div id="panel-writing" class="panel">
+  <div class="card">
+    <div class="card-title">✍️ <span class="t" data-en="Writing Prompt Generator" data-sq="Gjenerator Temash Shkrimi">Writing Prompt Generator</span></div>
+    <div class="row">
+      <div>
+        <label class="t" data-en="Topic Area" data-sq="Fusha e Temës">Topic Area</label>
+        <select id="writing-topic">
+          <option value="personal">Personal Experience</option>
+          <option value="opinion">Opinion & Argument</option>
+          <option value="descriptive">Descriptive</option>
+          <option value="narrative">Narrative / Story</option>
+          <option value="discursive">Discursive Essay</option>
+        </select>
+      </div>
+      <div>
+        <label class="t" data-en="Level" data-sq="Niveli">Level</label>
+        <select id="writing-level">
+          <option value="A2">A2 – Elementary</option>
+          <option value="B1" selected>B1 – Intermediate</option>
+          <option value="B2">B2 – Upper Intermediate</option>
+          <option value="C1">C1 – Advanced</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="generatePrompt()">✦ <span class="t" data-en="Generate Prompt" data-sq="Gjenero Temë">Generate Prompt</span></button>
+      <button class="btn btn-secondary" onclick="generatePrompt()">🔀 <span class="t" data-en="Another One" data-sq="Tjetër">Another One</span></button>
+    </div>
+  </div>
+  <div id="writing-output" style="display:none;">
+    <div class="card">
+      <div class="card-title">📄 <span class="t" data-en="Your Writing Prompt" data-sq="Tema Jote e Shkrimit">Your Writing Prompt</span></div>
+      <div id="prompt-content"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📝 <span class="t" data-en="Write Here" data-sq="Shkruaj Këtu">Write Here</span></div>
+      <textarea id="student-writing" placeholder="Start writing your response here..." style="min-height:200px;width:100%;"></textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+        <span id="word-count" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">0 words</span>
+        <div class="btn-row" style="margin-top:0;">
+          <button class="btn btn-primary" onclick="checkWriting()">✦ <span class="t" data-en="Check My Writing" data-sq="Kontrollo Shkrimin">Check My Writing</span></button>
+          <button class="btn btn-secondary" onclick="clearWriting()"><span class="t" data-en="Clear" data-sq="Pastro">Clear</span></button>
+        </div>
+      </div>
+    </div>
+    <div id="writing-feedback" style="display:none;" class="card">
+      <div class="card-title">💬 <span class="t" data-en="Feedback" data-sq="Komente">Feedback</span></div>
+      <div id="writing-feedback-content"></div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ===== READING ===== -->
+<div id="panel-reading" class="panel">
+  <div class="card">
+    <div class="card-title">📖 <span class="t" data-en="Reading Comprehension" data-sq="Kuptimi i Leximit">Reading Comprehension</span></div>
+    <div class="row">
+      <div>
+        <label class="t" data-en="Topic" data-sq="Tema">Topic</label>
+        <select id="reading-topic">
+          <option value="climate">Climate Change</option>
+          <option value="social">Social Media</option>
+          <option value="technology">Technology & AI</option>
+          <option value="travel">Travel & Culture</option>
+          <option value="health">Health & Wellbeing</option>
+          <option value="education">Education</option>
+        </select>
+      </div>
+      <div>
+        <label class="t" data-en="Level" data-sq="Niveli">Level</label>
+        <select id="reading-level">
+          <option value="A2">A2 – Elementary</option>
+          <option value="B1" selected>B1 – Intermediate</option>
+          <option value="B2">B2 – Upper Intermediate</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="loadReading()">✦ <span class="t" data-en="Load Passage" data-sq="Ngarko Tekstin">Load Passage</span></button>
+    </div>
+  </div>
+  <div id="reading-output" style="display:none;">
+    <div class="card">
+      <div class="card-title" id="reading-title">📄 Passage</div>
+      <div id="reading-passage" style="font-size:14px;line-height:1.9;color:var(--text);"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">❓ <span class="t" data-en="Comprehension Questions" data-sq="Pyetje Kuptimi">Comprehension Questions</span></div>
+      <div id="reading-questions"></div>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn btn-primary" onclick="checkReading()">✦ <span class="t" data-en="Check Answers" data-sq="Kontrollo Përgjigjet">Check Answers</span></button>
+        <button class="btn btn-secondary" onclick="resetReading()"><span class="t" data-en="Reset" data-sq="Rivendos">Reset</span></button>
+      </div>
+      <div id="reading-score" style="display:none;margin-top:14px;"></div>
+    </div>
+  </div>
+</div>
+ 
 <!-- ===== GAMES ===== -->
 <div id="panel-games" class="panel">
   <div class="card">
@@ -493,9 +550,23 @@ textarea{resize:vertical;min-height:100px;}
   <div class="card">
     <div class="card-title">📖 Dictionary Lookup</div>
     <label>Enter a word</label>
-    <div style="display:flex;gap:10px;">
+    <div style="display:flex;gap:10px;margin-bottom:14px;">
       <input type="text" id="dict-input" placeholder="e.g. perseverance, eloquent..." style="margin-bottom:0;" onkeydown="if(event.key==='Enter')lookupWord()"/>
       <button class="btn btn-primary" onclick="lookupWord()">Search</button>
+    </div>
+    <div class="row">
+      <div>
+        <label>🔊 Voice</label>
+        <select id="voice-select" style="margin-bottom:0;"><option>Loading voices...</option></select>
+      </div>
+      <div>
+        <label>Speed</label>
+        <select id="voice-rate" style="margin-bottom:0;">
+          <option value="0.6">Slow</option>
+          <option value="0.9" selected>Normal</option>
+          <option value="1.3">Fast</option>
+        </select>
+      </div>
     </div>
   </div>
   <div id="dict-output"></div>
@@ -527,13 +598,40 @@ function switchTab(name, el) {
 }
  
 // ======== TTS ========
-function speak(text, rate = 0.95) {
+let availableVoices = [];
+ 
+function loadVoices() {
+  availableVoices = window.speechSynthesis.getVoices();
+  const sel = document.getElementById('voice-select');
+  if (!sel || !availableVoices.length) return;
+  sel.innerHTML = '';
+  availableVoices.forEach((v, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${v.name} (${v.lang})`;
+    if (v.lang.startsWith('en')) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+ 
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+ 
+function speak(text, rate = 0.9) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US'; u.rate = rate; u.pitch = 1;
+  const sel = document.getElementById('voice-select');
+  const rateSel = document.getElementById('voice-rate');
+  if (sel && availableVoices[sel.value]) u.voice = availableVoices[sel.value];
+  u.rate = rateSel ? parseFloat(rateSel.value) : rate;
+  u.lang = 'en-US';
   window.speechSynthesis.speak(u);
 }
+ 
+function speakWord(word) { speak(word); }
 function stopSpeaking() { window.speechSynthesis.cancel(); }
  
 // ======== VOCAB DATA ========
@@ -638,19 +736,9 @@ const TOPICS = [
  
 // Build topic chips and selects
 function initTopics() {
-  const chips = document.getElementById('topic-chips');
   const fcSelect = document.getElementById('fc-topic');
   const gameSelect = document.getElementById('game-topic');
   TOPICS.forEach(t => {
-    const chip = document.createElement('span');
-    chip.className = 'chip';
-    chip.textContent = t.emoji + ' ' + t.name;
-    chip.onclick = () => {
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      document.getElementById('lesson-topic').value = t.name;
-    };
-    chips.appendChild(chip);
     const opt1 = document.createElement('option');
     opt1.value = t.name; opt1.textContent = t.emoji + ' ' + t.name;
     fcSelect.appendChild(opt1);
@@ -666,107 +754,6 @@ function getTopicData(name) {
     TOPICS[0];
 }
  
-// ======== LESSON ========
-let currentVocab = [], lessonText = '';
- 
-function generateLesson() {
-  const topic = document.getElementById('lesson-topic').value.trim();
-  if (!topic) { alert('Please enter or pick a topic!'); return; }
-  const level = document.getElementById('lesson-level').value;
-  const duration = document.getElementById('lesson-duration').value;
-  const skill = document.getElementById('lesson-skill').value;
-  const size = document.getElementById('lesson-size').value;
- 
-  const btn = document.getElementById('btn-gen-lesson');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Generating...';
- 
-  setTimeout(() => {
-    const tData = getTopicData(topic);
-    currentVocab = tData.words;
- 
-    const grid = document.getElementById('vocab-grid');
-    grid.innerHTML = '';
-    currentVocab.forEach(item => {
-      grid.innerHTML += `<div class="vocab-item" onclick="speak('${item.w.replace(/'/g,"\\'")}')">
-        <div class="vocab-word">📌 ${item.w}</div>
-        <div class="vocab-def">${item.d}</div>
-        <button class="speak-icon" onclick="event.stopPropagation();speak('${item.w.replace(/'/g,"\\'")}')">🔊</button>
-      </div>`;
-    });
-    document.getElementById('vocab-badge').textContent = currentVocab.length + ' words';
- 
-    const planHTML = buildPlan(topic, level, duration, skill, size);
-    document.getElementById('lesson-plan-content').innerHTML = planHTML;
-    lessonText = planHTML.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
- 
-    document.getElementById('lesson-output').style.display = 'block';
-    btn.disabled = false; btn.innerHTML = '✦ Generate Lesson';
- 
-    logActivity('lesson', `Lesson: ${topic}`, level, null);
-  }, 500);
-}
- 
-function buildPlan(topic, level, duration, skill, size) {
-  const mins = parseInt(duration);
-  const warm = Math.floor(mins * .15), main1 = Math.floor(mins * .30),
-        main2 = Math.floor(mins * .30), wrap = mins - Math.floor(mins*.15) - Math.floor(mins*.30) - Math.floor(mins*.30);
-  const acts = {
-    "Reading & Vocabulary": {a:"Pre-reading: Match vocabulary to definitions using word cards",b:"Read a text about the topic; underline unknown words",c:"Comprehension questions + gap-fill using vocabulary"},
-    "Speaking & Discussion": {a:"Think–Pair–Share: What do you already know about this topic?",b:"Structured mini-debate or role-play scenario",c:"Class discussion + peer feedback on language use"},
-    "Writing": {a:"Brainstorm ideas using a mind map on the board",b:"Draft a paragraph with guided prompts and sentence starters",c:"Peer review using a checklist + self-correction"},
-    "Grammar in Context": {a:"Spot the structure: find grammar patterns in example sentences",b:"Form-meaning-use mini-lesson + controlled practice",c:"Personalised sentences: write your own using the grammar"},
-    "Listening Comprehension": {a:"Pre-listening: predict what you will hear",b:"Listen and answer comprehension questions",c:"Dictogloss — reconstruct the text from notes"},
-  };
-  const a = acts[skill] || acts["Reading & Vocabulary"];
-  const sizeNote = size.includes('1–5') ? 'Students can work 1-to-1 with the teacher. Maximise speaking time.' :
-    size.includes('20–30') ? 'Use group work and stations to manage participation.' :
-    'Pair work is ideal for this class size.';
- 
-  return `
-    <div class="lesson-section"><h3>🎯 Objectives</h3><ul>
-      <li>Understand and use key vocabulary related to <strong>${topic}</strong></li>
-      <li>Practise ${skill.toLowerCase()} skills at <strong>${level}</strong> level</li>
-      <li>Communicate ideas about the topic with confidence</li>
-    </ul></div>
-    <div class="lesson-section"><h3>⏱️ Timeline (${duration})</h3><ul>
-      <li><strong>${warm} min</strong> — Warm-up: ${a.a}</li>
-      <li><strong>${main1} min</strong> — Main Activity 1: ${a.b}</li>
-      <li><strong>${main2} min</strong> — Main Activity 2: ${a.c}</li>
-      <li><strong>${wrap} min</strong> — Wrap-up: Exit ticket — 3 words I learned today</li>
-    </ul></div>
-    <div class="lesson-section"><h3>💡 Teacher Notes</h3><ul>
-      <li>${sizeNote}</li>
-      <li>Encourage guessing word meanings from context first</li>
-      <li>At ${level} level, use sentence starters and word banks to scaffold tasks</li>
-      <li>Celebrate creative answers — accuracy improves with exposure</li>
-    </ul></div>
-    <div class="lesson-section"><h3>📝 Homework</h3>
-      <p>Write 80–120 words about <strong>${topic}</strong> using at least 5 vocabulary words from today.</p>
-    </div>`;
-}
- 
-function clearLesson() {
-  document.getElementById('lesson-topic').value = '';
-  document.getElementById('lesson-output').style.display = 'none';
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-}
-function speakLesson() { if (lessonText) speak(lessonText, 0.88); }
-function sendToFlashcards() {
-  const topic = document.getElementById('lesson-topic').value.trim();
-  const sel = document.getElementById('fc-topic');
-  for (let i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].value.toLowerCase() === getTopicData(topic).name.toLowerCase()) {
-      sel.selectedIndex = i; break;
-    }
-  }
-  loadFlashcards();
-  document.querySelector('.tab:nth-child(3)').click();
-}
-function autoQuiz() {
-  document.querySelector('.tab:nth-child(2)').click();
-  loadQuiz();
-}
- 
 // ======== QUIZ ========
 let quizAnswers = {}, quizTotal = 0;
  
@@ -778,6 +765,9 @@ async function loadQuiz() {
   const cat = document.getElementById('quiz-cat').value;
   const diff = document.getElementById('quiz-diff').value;
   const count = document.getElementById('quiz-count').value;
+  const name = document.getElementById('student-name').value.trim();
+  const nameDisplay = document.getElementById('student-name-display');
+  if (nameDisplay) nameDisplay.textContent = name || 'Student';
   const btn = document.getElementById('btn-load-quiz');
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Loading...';
   const catP = cat !== '0' ? `&category=${cat}` : '';
@@ -789,7 +779,7 @@ async function loadQuiz() {
   } catch {
     document.getElementById('quiz-container').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div>Couldn't load. Check connection and retry.</div>`;
   }
-  btn.disabled = false; btn.innerHTML = '✦ Load Quiz';
+  btn.disabled = false; btn.innerHTML = '✦ ' + (currentLang==='sq' ? 'Ngarko Kuizin' : 'Load Quiz');
 }
  
 function renderQuiz(questions) {
@@ -848,7 +838,324 @@ function resetQuiz() {
   document.getElementById('score-section').style.display = 'none';
 }
  
-// ======== FLASHCARDS ========
+function answer(idx, chosen, correct, btn) {
+  if (quizAnswers[idx] !== undefined) return;
+  const isCorrect = chosen === correct;
+  quizAnswers[idx] = isCorrect;
+  document.querySelectorAll(`#q-${idx} .option`).forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+  const fb = document.getElementById(`fb-${idx}`);
+  fb.textContent = isCorrect ? '✓ Correct!' : `✗ Answer: "${correct}"`;
+  fb.className = `feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+  document.getElementById(`q-${idx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+  const answered = Object.keys(quizAnswers).length;
+  const pts = Object.values(quizAnswers).filter(Boolean).length;
+  updateScore(pts, answered, quizTotal);
+  if (answered === quizTotal) {
+    const pct = Math.round(pts/quizTotal*100);
+    const name = document.getElementById('student-name').value.trim() || 'Student';
+    logActivity('quiz', `Quiz — ${name}`, `${pts}/${quizTotal}`, pct);
+    showFinalScore(name, pts, quizTotal, pct);
+  }
+  speak(isCorrect ? 'Correct!' : `The answer is: ${correct}`);
+}
+ 
+function showFinalScore(name, pts, total, pct) {
+  const el = document.getElementById('score-final');
+  if (!el) return;
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
+  const msg = pct >= 80
+    ? (currentLang==='sq' ? 'Punë e shkëlqyer!' : 'Excellent work!')
+    : pct >= 60
+    ? (currentLang==='sq' ? 'Vazhdoni kështu!' : 'Good effort!')
+    : (currentLang==='sq' ? 'Vazhdoni të praktikoni!' : 'Keep practising!');
+  el.style.display = 'block';
+  el.innerHTML = `<div class="score-bar" style="background:var(--accent)18;border-color:var(--accent)44;">
+    <div style="font-size:32px;">${emoji}</div>
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--accent);">${name}</div>
+      <div style="font-size:13px;color:var(--text);">${msg} ${pts} / ${total} (${pct}%)</div>
+    </div>
+  </div>`;
+}
+ 
+function updateScore(pts, answered, total) {
+  document.getElementById('score-display').textContent = pts;
+  document.getElementById('score-pct').textContent = total ? Math.round(pts/total*100)+'%' : '0%';
+  document.getElementById('score-sub').textContent = `${answered} / ${total}`;
+  document.getElementById('score-fill').style.width = total ? (pts/total*100)+'%' : '0%';
+}
+ 
+function resetQuiz() {
+  quizAnswers = {};
+  document.getElementById('quiz-container').innerHTML = `<div class="empty-state"><div class="icon">🎯</div>${currentLang==='sq'?'Ngarko një kuiz për të filluar!':'Load a quiz to begin!'}</div>`;
+  document.getElementById('score-section').style.display = 'none';
+  const sf = document.getElementById('score-final');
+  if (sf) sf.style.display = 'none';
+}
+ 
+// ======== WRITING PROMPT GENERATOR ========
+const WRITING_PROMPTS = {
+  personal: [
+    { title:"A Memorable Journey", prompt:"Write about a journey you will never forget. Where did you go? What happened? Why was it special?", tips:["Use past tense throughout","Include sensory details (what you saw, heard, felt)","End with what you learned from the experience"], words:"100–150 words" },
+    { title:"My Role Model", prompt:"Describe a person you admire. Who are they? What do they do? Why do they inspire you?", tips:["Use adjectives to describe their personality","Give specific examples of what they have done","Explain how they have influenced you"], words:"100–150 words" },
+    { title:"A Challenge I Overcame", prompt:"Write about a difficult situation you faced and how you dealt with it. What did you learn?", tips:["Structure: situation → problem → action → result","Use linking words: however, although, as a result","Be honest and reflective"], words:"120–160 words" },
+  ],
+  opinion: [
+    { title:"Should Social Media Have Age Limits?", prompt:"Do you think teenagers under 16 should be banned from social media? Give your opinion with reasons and examples.", tips:["State your opinion clearly in the first sentence","Give at least 2 reasons with examples","Acknowledge the other side before concluding"], words:"150–200 words" },
+    { title:"Are Exams a Fair Way to Test Students?", prompt:"Some people believe exams are the best way to measure a student's ability. Do you agree? Why or why not?", tips:["Use phrases: In my opinion... / I strongly believe...","Present both sides before giving your view","End with a strong concluding sentence"], words:"150–200 words" },
+    { title:"Technology in the Classroom", prompt:"Should students be allowed to use smartphones in class? Discuss the advantages and disadvantages.", tips:["Use discourse markers: Firstly, Furthermore, On the other hand","Give real examples to support each point","Write a balanced conclusion"], words:"150–200 words" },
+  ],
+  descriptive: [
+    { title:"Describe Your Ideal City", prompt:"Imagine a perfect city for young people. Describe what it looks like, what it has, and why it would be a great place to live.", tips:["Use present tense for descriptions","Include senses: sights, sounds, smells","Use comparative structures: more... than, as... as"], words:"120–160 words" },
+    { title:"A Rainy Day", prompt:"Describe a rainy day in detail. Focus on the sights, sounds, smells and feelings it creates.", tips:["Use vivid adjectives and strong verbs","Write in the present tense for a 'live' feel","Try to create a mood — peaceful, gloomy, cosy"], words:"100–140 words" },
+  ],
+  narrative: [
+    { title:"The Unexpected Visitor", prompt:"You arrive home one day to find a stranger sitting in your living room. Write the story of what happens next.", tips:["Build suspense gradually","Use dialogue to make the story come alive","Think about: who? why? what happens? how does it end?"], words:"150–200 words" },
+    { title:"Lost!", prompt:"You are on a trip and suddenly realise you are completely lost. Write a story about what happens.", tips:["Use past simple and past continuous","Include your thoughts and feelings","Give the story a clear beginning, middle and end"], words:"150–200 words" },
+  ],
+  discursive: [
+    { title:"Climate Change: Whose Responsibility Is It?", prompt:"Is it the responsibility of governments, businesses, or individuals to tackle climate change? Discuss different views.", tips:["Organise into paragraphs: intro, point 1, point 2, counter-argument, conclusion","Use formal language throughout","Avoid using 'I' — use 'one' or 'people' instead"], words:"180–250 words" },
+    { title:"The Benefits and Drawbacks of Remote Learning", prompt:"Online learning has become very common. Discuss its advantages and disadvantages for teenagers.", tips:["Use topic sentences to start each paragraph","Balance positive and negative points equally","End with your own reasoned conclusion"], words:"180–250 words" },
+  ],
+};
+ 
+let currentPrompt = null;
+ 
+function generatePrompt() {
+  const type = document.getElementById('writing-topic').value;
+  const level = document.getElementById('writing-level').value;
+  const list = WRITING_PROMPTS[type] || WRITING_PROMPTS.personal;
+  const p = list[Math.floor(Math.random() * list.length)];
+  currentPrompt = p;
+ 
+  const tipsHTML = p.tips.map(t => `<li style="margin-bottom:6px;">${t}</li>`).join('');
+  document.getElementById('prompt-content').innerHTML = `
+    <div class="ppp-stage ppp-pres" style="margin-bottom:14px;">
+      <div class="ppp-stage-header"><span class="ppp-stage-tag">${p.title}</span><span class="ppp-time">${p.words}</span></div>
+      <div class="ppp-stage-body" style="font-size:14px;font-weight:500;">${p.prompt}</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;">💡 Writing Tips</div>
+      <ul style="padding-left:18px;font-size:13px;line-height:1.7;">${tipsHTML}</ul>
+    </div>`;
+  document.getElementById('writing-output').style.display = 'block';
+  document.getElementById('student-writing').value = '';
+  document.getElementById('word-count').textContent = '0 words';
+  document.getElementById('writing-feedback').style.display = 'none';
+ 
+  document.getElementById('student-writing').oninput = function() {
+    const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+    document.getElementById('word-count').textContent = words + ' words';
+  };
+}
+ 
+function checkWriting() {
+  const text = document.getElementById('student-writing').value.trim();
+  if (!text) { alert('Write something first!'); return; }
+  const words = text.trim().split(/\s+/).filter(w=>w.length>0).length;
+  const sentences = text.split(/[.!?]+/).filter(s=>s.trim().length>3).length;
+  const hasCapI = !/\bi\b(?!')/.test(text);
+  const longSentences = text.split(/[.!?]+/).filter(s=>s.trim().split(/\s+/).length > 35).length;
+ 
+  const fb = [];
+  if (words < 50) fb.push({ type:'warn', msg:`Your response is only ${words} words. Aim for at least ${currentPrompt?.words || '100'}.` });
+  else fb.push({ type:'good', msg:`Good length — ${words} words written.` });
+  if (!hasCapI) fb.push({ type:'error', msg:"Remember to always capitalise the pronoun 'I'." });
+  if (longSentences > 0) fb.push({ type:'warn', msg:`${longSentences} sentence(s) are very long. Try splitting them into shorter ones.` });
+  if (sentences >= 3) fb.push({ type:'good', msg:'Good use of varied sentences.' });
+  if (/however|although|because|therefore|furthermore|on the other hand|in addition/i.test(text))
+    fb.push({ type:'good', msg:'Great — you are using linking words and discourse markers!' });
+  else fb.push({ type:'warn', msg:"Try adding linking words like: however, although, therefore, furthermore." });
+  if (/I think|I believe|In my opinion|I feel/i.test(text))
+    fb.push({ type:'good', msg:'Good use of opinion phrases.' });
+ 
+  const html = fb.map(f => `<div class="grammar-item${f.type==='good'?' good':''}">
+    <div class="grammar-label${f.type==='good'?' good':''}">${f.type==='good'?'✓ Well done':f.type==='warn'?'💡 Tip':'⚠ Check'}</div>
+    <div class="grammar-text">${f.msg}</div>
+  </div>`).join('');
+ 
+  document.getElementById('writing-feedback-content').innerHTML = html;
+  document.getElementById('writing-feedback').style.display = 'block';
+  logActivity('writing', 'Writing prompt completed', `${words} words`, null);
+}
+ 
+function clearWriting() {
+  document.getElementById('student-writing').value = '';
+  document.getElementById('word-count').textContent = '0 words';
+  document.getElementById('writing-feedback').style.display = 'none';
+}
+ 
+// ======== READING COMPREHENSION ========
+const PASSAGES = {
+  climate: {
+    title: "Climate Change and Our Future",
+    B1: {
+      text: `Climate change is one of the biggest challenges facing our planet today. Scientists agree that the Earth's temperature is rising because of greenhouse gases, mainly from burning fossil fuels like coal and oil. These gases trap heat in the atmosphere, causing glaciers to melt, sea levels to rise, and extreme weather events to become more frequent.\n\nMany countries are now trying to reduce their carbon emissions by switching to renewable energy sources such as solar and wind power. Individuals can also help by using public transport, eating less meat, and reducing waste. However, experts warn that we need much faster action from governments and large companies to avoid the worst effects of climate change.\n\nYoung people around the world are increasingly speaking out about this issue, demanding that leaders take urgent steps to protect the environment for future generations.`,
+      questions: [
+        { q:"What is the main cause of rising temperatures according to scientists?", options:["Volcanic eruptions","Burning fossil fuels","Deforestation","Ocean currents"], answer:1 },
+        { q:"Which of the following is NOT mentioned as a consequence of climate change?", options:["Melting glaciers","Rising sea levels","Extreme weather","Earthquakes"], answer:3 },
+        { q:"What are 'renewable energy sources' according to the text?", options:["Coal and oil","Nuclear power","Solar and wind power","Fossil fuels"], answer:2 },
+        { q:"What do young people want their leaders to do?", options:["Build more factories","Take urgent steps to protect the environment","Reduce public transport","Stop using electricity"], answer:1 },
+        { q:"What does the word 'emissions' most likely mean in this context?", options:["Energy produced","Gases released into the air","Temperatures measured","Fuels burned underground"], answer:1 },
+      ]
+    }
+  },
+  social: {
+    title: "Social Media: Connection or Distraction?",
+    B1: {
+      text: `Social media platforms like Instagram, TikTok and Snapchat have transformed the way teenagers communicate and share their lives. With just a smartphone, young people can connect with friends across the world, discover new music, and follow their favourite celebrities. Many teens say social media helps them feel less lonely and gives them a space to express themselves.\n\nHowever, there are growing concerns about its negative effects. Research suggests that spending too much time on social media can damage mental health, particularly among teenage girls. The pressure to look perfect, gain followers, and receive likes can lead to anxiety and low self-esteem. Cyberbullying is also a serious problem, with many young people experiencing harassment online.\n\nExperts recommend setting daily time limits on social media use and having 'phone-free' times during meals and before bed. Parents and teachers play an important role in helping teenagers develop healthy digital habits.`,
+      questions: [
+        { q:"According to the text, which is a positive effect of social media for teens?", options:["It helps them sleep better","It helps them feel less lonely","It improves their grades","It replaces face-to-face contact"], answer:1 },
+        { q:"Who does research suggest is most negatively affected by social media?", options:["Young boys","Elderly people","Teenage girls","Primary school children"], answer:2 },
+        { q:"What is 'cyberbullying' as used in this text?", options:["Gaming online","Being famous on the internet","Harassing someone online","Sharing photos online"], answer:2 },
+        { q:"What do experts recommend?", options:["Deleting all social media accounts","Setting time limits on social media","Using more platforms at once","Only using social media at school"], answer:1 },
+        { q:"What does the word 'harassment' mean in this context?", options:["Encouragement","Aggressive or unwanted behaviour","Friendly messages","Public praise"], answer:1 },
+      ]
+    }
+  },
+  technology: {
+    title: "Artificial Intelligence: The Future Is Now",
+    B1: {
+      text: `Artificial intelligence, or AI, is no longer just a concept from science fiction films. It is already part of our daily lives in ways many of us do not notice. When you ask a voice assistant for the weather, get a recommendation on a streaming service, or see an advertisement that seems to know exactly what you want, you are experiencing AI in action.\n\nAI works by processing enormous amounts of data and identifying patterns. It can learn from experience and improve over time, which is why it is sometimes called 'machine learning'. Today, AI is being used in medicine to detect diseases earlier, in transport to develop self-driving cars, and in education to personalise learning.\n\nDespite its many advantages, AI also raises important questions. Some people worry that robots will replace human workers. Others are concerned about privacy, since AI systems collect large amounts of personal data. As this technology continues to develop rapidly, society must carefully consider both its benefits and its risks.`,
+      questions: [
+        { q:"Which is an example of AI mentioned in the text?", options:["Reading a book","Watching TV","Getting recommendations on a streaming service","Writing a letter"], answer:2 },
+        { q:"What does 'machine learning' refer to?", options:["Students using computers","AI that improves by learning from data","Programming languages","Factory machines"], answer:1 },
+        { q:"In which field is AI helping detect diseases earlier?", options:["Transport","Education","Medicine","Entertainment"], answer:2 },
+        { q:"What privacy concern does the text mention?", options:["AI systems taking photos","AI systems collecting personal data","AI reading private messages","AI controlling phones"], answer:1 },
+        { q:"What is the main idea of the last paragraph?", options:["AI is perfect and has no problems","AI raises important questions about jobs and privacy","AI will replace all humans","AI is only useful in education"], answer:1 },
+      ]
+    }
+  },
+  travel: {
+    title: "Travelling on a Budget",
+    B1: {
+      text: `Travelling is one of the most enriching experiences a young person can have, but many teenagers assume it is too expensive. In reality, with careful planning, it is possible to explore new countries and cultures without spending a fortune.\n\nOne of the best ways to save money is to travel during the off-season, when flights and accommodation are significantly cheaper. Booking in advance also helps, as prices tend to rise closer to the departure date. Many cities offer free or discounted entry to museums and attractions for students, so always carry your student card.\n\nStaying in hostels rather than hotels is another popular option among young travellers. Hostels are affordable, social places where you can meet people from all over the world. Cooking your own meals instead of eating out every day can also save a significant amount of money.\n\nTravelling broadens the mind. It teaches you to be independent, adapt to new situations, and appreciate different ways of life. Even a short trip to a nearby country can change the way you see the world.`,
+      questions: [
+        { q:"What does the text say about travelling during the off-season?", options:["It is more exciting","Flights and accommodation are cheaper","There are more tourists","It is harder to find hostels"], answer:1 },
+        { q:"What should students always carry when visiting attractions?", options:["A passport","A map","A student card","A credit card"], answer:2 },
+        { q:"Why does the text recommend staying in hostels?", options:["They are more luxurious than hotels","They are affordable and social","They provide free meals","They are only available in big cities"], answer:1 },
+        { q:"According to the last paragraph, what does travelling teach you?", options:["How to spend money wisely","Independence and adaptability","How to speak foreign languages","How to cook international food"], answer:1 },
+        { q:"What does the word 'enriching' mean in the first paragraph?", options:["Expensive","Making you wealthier financially","Making your life more valuable and interesting","Tiring and difficult"], answer:2 },
+      ]
+    }
+  },
+  health: {
+    title: "The Importance of Sleep for Teenagers",
+    B1: {
+      text: `Sleep is one of the most important factors in a teenager's health and wellbeing, yet it is often one of the most neglected. Research shows that teenagers need between eight and ten hours of sleep per night, but many get far less than this. The reasons include late-night phone use, heavy homework loads, and early school start times.\n\nLack of sleep has serious consequences. It affects concentration, memory, and the ability to learn. Tired teenagers are more likely to make poor decisions, feel anxious or depressed, and perform badly in exams. In the long term, chronic sleep deprivation can increase the risk of obesity and heart disease.\n\nExperts recommend several strategies to improve sleep quality. Avoiding screens for at least one hour before bed allows the brain to wind down. Keeping a consistent sleep schedule — even at weekends — helps regulate the body's internal clock. Regular physical exercise during the day also promotes better sleep at night.\n\nGetting enough sleep is not a luxury — it is a necessity for a healthy, happy, and successful life.`,
+      questions: [
+        { q:"How many hours of sleep do teenagers need per night according to research?", options:["6–7 hours","8–10 hours","10–12 hours","5–6 hours"], answer:1 },
+        { q:"Which is NOT listed as a reason teenagers get less sleep?", options:["Late-night phone use","Heavy homework","Early school start times","Playing sports"], answer:3 },
+        { q:"What does 'chronic sleep deprivation' mean?", options:["One night of poor sleep","Regularly not getting enough sleep","Sleeping too much","A sleeping disorder"], answer:1 },
+        { q:"What does the text recommend doing one hour before bed?", options:["Doing homework","Eating a snack","Avoiding screens","Doing exercise"], answer:2 },
+        { q:"What is the main message of the last sentence?", options:["Sleep is optional","Sleep is a basic human right","Sleep is essential for health and success","Teenagers do not sleep enough"], answer:2 },
+      ]
+    }
+  },
+  education: {
+    title: "Should School Start Later?",
+    B1: {
+      text: `A growing number of scientists and education experts are calling for secondary schools to start later in the morning. Their argument is simple: teenagers' body clocks are biologically different from those of adults. During puberty, the brain naturally shifts to a later sleep schedule, making it difficult for young people to fall asleep before 11pm or wake up early without feeling exhausted.\n\nStudies from the United States have shown that schools which moved their start times from 7:30am to 8:30am or later saw significant improvements. Students' grades improved, rates of absenteeism fell, and teenagers reported feeling happier and less stressed. There were even fewer road accidents involving young drivers in the morning.\n\nOpponents of later start times argue that it would be difficult for working parents and would disrupt after-school activities and transport schedules. However, supporters point out that the long-term benefits to students' mental and physical health outweigh these practical challenges.\n\nAs the debate continues, one thing is clear: the wellbeing of students must be placed at the centre of decisions about school policy.`,
+      questions: [
+        { q:"Why do scientists say teenagers struggle to wake up early?", options:["They stay up watching TV","Their body clocks shift during puberty","They have too much homework","They eat too late at night"], answer:1 },
+        { q:"What happened in US schools that changed their start times?", options:["Students performed worse","Grades improved and stress decreased","Schools had to close earlier","Teachers complained about the changes"], answer:1 },
+        { q:"Which unexpected benefit is mentioned in the second paragraph?", options:["Better school lunches","More sports activities","Fewer morning road accidents","Cheaper transport costs"], answer:2 },
+        { q:"What is the main argument against later school start times?", options:["Students would sleep too much","It could disrupt parents and activities","Teachers prefer early starts","Exam results would fall"], answer:1 },
+        { q:"What does 'absenteeism' most likely mean?", options:["Students arriving late","Students being frequently absent from school","Students performing poorly","Students changing schools"], answer:1 },
+      ]
+    }
+  }
+};
+ 
+let currentPassage = null, readingAnswers = {};
+ 
+function loadReading() {
+  const topic = document.getElementById('reading-topic').value;
+  const level = document.getElementById('reading-level').value;
+  const data = PASSAGES[topic];
+  if (!data) return;
+  const levelData = data[level] || data['B1'];
+  currentPassage = { ...levelData, topic };
+  readingAnswers = {};
+ 
+  document.getElementById('reading-title').innerHTML = `📄 ${data.title}`;
+  document.getElementById('reading-passage').innerHTML = levelData.text.split('\n\n').map(p => `<p style="margin-bottom:14px;">${p}</p>`).join('');
+ 
+  const qHTML = levelData.questions.map((q, i) => {
+    const opts = q.options.map((o, j) =>
+      `<button class="option" onclick="selectReading(${i},${j},this)">${o}</button>`
+    ).join('');
+    return `<div class="quiz-q" id="rq-${i}" style="margin-bottom:12px;">
+      <div class="q-text"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div class="options">${opts}</div>
+      <div class="feedback" id="rfb-${i}"></div>
+    </div>`;
+  }).join('');
+ 
+  document.getElementById('reading-questions').innerHTML = qHTML;
+  document.getElementById('reading-score').style.display = 'none';
+  document.getElementById('reading-output').style.display = 'block';
+}
+ 
+function selectReading(qIdx, optIdx, btn) {
+  if (readingAnswers[qIdx] !== undefined) return;
+  readingAnswers[qIdx] = optIdx;
+  document.querySelectorAll(`#rq-${qIdx} .option`).forEach(b => b.style.opacity = '0.6');
+  btn.style.opacity = '1';
+  btn.style.borderColor = 'var(--accent4)';
+  btn.style.color = 'var(--accent4)';
+}
+ 
+function checkReading() {
+  if (!currentPassage) return;
+  let correct = 0;
+  currentPassage.questions.forEach((q, i) => {
+    const chosen = readingAnswers[i];
+    const isCorrect = chosen === q.answer;
+    if (isCorrect) correct++;
+    document.querySelectorAll(`#rq-${i} .option`).forEach((b, j) => {
+      b.disabled = true;
+      b.style.opacity = '1';
+      if (j === q.answer) { b.classList.add('correct'); b.style.borderColor=''; b.style.color=''; }
+      else if (j === chosen && !isCorrect) { b.classList.add('wrong'); b.style.borderColor=''; b.style.color=''; }
+      else { b.style.opacity='0.4'; }
+    });
+    const fb = document.getElementById(`rfb-${i}`);
+    fb.textContent = isCorrect ? '✓ Correct!' : `✗ The answer is: "${q.options[q.answer]}"`;
+    fb.className = `feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+    document.getElementById(`rq-${i}`).classList.add(isCorrect ? 'correct' : 'wrong');
+  });
+  const pct = Math.round(correct / currentPassage.questions.length * 100);
+  const el = document.getElementById('reading-score');
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
+  el.innerHTML = `<div class="score-bar">${emoji} <strong>${correct} / ${currentPassage.questions.length}</strong> correct — ${pct}%</div>`;
+  el.style.display = 'block';
+  logActivity('reading', 'Reading Comprehension', `${correct}/${currentPassage.questions.length}`, pct);
+}
+ 
+function resetReading() {
+  readingAnswers = {};
+  document.getElementById('reading-output').style.display = 'none';
+}
+ 
+// ======== LANGUAGE TOGGLE ========
+let currentLang = 'en';
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'sq' : 'en';
+  document.getElementById('lang-btn').textContent = currentLang === 'sq' ? '🇦🇱 SQ' : '🇬🇧 EN';
+  document.querySelectorAll('.t').forEach(el => {
+    const val = el.getAttribute(`data-${currentLang}`);
+    if (val) el.textContent = val;
+  });
+  document.querySelectorAll('label.t').forEach(el => {
+    const val = el.getAttribute(`data-${currentLang}`);
+    if (val) el.textContent = val;
+  });
+}
 let fcDeck = [], fcIndex = 0, fcRatings = {};
  
 function loadFlashcards() {
