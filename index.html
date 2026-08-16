@@ -31,7 +31,7 @@ body::after{content:'';position:fixed;inset:0;
   background:radial-gradient(ellipse 55% 35% at 8% 8%,#5bffc022 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#a78bfa18 0%,transparent 60%),radial-gradient(ellipse 30% 30% at 50% 50%,#0e0f1488 0%,transparent 100%);
   pointer-events:none;z-index:0;}
 [data-theme="light"] body::before{
-@@ -196,50 +198,55 @@ textarea{resize:vertical;min-height:100px;}
+@@ -196,113 +198,173 @@ textarea{resize:vertical;min-height:100px;}
 .game-card .game-desc{font-size:11px;color:var(--muted);margin-top:4px;}
 /* HANGMAN */
 .hangman-area{text-align:center;}
@@ -66,6 +66,26 @@ body::after{content:'';position:fixed;inset:0;
 .history-title{font-size:13px;font-weight:500;color:var(--text);}
 .history-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
 .history-score{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent);}
+.hero{background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:22px;padding:28px;margin-bottom:18px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:220px;height:220px;border-radius:50%;background:var(--accent)18;filter:blur(6px);}
+.hero-kicker{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.hero h2{font-family:'Syne',sans-serif;font-size:34px;line-height:1.05;margin-bottom:10px;max-width:620px;}
+.hero p{color:var(--muted);font-size:14px;line-height:1.7;max-width:620px;}
+.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px;}
+.action-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s;}
+.action-card:hover{transform:translateY(-2px);border-color:var(--accent);background:var(--accent)0d;}
+.action-icon{font-size:24px;margin-bottom:8px;}
+.action-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;margin-bottom:4px;}
+.action-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.status-pill{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
+.status-pill.online{color:var(--accent);border-color:var(--accent)55;}
+.status-pill.offline{color:var(--accent3);border-color:var(--accent3)55;}
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.settings-card h3{font-family:'Syne',sans-serif;font-size:13px;margin-bottom:8px;color:var(--accent);}
+.settings-card p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.review-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.review-chip{font-family:'DM Mono',monospace;font-size:11px;padding:5px 10px;border-radius:20px;background:var(--accent3)18;color:var(--accent3);border:1px solid var(--accent3)33;}
  
 /* DICTIONARY */
 .dict-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:14px;}
@@ -79,6 +99,7 @@ body::after{content:'';position:fixed;inset:0;
 #word-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
 @media print{
   header,.nav,.btn-row,.speak-icon,.theme-toggle,.version-badge,#panel-quiz,#panel-flashcards,#panel-grammar,#panel-games,#panel-progress,#panel-dictionary{display:none!important;}
+  header,.nav,.btn-row,.speak-icon,.theme-toggle,.version-badge,#panel-home,#panel-quiz,#panel-flashcards,#panel-grammar,#panel-games,#panel-progress,#panel-dictionary,#panel-settings{display:none!important;}
   body{background:white;color:black;}
   .card{border:1px solid #ccc;box-shadow:none;}
   #panel-lesson{display:block!important;}
@@ -87,7 +108,108 @@ body::after{content:'';position:fixed;inset:0;
 /* RESPONSIVE */
 @media(max-width:640px){
   header{padding:14px 16px;}
-@@ -510,104 +517,122 @@ textarea{resize:vertical;min-height:100px;}
+  .nav{padding:12px 16px 0;}
+  main{padding:16px 16px 60px;}
+  .row,.row3{grid-template-columns:1fr;}
+  .options{grid-template-columns:1fr;}
+  .game-select{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .flashcard{height:190px;}
+  .card-word{font-size:22px;}
+  .hero{padding:22px;}
+  .hero h2{font-size:28px;}
+  .quick-actions{grid-template-columns:1fr 1fr;}
+  .header-right{width:100%;margin-left:0;justify-content:space-between;}
+}
+@media(max-width:420px){.quick-actions{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr;}.tab{padding:9px 14px;}}
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="logo">EL</div>
+  <h1>English<span>Lab</span></h1>
+  <div class="header-right">
+    <span class="version-badge">v2.0</span>
+    <span class="version-badge">v2.1</span>
+    <span class="status-pill" id="offline-status">checking...</span>
+    <button class="theme-toggle" onclick="toggleLang()" id="lang-btn" title="Switch language">🇬🇧 EN</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
+  </div>
+</header>
+ 
+<div class="nav">
+  <button class="tab active" onclick="switchTab('quiz',this)">🎯 <span class="t" data-en="Quiz" data-sq="Kuiz">Quiz</span></button>
+  <button class="tab active" onclick="switchTab('home',this)">🏠 <span class="t" data-en="Home" data-sq="Kryefaqe">Home</span></button>
+  <button class="tab" onclick="switchTab('quiz',this)">🎯 <span class="t" data-en="Quiz" data-sq="Kuiz">Quiz</span></button>
+  <button class="tab" onclick="switchTab('flashcards',this)">🃏 <span class="t" data-en="Flashcards" data-sq="Kartela">Flashcards</span></button>
+  <button class="tab" onclick="switchTab('grammar',this)">📝 <span class="t" data-en="Grammar" data-sq="Gramatikë">Grammar</span></button>
+  <button class="tab" onclick="switchTab('writing',this)">✍️ <span class="t" data-en="Writing" data-sq="Shkrimi">Writing</span></button>
+  <button class="tab" onclick="switchTab('reading',this)">📖 <span class="t" data-en="Reading" data-sq="Leximi">Reading</span></button>
+  <button class="tab" onclick="switchTab('games',this)">🎮 <span class="t" data-en="Games" data-sq="Lojëra">Games</span></button>
+  <button class="tab" onclick="switchTab('progress',this)">📊 <span class="t" data-en="Progress" data-sq="Progresi">Progress</span></button>
+  <button class="tab" onclick="switchTab('dictionary',this)">📖 <span class="t" data-en="Dictionary" data-sq="Fjalor">Dictionary</span></button>
+  <button class="tab" onclick="switchTab('settings',this)">⚙️ <span class="t" data-en="Settings" data-sq="Cilësime">Settings</span></button>
+</div>
+ 
+<main>
+ 
+<!-- ===== HOME ===== -->
+<div id="panel-home" class="panel active">
+  <section class="hero">
+    <div class="hero-kicker">Free • private • offline-ready</div>
+    <h2>Your personal English learning cockpit.</h2>
+    <p>Practice vocabulary, writing, reading, grammar, pronunciation, and quizzes with local progress tracking. No paid backend required.</p>
+    <div class="btn-row" style="margin-top:18px;">
+      <button class="btn btn-primary" onclick="startReviewDue()">⚡ Smart Review</button>
+      <button class="btn btn-secondary" onclick="goTab('writing')">✍️ Write</button>
+      <button class="btn btn-secondary" onclick="goTab('quiz')">🎯 Quiz</button>
+    </div>
+  </section>
+  <div class="stat-grid" id="home-stats"></div>
+  <div class="quick-actions">
+    <div class="action-card" onclick="startReviewDue()"><div class="action-icon">⚡</div><div class="action-title">Smart Review</div><div class="action-desc">Review due words first using your local spaced schedule.</div></div>
+    <div class="action-card" onclick="goTab('flashcards')"><div class="action-icon">🃏</div><div class="action-title">Flashcards</div><div class="action-desc">Build vocabulary by topic and mark words you know.</div></div>
+    <div class="action-card" onclick="goTab('reading')"><div class="action-icon">📖</div><div class="action-title">Reading Lab</div><div class="action-desc">Load a passage and check comprehension instantly.</div></div>
+    <div class="action-card" onclick="goTab('grammar')"><div class="action-icon">📝</div><div class="action-title">Grammar Coach</div><div class="action-desc">Catch common tense, agreement, spelling, and style issues.</div></div>
+    <div class="action-card" onclick="goTab('games')"><div class="action-icon">🎮</div><div class="action-title">Word Games</div><div class="action-desc">Play hangman or scramble with your vocabulary topics.</div></div>
+    <div class="action-card" onclick="goTab('settings')"><div class="action-icon">⚙️</div><div class="action-title">Backup & Settings</div><div class="action-desc">Export/import progress and check offline readiness.</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">⏰ Due Review Words</div>
+    <div id="due-review-home"></div>
+  </div>
+</div>
+ 
+<!-- ===== QUIZ ===== -->
+<div id="panel-quiz" class="panel active">
+<div id="panel-quiz" class="panel">
+  <div class="card">
+    <div class="card-title">🎯 <span class="t" data-en="Quiz Settings" data-sq="Cilësimet e Kuizit">Quiz Settings</span></div>
+    <div class="row">
+      <div>
+        <label class="t" data-en="Student Name" data-sq="Emri i Nxënësit">Student Name</label>
+        <input type="text" id="student-name" placeholder="Enter your name..." style="margin-bottom:0;"/>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px;">
+      <div>
+        <label class="t" data-en="Category" data-sq="Kategoria">Category</label>
+        <select id="quiz-cat">
+          <option value="10">Books & Literature</option>
+          <option value="0">English Language (Mixed)</option>
+        </select>
+      </div>
+      <div>
+        <label class="t" data-en="Difficulty" data-sq="Vështirësia">Difficulty</label>
+        <select id="quiz-diff">
+          <option value="easy" class="t" data-en="Easy" data-sq="E lehtë">Easy</option>
+          <option value="medium" selected class="t" data-en="Medium" data-sq="Mesatare">Medium</option>
+          <option value="hard" class="t" data-en="Hard" data-sq="E vështirë">Hard</option>
+        </select>
+      </div>
+    </div>
+@@ -510,113 +572,167 @@ textarea{resize:vertical;min-height:100px;}
       <div class="game-card" id="gc-scramble" onclick="selectGame('scramble')">
         <div class="game-icon">🔀</div>
         <div class="game-name">Word Scramble</div>
@@ -160,6 +282,36 @@ body::after{content:'';position:fixed;inset:0;
   </div>
 </div>
  
+
+<!-- ===== SETTINGS ===== -->
+<div id="panel-settings" class="panel">
+  <div class="card">
+    <div class="card-title">⚙️ Settings & Backup</div>
+    <div class="settings-grid">
+      <div class="settings-card">
+        <h3>Appearance</h3>
+        <p>Keep your preferred theme and language saved on this device.</p>
+        <div class="btn-row"><button class="btn btn-secondary" onclick="toggleTheme()">Toggle Theme</button><button class="btn btn-secondary" onclick="toggleLang()">Switch Language</button></div>
+      </div>
+      <div class="settings-card">
+        <h3>Progress Backup</h3>
+        <p>Export your data to a JSON file or import it on another browser. No account or paid database needed.</p>
+        <div class="btn-row"><button class="btn btn-primary" onclick="exportProgress()">Export</button><button class="btn btn-secondary" onclick="document.getElementById('import-progress').click()">Import</button></div>
+      </div>
+      <div class="settings-card">
+        <h3>Offline Status</h3>
+        <p id="offline-detail">Checking offline readiness...</p>
+        <div class="btn-row"><button class="btn btn-secondary" onclick="updateOfflineStatus(true)">Refresh Status</button></div>
+      </div>
+      <div class="settings-card">
+        <h3>Deploy Free</h3>
+        <p>This is a static app, so it can go on Vercel, Netlify, Cloudflare Pages, or GitHub Pages without a backend.</p>
+        <code style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);">vercel --prod</code>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 </main>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
  
@@ -196,8 +348,15 @@ function switchTab(name, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
+  el?.classList.add('active');
   document.getElementById('panel-' + name).classList.add('active');
   if (name === 'progress') renderProgress();
+  if (name === 'home') renderDashboard();
+  if (name === 'settings') updateOfflineStatus();
+}
+function goTab(name) {
+  const btn = [...document.querySelectorAll('.tab')].find(b => b.getAttribute('onclick')?.includes(`'${name}'`));
+  if (btn) switchTab(name, btn);
 }
  
 // ======== TTS ========
@@ -214,7 +373,16 @@ function loadVoices() {
     opt.textContent = `${v.name} (${v.lang})`;
     if (v.lang.startsWith('en')) opt.selected = true;
     sel.appendChild(opt);
-@@ -781,85 +806,50 @@ async function loadQuiz() {
+  });
+}
+ 
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+ 
+function speak(text, rate = 0.9) {
+@@ -781,85 +897,50 @@ async function loadQuiz() {
   }
   btn.disabled = false; btn.innerHTML = '✦ ' + (currentLang==='sq' ? 'Ngarko Kuizin' : 'Load Quiz');
 }
@@ -300,7 +468,7 @@ function answer(idx, chosen, correct, btn) {
   speak(isCorrect ? 'Correct!' : `The answer is: ${correct}`);
 }
  
-@@ -1121,102 +1111,115 @@ function checkReading() {
+@@ -1121,102 +1202,115 @@ function checkReading() {
       b.disabled = true;
       b.style.opacity = '1';
       if (j === q.answer) { b.classList.add('correct'); b.style.borderColor=''; b.style.color=''; }
@@ -420,7 +588,7 @@ const IRREGULAR_VERBS = [
   ['begin','began','begun'],['keep','kept','kept'],['hold','held','held'],['write','wrote','written'],
   ['stand','stood','stood'],['hear','heard','heard'],['let','let','let'],['mean','meant','meant'],
   ['set','set','set'],['meet','met','met'],['run','ran','run'],['pay','paid','paid'],
-@@ -1498,86 +1501,120 @@ function checkScramble() {
+@@ -1498,86 +1592,179 @@ function checkScramble() {
  
 // ======== PROGRESS (localStorage) ========
 function getProgress() { return JSON.parse(localStorage.getItem('el_progress') || '{"history":[],"stats":{}}'); }
@@ -489,6 +657,48 @@ function getDueWords() {
   const now = Date.now();
   return Object.entries(p.review || {}).filter(([, v]) => (v.nextDue || 0) <= now).map(([word]) => word);
 }
+function findWordData(word) {
+  for (const topic of TOPICS) {
+    const match = topic.words.find(item => item.w === word);
+    if (match) return match;
+  }
+  return null;
+}
+function renderDashboard() {
+  const p = getProgress();
+  const known = getKnownWords();
+  const due = getDueWords();
+  const total = Object.values(p.stats || {}).reduce((a,b) => a+b, 0);
+  const quizSessions = (p.history || []).filter(h => h.type === 'quiz' && h.score !== null);
+  const avgScore = quizSessions.length ? Math.round(quizSessions.reduce((a,h) => a+h.score,0)/quizSessions.length) : 0;
+  const stats = document.getElementById('home-stats');
+  if (stats) stats.innerHTML = `
+    <div class="stat-card"><div class="stat-num">${due.length}</div><div class="stat-label">due now</div></div>
+    <div class="stat-card"><div class="stat-num">${known.length}</div><div class="stat-label">known words</div></div>
+    <div class="stat-card"><div class="stat-num">${avgScore}%</div><div class="stat-label">avg quiz</div></div>
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">activities</div></div>`;
+  const dueBox = document.getElementById('due-review-home');
+  if (!dueBox) return;
+  if (!due.length) {
+    dueBox.innerHTML = '<div class="empty-state" style="padding:24px 10px;"><div class="icon">✨</div>No due cards yet. Study flashcards to build your review queue.</div>';
+  } else {
+    dueBox.innerHTML = `<p style="font-size:13px;color:var(--muted);line-height:1.6;">These words are ready for review:</p><div class="review-list">${due.slice(0,18).map(w => `<span class="review-chip">${w}</span>`).join('')}</div><div class="btn-row"><button class="btn btn-primary" onclick="startReviewDue()">Start due review</button></div>`;
+  }
+}
+function startReviewDue() {
+  const due = getDueWords();
+  if (!due.length) {
+    showToast('No due words yet — opening flashcards');
+    goTab('flashcards');
+    return;
+  }
+  fcDeck = due.map(findWordData).filter(Boolean);
+  fcIndex = 0; fcRatings = {};
+  document.getElementById('fc-area').style.display = 'block';
+  renderCard();
+  goTab('flashcards');
+  showToast(`Loaded ${fcDeck.length} due word${fcDeck.length === 1 ? '' : 's'}`);
+}
 function exportProgress() {
   const payload = { exportedAt: new Date().toISOString(), progress: getProgress(), known: getKnownWords(), theme: localStorage.getItem('el_theme'), lang: localStorage.getItem('el_lang') };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
@@ -516,6 +726,23 @@ function importProgress(event) {
   };
   reader.readAsText(file);
 }
+function updateOfflineStatus(verbose = false) {
+  const pill = document.getElementById('offline-status');
+  const detail = document.getElementById('offline-detail');
+  const online = navigator.onLine;
+  const swReady = 'serviceWorker' in navigator;
+  const controlled = Boolean(navigator.serviceWorker?.controller);
+  if (pill) {
+    pill.textContent = online ? (controlled ? 'online • offline ready' : 'online') : 'offline';
+    pill.className = `status-pill ${online ? 'online' : 'offline'}`;
+  }
+  if (detail) {
+    detail.textContent = swReady
+      ? (controlled ? 'The app shell is cached and ready for offline use on this device.' : 'Service worker supported. Refresh once after first load to complete offline setup.')
+      : 'This browser does not support service workers, so offline app caching is unavailable.';
+  }
+  if (verbose) showToast(online ? 'Online status checked' : 'You are offline');
+}
 function clearProgress() {
   if (confirm('Reset all progress? This cannot be undone.')) {
     localStorage.removeItem('el_progress');
@@ -541,7 +768,7 @@ async function lookupWord() {
 }
  
 function renderDict(entry, container) {
-@@ -1593,30 +1630,35 @@ function renderDict(entry, container) {
+@@ -1593,30 +1780,39 @@ function renderDict(entry, container) {
     m.definitions?.slice(0,2).forEach(d => {
       html += `<div class="dict-def">• ${d.definition}</div>`;
       if (d.example) html += `<div class="dict-ex">"${d.example}"</div>`;
@@ -571,8 +798,12 @@ applyTheme();
 applyLang();
 initTopics();
 renderProgress();
+renderDashboard();
+updateOfflineStatus();
+window.addEventListener('online', () => updateOfflineStatus(true));
+window.addEventListener('offline', () => updateOfflineStatus(true));
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').then(() => updateOfflineStatus()).catch(() => {}));
 }
 </script>
 </body>
