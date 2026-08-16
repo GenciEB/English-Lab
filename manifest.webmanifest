@@ -1,0 +1,10 @@
+{
+  "name": "EnglishLab",
+  "short_name": "EnglishLab",
+  "description": "A free personal English learning lab with quizzes, flashcards, writing, reading, games, progress, and dictionary tools.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0e0f14",
+  "theme_color": "#5bffc0",
+  "icons": []
+}
