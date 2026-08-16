@@ -1,5 +1,5 @@
 const CACHE_NAME = 'englishlab-v3';
-const OFFLINE_ASSETS = ['./', './index.html', './manifest.webmanifest'];
+const OFFLINE_ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(OFFLINE_ASSETS)));
