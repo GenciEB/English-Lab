@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EnglishLab v2</title>
+<meta name="theme-color" content="#0e0f14"/>
+<link rel="manifest" href="manifest.webmanifest"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -29,170 +31,7 @@ body::after{content:'';position:fixed;inset:0;
   background:radial-gradient(ellipse 55% 35% at 8% 8%,#5bffc022 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#a78bfa18 0%,transparent 60%),radial-gradient(ellipse 30% 30% at 50% 50%,#0e0f1488 0%,transparent 100%);
   pointer-events:none;z-index:0;}
 [data-theme="light"] body::before{
-  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-family='Georgia,serif' font-size='18' fill='%230a8a5c' opacity='0.05'%3EAbc%3C/text%3E%3Ctext x='60' y='65' font-family='Georgia,serif' font-size='14' fill='%236d28d9' opacity='0.05'%3E%E2%9C%93%3C/text%3E%3Ctext x='5' y='80' font-family='Georgia,serif' font-size='12' fill='%23b07d00' opacity='0.04'%3EEng%3C/text%3E%3Ctext x='70' y='100' font-family='Georgia,serif' font-size='16' fill='%230a8a5c' opacity='0.05'%3E?%3C/text%3E%3Ctext x='30' y='110' font-family='Georgia,serif' font-size='11' fill='%236d28d9' opacity='0.04'%3EXyz%3C/text%3E%3Ctext x='85' y='30' font-family='Georgia,serif' font-size='13' fill='%23b07d00' opacity='0.04'%3E!%3C/text%3E%3C/svg%3E");
-  background-size: 120px 120px;}
-[data-theme="light"] body::after{background:radial-gradient(ellipse 55% 35% at 8% 8%,#0a8a5c14 0%,transparent 60%),radial-gradient(ellipse 40% 45% at 92% 85%,#6d28d912 0%,transparent 60%);}
- 
-/* HEADER */
-header{padding:18px 32px;display:flex;align-items:center;gap:14px;position:relative;z-index:10;border-bottom:1px solid var(--border);backdrop-filter:blur(8px);background:var(--bg)cc;flex-wrap:wrap;gap:10px;}
-.logo{background:var(--accent);color:#0e0f14;font-family:'Syne',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:5px 11px;border-radius:6px;}
-header h1{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;}
-header h1 span{color:var(--accent);}
-.header-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
-.theme-toggle{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:16px;color:var(--text);transition:all .2s;}
-.theme-toggle:hover{border-color:var(--accent);}
-.version-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
- 
-/* NAV TABS */
-.nav{display:flex;gap:2px;padding:16px 32px 0;position:relative;z-index:5;overflow-x:auto;scrollbar-width:none;}
-.nav::-webkit-scrollbar{display:none;}
-.tab{padding:9px 18px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--surface);color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;flex-shrink:0;}
-.tab:hover{color:var(--text);}
-.tab.active{background:var(--card);color:var(--accent);border-color:var(--border);}
- 
-/* MAIN */
-main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:28px 32px 80px;}
-.panel{display:none;}
-.panel.active{display:block;animation:fadeUp .3s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
- 
-/* CARDS */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:18px;transition:background .3s,border-color .3s;}
-.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:16px;letter-spacing:0.3px;}
- 
-/* FORM */
-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:0.6px;text-transform:uppercase;}
-input[type=text],select,textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;outline:none;transition:border-color .2s,background .3s;margin-bottom:14px;}
-input[type=text]:focus,select:focus,textarea:focus{border-color:var(--accent);}
-select option{background:var(--card);}
-textarea{resize:vertical;min-height:100px;}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
- 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .2s;letter-spacing:0.3px;white-space:nowrap;}
-.btn-primary{background:var(--accent);color:#0e0f14;}
-.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);}
-.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
-.btn-ghost{background:transparent;color:var(--muted);border:none;padding:6px 10px;}
-.btn-ghost:hover{color:var(--text);}
-.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;filter:none!important;}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
- 
-/* BADGES */
-.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:var(--border);color:var(--muted);margin-left:6px;vertical-align:middle;}
-.badge-accent{background:var(--accent)22;color:var(--accent);}
-.badge-warn{background:var(--accent3)22;color:var(--accent3);}
-.badge-danger{background:var(--accent2)22;color:var(--accent2);}
- 
-/* SPINNER */
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
-@keyframes spin{to{transform:rotate(360deg);}}
- 
-.empty-state{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px;}
-.empty-state .icon{font-size:38px;margin-bottom:12px;}
- 
-/* DIVIDER */
-.divider{height:1px;background:var(--border);margin:20px 0;}
- 
-/* ======== LESSON ======== */
-.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
-.vocab-item{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:12px;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;}
-.vocab-item:hover{border-color:var(--accent);transform:translateY(-2px);}
-.vocab-word{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px;}
-.vocab-def{font-size:11px;color:var(--muted);line-height:1.5;}
-.speak-icon{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px;transition:color .2s;}
-.speak-icon:hover{color:var(--accent);}
-.lesson-section{margin-bottom:18px;}
-.lesson-section h3{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent3);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;}
-.lesson-section p,.lesson-section li{font-size:13px;line-height:1.75;color:var(--text);}
-.lesson-section ul{padding-left:18px;}
-.lesson-section li{margin-bottom:3px;}
-.topic-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-.chip{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;}
-.chip:hover,.chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent)11;}
- 
-/* ======== QUIZ ======== */
-.score-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px;display:flex;align-items:center;gap:18px;margin-bottom:18px;}
-.score-num{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--accent);}
-.score-track{flex:1;height:5px;background:var(--border);border-radius:99px;overflow:hidden;}
-.score-fill{height:100%;background:var(--accent);border-radius:99px;transition:width 1s ease;}
-.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px;transition:border-color .2s;}
-.quiz-q.correct{border-color:var(--accent);}
-.quiz-q.wrong{border-color:var(--accent2);}
-.q-text{font-size:13px;font-weight:500;margin-bottom:12px;line-height:1.65;}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.option{padding:9px 13px;border-radius:7px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:12px;cursor:pointer;transition:all .15s;text-align:left;font-family:'DM Sans',sans-serif;}
-.option:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
-.option.correct{background:var(--accent)1a;border-color:var(--accent);color:var(--accent);}
-.option.wrong{background:var(--accent2)1a;border-color:var(--accent2);color:var(--accent2);}
-.option:disabled{cursor:default;}
-.feedback{font-size:11px;margin-top:8px;padding:7px 11px;border-radius:6px;display:none;font-family:'DM Mono',monospace;}
-.feedback.show{display:block;}
-.feedback.correct{background:var(--accent)18;color:var(--accent);}
-.feedback.wrong{background:var(--accent2)18;color:var(--accent2);}
- 
-/* ======== FLASHCARDS ======== */
-.flashcard-area{perspective:1000px;margin:20px 0;}
-.flashcard{width:100%;max-width:500px;margin:0 auto;height:220px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-.flashcard.flipped{transform:rotateY(180deg);}
-.card-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;backface-visibility:hidden;border:2px solid var(--border);}
-.card-front{background:var(--card);}
-.card-back{background:var(--accent)18;border-color:var(--accent)44;transform:rotateY(180deg);}
-.card-word{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent);text-align:center;margin-bottom:10px;}
-.card-hint{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
-.card-def{font-size:14px;color:var(--text);text-align:center;line-height:1.6;}
-.card-ex{font-size:12px;color:var(--muted);font-style:italic;text-align:center;margin-top:10px;}
-.fc-controls{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
-.fc-progress{text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:16px;}
-.fc-dots{display:flex;gap:5px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
-.fc-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s;}
-.fc-dot.known{background:var(--accent);}
-.fc-dot.unsure{background:var(--accent3);}
-.fc-dot.current{background:var(--accent4);transform:scale(1.3);}
- 
-/* ======== PPP LESSON PLAN ======== */
-.ppp-header{margin-bottom:18px;}
-.ppp-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.ppp-meta-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
-.ppp-label{display:block;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px;}
-.ppp-val{font-size:13px;font-weight:600;color:var(--text);}
-.ppp-section{margin-bottom:12px;}
-.ppp-row{display:flex;gap:10px;}
-.ppp-block{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;}
-.ppp-block-title{font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;font-weight:600;}
-.ppp-block-body{font-size:13px;color:var(--text);line-height:1.6;}
-.ppp-list{padding-left:16px;margin:0;}
-.ppp-list li{margin-bottom:4px;}
-.ppp-stage{border-radius:10px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border);}
-.ppp-stage-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;}
-.ppp-stage-tag{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;}
-.ppp-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
-.ppp-stage-body{padding:12px 16px;font-size:13px;line-height:1.7;color:var(--text);background:var(--surface);}
-.ppp-intro .ppp-stage-header{background:var(--accent4)22;} .ppp-intro .ppp-stage-tag{color:var(--accent4);}
-.ppp-warm  .ppp-stage-header{background:var(--accent3)22;} .ppp-warm  .ppp-stage-tag{color:var(--accent3);}
-.ppp-pres  .ppp-stage-header{background:var(--accent)22;}  .ppp-pres  .ppp-stage-tag{color:var(--accent);}
-.ppp-prac  .ppp-stage-header{background:#60a5fa22;}        .ppp-prac  .ppp-stage-tag{color:#60a5fa;}
-.ppp-prod  .ppp-stage-header{background:var(--accent2)22;} .ppp-prod  .ppp-stage-tag{color:var(--accent2);}
-.ppp-eval  .ppp-stage-header{background:var(--accent4)22;} .ppp-eval  .ppp-stage-tag{color:var(--accent4);}
-.ppp-assign .ppp-stage-header{background:var(--border);}   .ppp-assign .ppp-stage-tag{color:var(--muted);}
-@media(max-width:640px){.ppp-meta-grid{grid-template-columns:1fr 1fr;}.ppp-row{flex-direction:column;}}
-.grammar-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:14px;}
-.grammar-item{border-left:3px solid var(--accent3);padding:10px 14px;margin-bottom:10px;background:var(--accent3)08;border-radius:0 8px 8px 0;}
-.grammar-item.good{border-color:var(--accent);background:var(--accent)08;}
-.grammar-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;font-weight:600;}
-.grammar-label.good{color:var(--accent);}
-.grammar-text{font-size:13px;color:var(--text);line-height:1.6;}
-.grammar-fix{font-size:12px;color:var(--accent);margin-top:5px;font-family:'DM Mono',monospace;}
-.style-item{border-color:var(--accent4);background:var(--accent4)08;}
- 
-/* ======== WORD GAMES ======== */
-.game-select{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-.game-card{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all .2s;text-align:center;}
-.game-card:hover,.game-card.active{border-color:var(--accent);background:var(--accent)0a;}
-.game-card .game-icon{font-size:28px;margin-bottom:8px;}
-.game-card .game-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
+@@ -196,50 +198,55 @@ textarea{resize:vertical;min-height:100px;}
 .game-card .game-desc{font-size:11px;color:var(--muted);margin-top:4px;}
 /* HANGMAN */
 .hangman-area{text-align:center;}
@@ -218,6 +57,11 @@ textarea{resize:vertical;min-height:100px;}
 .stat-label{font-size:11px;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace;}
 .history-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
 .history-icon{font-size:20px;flex-shrink:0;}
+.toast{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--card);border:1px solid var(--accent);color:var(--text);box-shadow:var(--shadow);border-radius:12px;padding:12px 16px;font-size:13px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;}
+.toast.show{opacity:1;transform:translateY(0);}
+.insight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px;}
+.insight{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;}
+.insight strong{display:block;color:var(--accent);font-family:'Syne',sans-serif;margin-bottom:4px;}
 .history-info{flex:1;}
 .history-title{font-size:13px;font-weight:500;color:var(--text);}
 .history-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
@@ -243,270 +87,7 @@ textarea{resize:vertical;min-height:100px;}
 /* RESPONSIVE */
 @media(max-width:640px){
   header{padding:14px 16px;}
-  .nav{padding:12px 16px 0;}
-  main{padding:16px 16px 60px;}
-  .row,.row3{grid-template-columns:1fr;}
-  .options{grid-template-columns:1fr;}
-  .game-select{grid-template-columns:1fr;}
-  .stat-grid{grid-template-columns:1fr 1fr;}
-  .flashcard{height:190px;}
-  .card-word{font-size:22px;}
-}
-</style>
-</head>
-<body>
- 
-<header>
-  <div class="logo">EL</div>
-  <h1>English<span>Lab</span></h1>
-  <div class="header-right">
-    <span class="version-badge">v2.0</span>
-    <button class="theme-toggle" onclick="toggleLang()" id="lang-btn" title="Switch language">🇬🇧 EN</button>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
-  </div>
-</header>
- 
-<div class="nav">
-  <button class="tab active" onclick="switchTab('quiz',this)">🎯 <span class="t" data-en="Quiz" data-sq="Kuiz">Quiz</span></button>
-  <button class="tab" onclick="switchTab('flashcards',this)">🃏 <span class="t" data-en="Flashcards" data-sq="Kartela">Flashcards</span></button>
-  <button class="tab" onclick="switchTab('grammar',this)">📝 <span class="t" data-en="Grammar" data-sq="Gramatikë">Grammar</span></button>
-  <button class="tab" onclick="switchTab('writing',this)">✍️ <span class="t" data-en="Writing" data-sq="Shkrimi">Writing</span></button>
-  <button class="tab" onclick="switchTab('reading',this)">📖 <span class="t" data-en="Reading" data-sq="Leximi">Reading</span></button>
-  <button class="tab" onclick="switchTab('games',this)">🎮 <span class="t" data-en="Games" data-sq="Lojëra">Games</span></button>
-  <button class="tab" onclick="switchTab('progress',this)">📊 <span class="t" data-en="Progress" data-sq="Progresi">Progress</span></button>
-  <button class="tab" onclick="switchTab('dictionary',this)">📖 <span class="t" data-en="Dictionary" data-sq="Fjalor">Dictionary</span></button>
-</div>
- 
-<main>
- 
-<!-- ===== QUIZ ===== -->
-<div id="panel-quiz" class="panel active">
-  <div class="card">
-    <div class="card-title">🎯 <span class="t" data-en="Quiz Settings" data-sq="Cilësimet e Kuizit">Quiz Settings</span></div>
-    <div class="row">
-      <div>
-        <label class="t" data-en="Student Name" data-sq="Emri i Nxënësit">Student Name</label>
-        <input type="text" id="student-name" placeholder="Enter your name..." style="margin-bottom:0;"/>
-      </div>
-    </div>
-    <div class="row" style="margin-top:14px;">
-      <div>
-        <label class="t" data-en="Category" data-sq="Kategoria">Category</label>
-        <select id="quiz-cat">
-          <option value="10">Books & Literature</option>
-          <option value="0">English Language (Mixed)</option>
-        </select>
-      </div>
-      <div>
-        <label class="t" data-en="Difficulty" data-sq="Vështirësia">Difficulty</label>
-        <select id="quiz-diff">
-          <option value="easy" class="t" data-en="Easy" data-sq="E lehtë">Easy</option>
-          <option value="medium" selected class="t" data-en="Medium" data-sq="Mesatare">Medium</option>
-          <option value="hard" class="t" data-en="Hard" data-sq="E vështirë">Hard</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <label class="t" data-en="Questions" data-sq="Pyetje">Questions</label>
-        <select id="quiz-count">
-          <option value="5">5</option>
-          <option value="10" selected>10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="loadQuiz()" id="btn-load-quiz">✦ <span class="t" data-en="Load Quiz" data-sq="Ngarko Kuizin">Load Quiz</span></button>
-      <button class="btn btn-secondary" onclick="resetQuiz()"><span class="t" data-en="Reset" data-sq="Rivendos">Reset</span></button>
-    </div>
-  </div>
-  <div id="score-section" style="display:none;">
-    <div class="score-bar">
-      <div>
-        <div class="score-num" id="score-display">0</div>
-        <div style="font-size:11px;color:var(--muted);" id="student-name-display"></div>
-      </div>
-      <div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
-      <div style="text-align:right;">
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;" id="score-pct">0%</div>
-        <div style="font-size:11px;color:var(--muted);" id="score-sub">0 / 0</div>
-      </div>
-    </div>
-    <div id="score-final" style="display:none;"></div>
-  </div>
-  <div id="quiz-container"><div class="empty-state"><div class="icon">🎯</div><span class="t" data-en="Load a quiz to begin!" data-sq="Ngarko një kuiz për të filluar!">Load a quiz to begin!</span></div></div>
-</div>
- 
-<!-- ===== FLASHCARDS ===== -->
-<div id="panel-flashcards" class="panel">
-  <div class="card">
-    <div class="card-title">🃏 Flashcard Deck</div>
-    <div class="row">
-      <div>
-        <label>Topic</label>
-        <select id="fc-topic" onchange="loadFlashcards()">
-          <option value="">-- Select topic --</option>
-        </select>
-      </div>
-      <div style="display:flex;align-items:flex-end;padding-bottom:14px;">
-        <button class="btn btn-primary" onclick="loadFlashcards()">✦ Start Deck</button>
-      </div>
-    </div>
-  </div>
-  <div id="fc-area" style="display:none;">
-    <div class="fc-progress" id="fc-progress">Card 1 of 10</div>
-    <div class="fc-dots" id="fc-dots"></div>
-    <div class="flashcard-area">
-      <div class="flashcard" id="flashcard" onclick="flipCard()">
-        <div class="card-face card-front" id="card-front">
-          <div class="card-word" id="fc-word">word</div>
-          <div class="card-hint">tap to reveal definition</div>
-        </div>
-        <div class="card-face card-back" id="card-back">
-          <div class="card-def" id="fc-def">definition</div>
-          <div class="card-ex" id="fc-ex"></div>
-        </div>
-      </div>
-    </div>
-    <div class="fc-controls">
-      <button class="btn btn-secondary" onclick="fcRate('unsure')">🤔 Still Learning</button>
-      <button class="btn btn-primary" onclick="fcRate('known')">✓ Got It!</button>
-      <button class="btn btn-ghost" onclick="speak(document.getElementById('fc-word').textContent)">🔊</button>
-    </div>
-    <div class="btn-row" style="justify-content:center;margin-top:12px;">
-      <button class="btn btn-ghost" onclick="fcPrev()">← Prev</button>
-      <button class="btn btn-ghost" onclick="fcNext()">Next →</button>
-      <button class="btn btn-ghost" onclick="shuffleDeck()">🔀 Shuffle</button>
-    </div>
-  </div>
-</div>
- 
-<!-- ===== GRAMMAR ===== -->
-<div id="panel-grammar" class="panel">
-  <div class="card">
-    <div class="card-title">📝 Grammar & Writing Checker</div>
-    <label>Paste your text below</label>
-    <textarea id="grammar-input" placeholder="Type or paste a sentence or short paragraph here. e.g. 'Yesterday I goed to the store and buyed some apple.'"></textarea>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="checkGrammar()">✦ Check Grammar</button>
-      <button class="btn btn-secondary" onclick="document.getElementById('grammar-input').value='';document.getElementById('grammar-output').innerHTML=''">Clear</button>
-      <button class="btn btn-secondary" onclick="grammarExample()">Try an Example</button>
-    </div>
-  </div>
-  <div id="grammar-output"></div>
-</div>
- 
-<!-- ===== WRITING ===== -->
-<div id="panel-writing" class="panel">
-  <div class="card">
-    <div class="card-title">✍️ <span class="t" data-en="Writing Prompt Generator" data-sq="Gjenerator Temash Shkrimi">Writing Prompt Generator</span></div>
-    <div class="row">
-      <div>
-        <label class="t" data-en="Topic Area" data-sq="Fusha e Temës">Topic Area</label>
-        <select id="writing-topic">
-          <option value="personal">Personal Experience</option>
-          <option value="opinion">Opinion & Argument</option>
-          <option value="descriptive">Descriptive</option>
-          <option value="narrative">Narrative / Story</option>
-          <option value="discursive">Discursive Essay</option>
-        </select>
-      </div>
-      <div>
-        <label class="t" data-en="Level" data-sq="Niveli">Level</label>
-        <select id="writing-level">
-          <option value="A2">A2 – Elementary</option>
-          <option value="B1" selected>B1 – Intermediate</option>
-          <option value="B2">B2 – Upper Intermediate</option>
-          <option value="C1">C1 – Advanced</option>
-        </select>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="generatePrompt()">✦ <span class="t" data-en="Generate Prompt" data-sq="Gjenero Temë">Generate Prompt</span></button>
-      <button class="btn btn-secondary" onclick="generatePrompt()">🔀 <span class="t" data-en="Another One" data-sq="Tjetër">Another One</span></button>
-    </div>
-  </div>
-  <div id="writing-output" style="display:none;">
-    <div class="card">
-      <div class="card-title">📄 <span class="t" data-en="Your Writing Prompt" data-sq="Tema Jote e Shkrimit">Your Writing Prompt</span></div>
-      <div id="prompt-content"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">📝 <span class="t" data-en="Write Here" data-sq="Shkruaj Këtu">Write Here</span></div>
-      <textarea id="student-writing" placeholder="Start writing your response here..." style="min-height:200px;width:100%;"></textarea>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-        <span id="word-count" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">0 words</span>
-        <div class="btn-row" style="margin-top:0;">
-          <button class="btn btn-primary" onclick="checkWriting()">✦ <span class="t" data-en="Check My Writing" data-sq="Kontrollo Shkrimin">Check My Writing</span></button>
-          <button class="btn btn-secondary" onclick="clearWriting()"><span class="t" data-en="Clear" data-sq="Pastro">Clear</span></button>
-        </div>
-      </div>
-    </div>
-    <div id="writing-feedback" style="display:none;" class="card">
-      <div class="card-title">💬 <span class="t" data-en="Feedback" data-sq="Komente">Feedback</span></div>
-      <div id="writing-feedback-content"></div>
-    </div>
-  </div>
-</div>
- 
-<!-- ===== READING ===== -->
-<div id="panel-reading" class="panel">
-  <div class="card">
-    <div class="card-title">📖 <span class="t" data-en="Reading Comprehension" data-sq="Kuptimi i Leximit">Reading Comprehension</span></div>
-    <div class="row">
-      <div>
-        <label class="t" data-en="Topic" data-sq="Tema">Topic</label>
-        <select id="reading-topic">
-          <option value="climate">Climate Change</option>
-          <option value="social">Social Media</option>
-          <option value="technology">Technology & AI</option>
-          <option value="travel">Travel & Culture</option>
-          <option value="health">Health & Wellbeing</option>
-          <option value="education">Education</option>
-        </select>
-      </div>
-      <div>
-        <label class="t" data-en="Level" data-sq="Niveli">Level</label>
-        <select id="reading-level">
-          <option value="A2">A2 – Elementary</option>
-          <option value="B1" selected>B1 – Intermediate</option>
-          <option value="B2">B2 – Upper Intermediate</option>
-        </select>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="loadReading()">✦ <span class="t" data-en="Load Passage" data-sq="Ngarko Tekstin">Load Passage</span></button>
-    </div>
-  </div>
-  <div id="reading-output" style="display:none;">
-    <div class="card">
-      <div class="card-title" id="reading-title">📄 Passage</div>
-      <div id="reading-passage" style="font-size:14px;line-height:1.9;color:var(--text);"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">❓ <span class="t" data-en="Comprehension Questions" data-sq="Pyetje Kuptimi">Comprehension Questions</span></div>
-      <div id="reading-questions"></div>
-      <div class="btn-row" style="margin-top:14px;">
-        <button class="btn btn-primary" onclick="checkReading()">✦ <span class="t" data-en="Check Answers" data-sq="Kontrollo Përgjigjet">Check Answers</span></button>
-        <button class="btn btn-secondary" onclick="resetReading()"><span class="t" data-en="Reset" data-sq="Rivendos">Reset</span></button>
-      </div>
-      <div id="reading-score" style="display:none;margin-top:14px;"></div>
-    </div>
-  </div>
-</div>
- 
-<!-- ===== GAMES ===== -->
-<div id="panel-games" class="panel">
-  <div class="card">
-    <div class="card-title">🎮 Word Games</div>
-    <div class="game-select">
-      <div class="game-card active" id="gc-hangman" onclick="selectGame('hangman')">
-        <div class="game-icon">🪢</div>
-        <div class="game-name">Hangman</div>
-        <div class="game-desc">Guess the word letter by letter</div>
-      </div>
+@@ -510,104 +517,122 @@ textarea{resize:vertical;min-height:100px;}
       <div class="game-card" id="gc-scramble" onclick="selectGame('scramble')">
         <div class="game-icon">🔀</div>
         <div class="game-name">Word Scramble</div>
@@ -532,6 +113,9 @@ textarea{resize:vertical;min-height:100px;}
     <div class="card-title">📊 Your Progress</div>
     <div class="stat-grid" id="stat-grid"></div>
     <div class="btn-row">
+      <button class="btn btn-secondary" onclick="exportProgress()">⬇️ Export Progress</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('import-progress').click()">⬆️ Import Progress</button>
+      <input id="import-progress" type="file" accept="application/json" style="display:none" onchange="importProgress(event)"/>
       <button class="btn btn-secondary" onclick="clearProgress()">🗑️ Reset Progress</button>
     </div>
   </div>
@@ -577,15 +161,34 @@ textarea{resize:vertical;min-height:100px;}
 </div>
  
 </main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
  
 <script>
 // ======== THEME ========
 let isDark = true;
+let isDark = (localStorage.getItem('el_theme') || 'dark') === 'dark';
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0e0f14' : '#f4f5f0');
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
+}
 function toggleTheme() {
   isDark = !isDark;
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
   saveProgress();
+  localStorage.setItem('el_theme', isDark ? 'dark' : 'light');
+  applyTheme();
+  showToast(`Theme saved: ${isDark ? 'dark' : 'light'} mode`);
+}
+function showToast(message) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = message;
+  t.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => t.classList.remove('show'), 2200);
 }
  
 // ======== TABS ========
@@ -611,173 +214,7 @@ function loadVoices() {
     opt.textContent = `${v.name} (${v.lang})`;
     if (v.lang.startsWith('en')) opt.selected = true;
     sel.appendChild(opt);
-  });
-}
- 
-if (window.speechSynthesis) {
-  window.speechSynthesis.onvoiceschanged = loadVoices;
-  loadVoices();
-}
- 
-function speak(text, rate = 0.9) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  const sel = document.getElementById('voice-select');
-  const rateSel = document.getElementById('voice-rate');
-  if (sel && availableVoices[sel.value]) u.voice = availableVoices[sel.value];
-  u.rate = rateSel ? parseFloat(rateSel.value) : rate;
-  u.lang = 'en-US';
-  window.speechSynthesis.speak(u);
-}
- 
-function speakWord(word) { speak(word); }
-function stopSpeaking() { window.speechSynthesis.cancel(); }
- 
-// ======== VOCAB DATA ========
-const TOPICS = [
-  { name: "Climate Change", emoji: "🌍", words: [
-    {w:"fossil fuels",d:"Natural fuels (coal, oil, gas) formed from ancient organisms.",e:"Burning fossil fuels releases carbon dioxide."},
-    {w:"carbon emissions",d:"CO₂ released into the atmosphere from burning fuel.",e:"Countries are pledging to reduce carbon emissions."},
-    {w:"renewable energy",d:"Energy from naturally replenished sources like sun or wind.",e:"Solar panels generate renewable energy."},
-    {w:"greenhouse gas",d:"A gas that traps heat in the atmosphere.",e:"Methane is a powerful greenhouse gas."},
-    {w:"sustainability",d:"Using resources without depleting them for future generations.",e:"The company adopted sustainability practices."},
-    {w:"deforestation",d:"Large-scale clearing of forests.",e:"Deforestation threatens many animal species."},
-    {w:"biodiversity",d:"The variety of life in an ecosystem.",e:"Rainforests have incredible biodiversity."},
-    {w:"ecosystem",d:"A community of living things interacting with their environment.",e:"Oceans are a vital ecosystem."},
-    {w:"carbon footprint",d:"Total greenhouse gas emissions caused by an individual.",e:"Flying increases your carbon footprint."},
-    {w:"drought",d:"A prolonged period of abnormally low rainfall.",e:"Severe droughts are becoming more frequent."},
-  ]},
-  { name: "Social Media", emoji: "📱", words: [
-    {w:"algorithm",d:"Rules a computer uses to decide what content you see.",e:"The algorithm shows you posts based on your likes."},
-    {w:"influencer",d:"A person with a large online following who affects opinions.",e:"She became an influencer after her videos went viral."},
-    {w:"engagement",d:"Likes, shares, and comments on social media posts.",e:"High engagement helps posts reach more people."},
-    {w:"viral",d:"Spreading rapidly and widely across the internet.",e:"The video went viral overnight."},
-    {w:"misinformation",d:"False information spread without intending to deceive.",e:"Misinformation about health can be dangerous."},
-    {w:"digital footprint",d:"The trail of data you leave when using the internet.",e:"Think carefully about your digital footprint."},
-    {w:"cyberbullying",d:"Using digital technology to bully someone.",e:"Schools are tackling cyberbullying with new policies."},
-    {w:"privacy",d:"The right to keep personal information secret.",e:"Many apps collect data without respecting privacy."},
-    {w:"platform",d:"A website or app where people share content.",e:"Instagram is a popular social media platform."},
-    {w:"filter bubble",d:"When algorithms only show you content you already agree with.",e:"Filter bubbles can distort our view of the world."},
-  ]},
-  { name: "Technology", emoji: "💻", words: [
-    {w:"artificial intelligence",d:"Computer systems that perform tasks requiring human-like intelligence.",e:"AI can now write essays and create images."},
-    {w:"automation",d:"Using machines or software to perform tasks automatically.",e:"Automation is changing many industries."},
-    {w:"cybersecurity",d:"Protection of computer systems from digital attacks.",e:"Cybersecurity is a growing career field."},
-    {w:"virtual reality",d:"A simulated 3D environment experienced through a headset.",e:"Virtual reality is used in gaming and training."},
-    {w:"bandwidth",d:"The amount of data that can be transferred over a connection.",e:"Streaming videos requires high bandwidth."},
-    {w:"cloud computing",d:"Storing and accessing data over the internet.",e:"Many businesses use cloud computing for storage."},
-    {w:"machine learning",d:"AI that improves through experience and data.",e:"Machine learning powers recommendation systems."},
-    {w:"encryption",d:"Converting data into a code to prevent unauthorised access.",e:"End-to-end encryption protects your messages."},
-    {w:"data breach",d:"Unauthorised access to confidential data.",e:"The company suffered a major data breach."},
-    {w:"interface",d:"The point of interaction between a user and a computer.",e:"A good interface makes software easy to use."},
-  ]},
-  { name: "Travel", emoji: "✈️", words: [
-    {w:"itinerary",d:"A detailed plan or route of a journey.",e:"She planned a week-long itinerary through Italy."},
-    {w:"accommodation",d:"A place where someone lives or stays temporarily.",e:"The accommodation included breakfast."},
-    {w:"culture shock",d:"Disorientation when experiencing a very different culture.",e:"Moving abroad can cause culture shock."},
-    {w:"landmark",d:"A recognisable feature marking a location.",e:"The Eiffel Tower is a famous landmark."},
-    {w:"expedition",d:"A journey undertaken for a specific purpose.",e:"They joined an expedition to the Arctic."},
-    {w:"customs",d:"The official process of checking goods at a border.",e:"You must declare items at customs."},
-    {w:"jet lag",d:"Tiredness after crossing several time zones.",e:"She had terrible jet lag after the 12-hour flight."},
-    {w:"excursion",d:"A short journey or trip, often for pleasure.",e:"We booked a day excursion to the volcano."},
-    {w:"visa",d:"An official endorsement allowing entry to a country.",e:"You need a visa to visit some countries."},
-    {w:"backpacking",d:"Travelling independently with minimal luggage.",e:"He spent a summer backpacking through Southeast Asia."},
-  ]},
-  { name: "Health & Wellbeing", emoji: "🏃", words: [
-    {w:"nutrition",d:"The process of taking in food for growth and health.",e:"Good nutrition is essential for children."},
-    {w:"immunity",d:"The ability of an organism to resist infection.",e:"Exercise can boost your immunity."},
-    {w:"cardiovascular",d:"Relating to the heart and blood vessels.",e:"Running is great cardiovascular exercise."},
-    {w:"mental health",d:"A person's psychological and emotional wellbeing.",e:"Talking about mental health reduces stigma."},
-    {w:"sedentary",d:"Characterised by much sitting and little physical activity.",e:"A sedentary lifestyle can lead to health problems."},
-    {w:"symptom",d:"A physical or mental feature indicating a condition.",e:"Fever is a common symptom of infection."},
-    {w:"therapy",d:"Treatment for physical or mental health problems.",e:"Cognitive therapy can help with anxiety."},
-    {w:"pandemic",d:"An outbreak of disease spreading across a large region.",e:"The pandemic changed how we live and work."},
-    {w:"resilience",d:"The ability to recover quickly from difficulties.",e:"Resilience is an important life skill."},
-    {w:"hydration",d:"The process of maintaining enough water in the body.",e:"Proper hydration improves concentration."},
-  ]},
-  { name: "Education", emoji: "📚", words: [
-    {w:"curriculum",d:"The subjects making up a course of study.",e:"The school updated its curriculum last year."},
-    {w:"assessment",d:"An evaluation of a student's understanding.",e:"Continuous assessment replaces final exams in some schools."},
-    {w:"collaborative",d:"Involving people working together toward a shared goal.",e:"Collaborative projects develop teamwork skills."},
-    {w:"critical thinking",d:"Analysing facts to form a judgement.",e:"Critical thinking is valued in higher education."},
-    {w:"literacy",d:"The ability to read and write.",e:"Digital literacy is as important as traditional literacy."},
-    {w:"pedagogy",d:"The method and practice of teaching.",e:"Modern pedagogy focuses on student engagement."},
-    {w:"scholarship",d:"A grant awarded to support a student's education.",e:"She received a scholarship to study abroad."},
-    {w:"motivation",d:"The reason for acting in a particular way.",e:"Motivation affects academic performance."},
-    {w:"peer review",d:"Evaluation of work by others in the same field.",e:"Students exchanged essays for peer review."},
-    {w:"extracurricular",d:"Activities outside the regular academic curriculum.",e:"She joined many extracurricular clubs."},
-  ]},
-  { name: "Environment", emoji: "🌿", words: [
-    {w:"conservation",d:"Protection of the natural environment.",e:"Conservation efforts saved the species."},
-    {w:"pollution",d:"Contamination of the environment with harmful substances.",e:"Air pollution causes respiratory problems."},
-    {w:"habitat",d:"The natural home of an animal or plant.",e:"Wetlands are an important habitat for birds."},
-    {w:"endangered",d:"At serious risk of extinction.",e:"The tiger is an endangered species."},
-    {w:"reforestation",d:"Replanting trees in deforested areas.",e:"Reforestation helps absorb CO₂."},
-    {w:"compost",d:"Decayed organic material used as fertiliser.",e:"She used kitchen waste to make compost."},
-    {w:"carbon neutral",d:"Not adding net carbon dioxide to the atmosphere.",e:"The airline aims to be carbon neutral by 2030."},
-    {w:"recycling",d:"Converting waste into reusable material.",e:"Recycling reduces landfill waste."},
-    {w:"invasive species",d:"A species introduced to an area where it causes harm.",e:"Invasive species can destroy local ecosystems."},
-    {w:"marine",d:"Relating to the sea.",e:"Marine biologists study ocean life."},
-  ]},
-  { name: "Arts & Culture", emoji: "🎨", words: [
-    {w:"aesthetic",d:"Concerned with beauty or the appreciation of art.",e:"The gallery has a minimal aesthetic."},
-    {w:"narrative",d:"A spoken or written account of events.",e:"The film had a powerful narrative."},
-    {w:"symbolism",d:"The use of symbols to represent ideas.",e:"The dove is a symbol of peace."},
-    {w:"genre",d:"A style or category of art, music, or literature.",e:"Mystery is her favourite literary genre."},
-    {w:"interpretation",d:"An explanation or way of understanding something.",e:"His interpretation of the poem was unique."},
-    {w:"perspective",d:"A particular point of view or attitude.",e:"The novel offers a fresh perspective on war."},
-    {w:"critique",d:"A detailed analysis and assessment of something.",e:"She wrote a critique of the exhibition."},
-    {w:"contemporary",d:"Belonging to or occurring in the present.",e:"Contemporary art often challenges traditions."},
-    {w:"heritage",d:"Traditions and achievements passed down from previous generations.",e:"The city is proud of its cultural heritage."},
-    {w:"improvisation",d:"Creating or performing spontaneously without preparation.",e:"Jazz musicians are skilled in improvisation."},
-  ]},
-];
- 
-// Build topic chips and selects
-function initTopics() {
-  const fcSelect = document.getElementById('fc-topic');
-  const gameSelect = document.getElementById('game-topic');
-  TOPICS.forEach(t => {
-    const opt1 = document.createElement('option');
-    opt1.value = t.name; opt1.textContent = t.emoji + ' ' + t.name;
-    fcSelect.appendChild(opt1);
-    const opt2 = document.createElement('option');
-    opt2.value = t.name; opt2.textContent = t.emoji + ' ' + t.name;
-    gameSelect.appendChild(opt2);
-  });
-}
- 
-function getTopicData(name) {
-  return TOPICS.find(t => t.name.toLowerCase() === name.toLowerCase()) ||
-    TOPICS.find(t => name.toLowerCase().includes(t.name.toLowerCase())) ||
-    TOPICS[0];
-}
- 
-// ======== QUIZ ========
-let quizAnswers = {}, quizTotal = 0;
- 
-function decodeHTML(s) {
-  const t = document.createElement('textarea'); t.innerHTML = s; return t.value;
-}
- 
-async function loadQuiz() {
-  const cat = document.getElementById('quiz-cat').value;
-  const diff = document.getElementById('quiz-diff').value;
-  const count = document.getElementById('quiz-count').value;
-  const name = document.getElementById('student-name').value.trim();
-  const nameDisplay = document.getElementById('student-name-display');
-  if (nameDisplay) nameDisplay.textContent = name || 'Student';
-  const btn = document.getElementById('btn-load-quiz');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Loading...';
-  const catP = cat !== '0' ? `&category=${cat}` : '';
-  try {
-    const res = await fetch(`https://opentdb.com/api.php?amount=${count}&type=multiple&difficulty=${diff}${catP}`);
-    const data = await res.json();
-    if (data.response_code !== 0 || !data.results.length) throw new Error();
-    renderQuiz(data.results);
-  } catch {
-    document.getElementById('quiz-container').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div>Couldn't load. Check connection and retry.</div>`;
+@@ -781,85 +806,50 @@ async function loadQuiz() {
   }
   btn.disabled = false; btn.innerHTML = '✦ ' + (currentLang==='sq' ? 'Ngarko Kuizin' : 'Load Quiz');
 }
@@ -863,261 +300,7 @@ function answer(idx, chosen, correct, btn) {
   speak(isCorrect ? 'Correct!' : `The answer is: ${correct}`);
 }
  
-function showFinalScore(name, pts, total, pct) {
-  const el = document.getElementById('score-final');
-  if (!el) return;
-  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
-  const msg = pct >= 80
-    ? (currentLang==='sq' ? 'Punë e shkëlqyer!' : 'Excellent work!')
-    : pct >= 60
-    ? (currentLang==='sq' ? 'Vazhdoni kështu!' : 'Good effort!')
-    : (currentLang==='sq' ? 'Vazhdoni të praktikoni!' : 'Keep practising!');
-  el.style.display = 'block';
-  el.innerHTML = `<div class="score-bar" style="background:var(--accent)18;border-color:var(--accent)44;">
-    <div style="font-size:32px;">${emoji}</div>
-    <div>
-      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--accent);">${name}</div>
-      <div style="font-size:13px;color:var(--text);">${msg} ${pts} / ${total} (${pct}%)</div>
-    </div>
-  </div>`;
-}
- 
-function updateScore(pts, answered, total) {
-  document.getElementById('score-display').textContent = pts;
-  document.getElementById('score-pct').textContent = total ? Math.round(pts/total*100)+'%' : '0%';
-  document.getElementById('score-sub').textContent = `${answered} / ${total}`;
-  document.getElementById('score-fill').style.width = total ? (pts/total*100)+'%' : '0%';
-}
- 
-function resetQuiz() {
-  quizAnswers = {};
-  document.getElementById('quiz-container').innerHTML = `<div class="empty-state"><div class="icon">🎯</div>${currentLang==='sq'?'Ngarko një kuiz për të filluar!':'Load a quiz to begin!'}</div>`;
-  document.getElementById('score-section').style.display = 'none';
-  const sf = document.getElementById('score-final');
-  if (sf) sf.style.display = 'none';
-}
- 
-// ======== WRITING PROMPT GENERATOR ========
-const WRITING_PROMPTS = {
-  personal: [
-    { title:"A Memorable Journey", prompt:"Write about a journey you will never forget. Where did you go? What happened? Why was it special?", tips:["Use past tense throughout","Include sensory details (what you saw, heard, felt)","End with what you learned from the experience"], words:"100–150 words" },
-    { title:"My Role Model", prompt:"Describe a person you admire. Who are they? What do they do? Why do they inspire you?", tips:["Use adjectives to describe their personality","Give specific examples of what they have done","Explain how they have influenced you"], words:"100–150 words" },
-    { title:"A Challenge I Overcame", prompt:"Write about a difficult situation you faced and how you dealt with it. What did you learn?", tips:["Structure: situation → problem → action → result","Use linking words: however, although, as a result","Be honest and reflective"], words:"120–160 words" },
-  ],
-  opinion: [
-    { title:"Should Social Media Have Age Limits?", prompt:"Do you think teenagers under 16 should be banned from social media? Give your opinion with reasons and examples.", tips:["State your opinion clearly in the first sentence","Give at least 2 reasons with examples","Acknowledge the other side before concluding"], words:"150–200 words" },
-    { title:"Are Exams a Fair Way to Test Students?", prompt:"Some people believe exams are the best way to measure a student's ability. Do you agree? Why or why not?", tips:["Use phrases: In my opinion... / I strongly believe...","Present both sides before giving your view","End with a strong concluding sentence"], words:"150–200 words" },
-    { title:"Technology in the Classroom", prompt:"Should students be allowed to use smartphones in class? Discuss the advantages and disadvantages.", tips:["Use discourse markers: Firstly, Furthermore, On the other hand","Give real examples to support each point","Write a balanced conclusion"], words:"150–200 words" },
-  ],
-  descriptive: [
-    { title:"Describe Your Ideal City", prompt:"Imagine a perfect city for young people. Describe what it looks like, what it has, and why it would be a great place to live.", tips:["Use present tense for descriptions","Include senses: sights, sounds, smells","Use comparative structures: more... than, as... as"], words:"120–160 words" },
-    { title:"A Rainy Day", prompt:"Describe a rainy day in detail. Focus on the sights, sounds, smells and feelings it creates.", tips:["Use vivid adjectives and strong verbs","Write in the present tense for a 'live' feel","Try to create a mood — peaceful, gloomy, cosy"], words:"100–140 words" },
-  ],
-  narrative: [
-    { title:"The Unexpected Visitor", prompt:"You arrive home one day to find a stranger sitting in your living room. Write the story of what happens next.", tips:["Build suspense gradually","Use dialogue to make the story come alive","Think about: who? why? what happens? how does it end?"], words:"150–200 words" },
-    { title:"Lost!", prompt:"You are on a trip and suddenly realise you are completely lost. Write a story about what happens.", tips:["Use past simple and past continuous","Include your thoughts and feelings","Give the story a clear beginning, middle and end"], words:"150–200 words" },
-  ],
-  discursive: [
-    { title:"Climate Change: Whose Responsibility Is It?", prompt:"Is it the responsibility of governments, businesses, or individuals to tackle climate change? Discuss different views.", tips:["Organise into paragraphs: intro, point 1, point 2, counter-argument, conclusion","Use formal language throughout","Avoid using 'I' — use 'one' or 'people' instead"], words:"180–250 words" },
-    { title:"The Benefits and Drawbacks of Remote Learning", prompt:"Online learning has become very common. Discuss its advantages and disadvantages for teenagers.", tips:["Use topic sentences to start each paragraph","Balance positive and negative points equally","End with your own reasoned conclusion"], words:"180–250 words" },
-  ],
-};
- 
-let currentPrompt = null;
- 
-function generatePrompt() {
-  const type = document.getElementById('writing-topic').value;
-  const level = document.getElementById('writing-level').value;
-  const list = WRITING_PROMPTS[type] || WRITING_PROMPTS.personal;
-  const p = list[Math.floor(Math.random() * list.length)];
-  currentPrompt = p;
- 
-  const tipsHTML = p.tips.map(t => `<li style="margin-bottom:6px;">${t}</li>`).join('');
-  document.getElementById('prompt-content').innerHTML = `
-    <div class="ppp-stage ppp-pres" style="margin-bottom:14px;">
-      <div class="ppp-stage-header"><span class="ppp-stage-tag">${p.title}</span><span class="ppp-time">${p.words}</span></div>
-      <div class="ppp-stage-body" style="font-size:14px;font-weight:500;">${p.prompt}</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;">💡 Writing Tips</div>
-      <ul style="padding-left:18px;font-size:13px;line-height:1.7;">${tipsHTML}</ul>
-    </div>`;
-  document.getElementById('writing-output').style.display = 'block';
-  document.getElementById('student-writing').value = '';
-  document.getElementById('word-count').textContent = '0 words';
-  document.getElementById('writing-feedback').style.display = 'none';
- 
-  document.getElementById('student-writing').oninput = function() {
-    const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
-    document.getElementById('word-count').textContent = words + ' words';
-  };
-}
- 
-function checkWriting() {
-  const text = document.getElementById('student-writing').value.trim();
-  if (!text) { alert('Write something first!'); return; }
-  const words = text.trim().split(/\s+/).filter(w=>w.length>0).length;
-  const sentences = text.split(/[.!?]+/).filter(s=>s.trim().length>3).length;
-  const hasCapI = !/\bi\b(?!')/.test(text);
-  const longSentences = text.split(/[.!?]+/).filter(s=>s.trim().split(/\s+/).length > 35).length;
- 
-  const fb = [];
-  if (words < 50) fb.push({ type:'warn', msg:`Your response is only ${words} words. Aim for at least ${currentPrompt?.words || '100'}.` });
-  else fb.push({ type:'good', msg:`Good length — ${words} words written.` });
-  if (!hasCapI) fb.push({ type:'error', msg:"Remember to always capitalise the pronoun 'I'." });
-  if (longSentences > 0) fb.push({ type:'warn', msg:`${longSentences} sentence(s) are very long. Try splitting them into shorter ones.` });
-  if (sentences >= 3) fb.push({ type:'good', msg:'Good use of varied sentences.' });
-  if (/however|although|because|therefore|furthermore|on the other hand|in addition/i.test(text))
-    fb.push({ type:'good', msg:'Great — you are using linking words and discourse markers!' });
-  else fb.push({ type:'warn', msg:"Try adding linking words like: however, although, therefore, furthermore." });
-  if (/I think|I believe|In my opinion|I feel/i.test(text))
-    fb.push({ type:'good', msg:'Good use of opinion phrases.' });
- 
-  const html = fb.map(f => `<div class="grammar-item${f.type==='good'?' good':''}">
-    <div class="grammar-label${f.type==='good'?' good':''}">${f.type==='good'?'✓ Well done':f.type==='warn'?'💡 Tip':'⚠ Check'}</div>
-    <div class="grammar-text">${f.msg}</div>
-  </div>`).join('');
- 
-  document.getElementById('writing-feedback-content').innerHTML = html;
-  document.getElementById('writing-feedback').style.display = 'block';
-  logActivity('writing', 'Writing prompt completed', `${words} words`, null);
-}
- 
-function clearWriting() {
-  document.getElementById('student-writing').value = '';
-  document.getElementById('word-count').textContent = '0 words';
-  document.getElementById('writing-feedback').style.display = 'none';
-}
- 
-// ======== READING COMPREHENSION ========
-const PASSAGES = {
-  climate: {
-    title: "Climate Change and Our Future",
-    B1: {
-      text: `Climate change is one of the biggest challenges facing our planet today. Scientists agree that the Earth's temperature is rising because of greenhouse gases, mainly from burning fossil fuels like coal and oil. These gases trap heat in the atmosphere, causing glaciers to melt, sea levels to rise, and extreme weather events to become more frequent.\n\nMany countries are now trying to reduce their carbon emissions by switching to renewable energy sources such as solar and wind power. Individuals can also help by using public transport, eating less meat, and reducing waste. However, experts warn that we need much faster action from governments and large companies to avoid the worst effects of climate change.\n\nYoung people around the world are increasingly speaking out about this issue, demanding that leaders take urgent steps to protect the environment for future generations.`,
-      questions: [
-        { q:"What is the main cause of rising temperatures according to scientists?", options:["Volcanic eruptions","Burning fossil fuels","Deforestation","Ocean currents"], answer:1 },
-        { q:"Which of the following is NOT mentioned as a consequence of climate change?", options:["Melting glaciers","Rising sea levels","Extreme weather","Earthquakes"], answer:3 },
-        { q:"What are 'renewable energy sources' according to the text?", options:["Coal and oil","Nuclear power","Solar and wind power","Fossil fuels"], answer:2 },
-        { q:"What do young people want their leaders to do?", options:["Build more factories","Take urgent steps to protect the environment","Reduce public transport","Stop using electricity"], answer:1 },
-        { q:"What does the word 'emissions' most likely mean in this context?", options:["Energy produced","Gases released into the air","Temperatures measured","Fuels burned underground"], answer:1 },
-      ]
-    }
-  },
-  social: {
-    title: "Social Media: Connection or Distraction?",
-    B1: {
-      text: `Social media platforms like Instagram, TikTok and Snapchat have transformed the way teenagers communicate and share their lives. With just a smartphone, young people can connect with friends across the world, discover new music, and follow their favourite celebrities. Many teens say social media helps them feel less lonely and gives them a space to express themselves.\n\nHowever, there are growing concerns about its negative effects. Research suggests that spending too much time on social media can damage mental health, particularly among teenage girls. The pressure to look perfect, gain followers, and receive likes can lead to anxiety and low self-esteem. Cyberbullying is also a serious problem, with many young people experiencing harassment online.\n\nExperts recommend setting daily time limits on social media use and having 'phone-free' times during meals and before bed. Parents and teachers play an important role in helping teenagers develop healthy digital habits.`,
-      questions: [
-        { q:"According to the text, which is a positive effect of social media for teens?", options:["It helps them sleep better","It helps them feel less lonely","It improves their grades","It replaces face-to-face contact"], answer:1 },
-        { q:"Who does research suggest is most negatively affected by social media?", options:["Young boys","Elderly people","Teenage girls","Primary school children"], answer:2 },
-        { q:"What is 'cyberbullying' as used in this text?", options:["Gaming online","Being famous on the internet","Harassing someone online","Sharing photos online"], answer:2 },
-        { q:"What do experts recommend?", options:["Deleting all social media accounts","Setting time limits on social media","Using more platforms at once","Only using social media at school"], answer:1 },
-        { q:"What does the word 'harassment' mean in this context?", options:["Encouragement","Aggressive or unwanted behaviour","Friendly messages","Public praise"], answer:1 },
-      ]
-    }
-  },
-  technology: {
-    title: "Artificial Intelligence: The Future Is Now",
-    B1: {
-      text: `Artificial intelligence, or AI, is no longer just a concept from science fiction films. It is already part of our daily lives in ways many of us do not notice. When you ask a voice assistant for the weather, get a recommendation on a streaming service, or see an advertisement that seems to know exactly what you want, you are experiencing AI in action.\n\nAI works by processing enormous amounts of data and identifying patterns. It can learn from experience and improve over time, which is why it is sometimes called 'machine learning'. Today, AI is being used in medicine to detect diseases earlier, in transport to develop self-driving cars, and in education to personalise learning.\n\nDespite its many advantages, AI also raises important questions. Some people worry that robots will replace human workers. Others are concerned about privacy, since AI systems collect large amounts of personal data. As this technology continues to develop rapidly, society must carefully consider both its benefits and its risks.`,
-      questions: [
-        { q:"Which is an example of AI mentioned in the text?", options:["Reading a book","Watching TV","Getting recommendations on a streaming service","Writing a letter"], answer:2 },
-        { q:"What does 'machine learning' refer to?", options:["Students using computers","AI that improves by learning from data","Programming languages","Factory machines"], answer:1 },
-        { q:"In which field is AI helping detect diseases earlier?", options:["Transport","Education","Medicine","Entertainment"], answer:2 },
-        { q:"What privacy concern does the text mention?", options:["AI systems taking photos","AI systems collecting personal data","AI reading private messages","AI controlling phones"], answer:1 },
-        { q:"What is the main idea of the last paragraph?", options:["AI is perfect and has no problems","AI raises important questions about jobs and privacy","AI will replace all humans","AI is only useful in education"], answer:1 },
-      ]
-    }
-  },
-  travel: {
-    title: "Travelling on a Budget",
-    B1: {
-      text: `Travelling is one of the most enriching experiences a young person can have, but many teenagers assume it is too expensive. In reality, with careful planning, it is possible to explore new countries and cultures without spending a fortune.\n\nOne of the best ways to save money is to travel during the off-season, when flights and accommodation are significantly cheaper. Booking in advance also helps, as prices tend to rise closer to the departure date. Many cities offer free or discounted entry to museums and attractions for students, so always carry your student card.\n\nStaying in hostels rather than hotels is another popular option among young travellers. Hostels are affordable, social places where you can meet people from all over the world. Cooking your own meals instead of eating out every day can also save a significant amount of money.\n\nTravelling broadens the mind. It teaches you to be independent, adapt to new situations, and appreciate different ways of life. Even a short trip to a nearby country can change the way you see the world.`,
-      questions: [
-        { q:"What does the text say about travelling during the off-season?", options:["It is more exciting","Flights and accommodation are cheaper","There are more tourists","It is harder to find hostels"], answer:1 },
-        { q:"What should students always carry when visiting attractions?", options:["A passport","A map","A student card","A credit card"], answer:2 },
-        { q:"Why does the text recommend staying in hostels?", options:["They are more luxurious than hotels","They are affordable and social","They provide free meals","They are only available in big cities"], answer:1 },
-        { q:"According to the last paragraph, what does travelling teach you?", options:["How to spend money wisely","Independence and adaptability","How to speak foreign languages","How to cook international food"], answer:1 },
-        { q:"What does the word 'enriching' mean in the first paragraph?", options:["Expensive","Making you wealthier financially","Making your life more valuable and interesting","Tiring and difficult"], answer:2 },
-      ]
-    }
-  },
-  health: {
-    title: "The Importance of Sleep for Teenagers",
-    B1: {
-      text: `Sleep is one of the most important factors in a teenager's health and wellbeing, yet it is often one of the most neglected. Research shows that teenagers need between eight and ten hours of sleep per night, but many get far less than this. The reasons include late-night phone use, heavy homework loads, and early school start times.\n\nLack of sleep has serious consequences. It affects concentration, memory, and the ability to learn. Tired teenagers are more likely to make poor decisions, feel anxious or depressed, and perform badly in exams. In the long term, chronic sleep deprivation can increase the risk of obesity and heart disease.\n\nExperts recommend several strategies to improve sleep quality. Avoiding screens for at least one hour before bed allows the brain to wind down. Keeping a consistent sleep schedule — even at weekends — helps regulate the body's internal clock. Regular physical exercise during the day also promotes better sleep at night.\n\nGetting enough sleep is not a luxury — it is a necessity for a healthy, happy, and successful life.`,
-      questions: [
-        { q:"How many hours of sleep do teenagers need per night according to research?", options:["6–7 hours","8–10 hours","10–12 hours","5–6 hours"], answer:1 },
-        { q:"Which is NOT listed as a reason teenagers get less sleep?", options:["Late-night phone use","Heavy homework","Early school start times","Playing sports"], answer:3 },
-        { q:"What does 'chronic sleep deprivation' mean?", options:["One night of poor sleep","Regularly not getting enough sleep","Sleeping too much","A sleeping disorder"], answer:1 },
-        { q:"What does the text recommend doing one hour before bed?", options:["Doing homework","Eating a snack","Avoiding screens","Doing exercise"], answer:2 },
-        { q:"What is the main message of the last sentence?", options:["Sleep is optional","Sleep is a basic human right","Sleep is essential for health and success","Teenagers do not sleep enough"], answer:2 },
-      ]
-    }
-  },
-  education: {
-    title: "Should School Start Later?",
-    B1: {
-      text: `A growing number of scientists and education experts are calling for secondary schools to start later in the morning. Their argument is simple: teenagers' body clocks are biologically different from those of adults. During puberty, the brain naturally shifts to a later sleep schedule, making it difficult for young people to fall asleep before 11pm or wake up early without feeling exhausted.\n\nStudies from the United States have shown that schools which moved their start times from 7:30am to 8:30am or later saw significant improvements. Students' grades improved, rates of absenteeism fell, and teenagers reported feeling happier and less stressed. There were even fewer road accidents involving young drivers in the morning.\n\nOpponents of later start times argue that it would be difficult for working parents and would disrupt after-school activities and transport schedules. However, supporters point out that the long-term benefits to students' mental and physical health outweigh these practical challenges.\n\nAs the debate continues, one thing is clear: the wellbeing of students must be placed at the centre of decisions about school policy.`,
-      questions: [
-        { q:"Why do scientists say teenagers struggle to wake up early?", options:["They stay up watching TV","Their body clocks shift during puberty","They have too much homework","They eat too late at night"], answer:1 },
-        { q:"What happened in US schools that changed their start times?", options:["Students performed worse","Grades improved and stress decreased","Schools had to close earlier","Teachers complained about the changes"], answer:1 },
-        { q:"Which unexpected benefit is mentioned in the second paragraph?", options:["Better school lunches","More sports activities","Fewer morning road accidents","Cheaper transport costs"], answer:2 },
-        { q:"What is the main argument against later school start times?", options:["Students would sleep too much","It could disrupt parents and activities","Teachers prefer early starts","Exam results would fall"], answer:1 },
-        { q:"What does 'absenteeism' most likely mean?", options:["Students arriving late","Students being frequently absent from school","Students performing poorly","Students changing schools"], answer:1 },
-      ]
-    }
-  }
-};
- 
-let currentPassage = null, readingAnswers = {};
- 
-function loadReading() {
-  const topic = document.getElementById('reading-topic').value;
-  const level = document.getElementById('reading-level').value;
-  const data = PASSAGES[topic];
-  if (!data) return;
-  const levelData = data[level] || data['B1'];
-  currentPassage = { ...levelData, topic };
-  readingAnswers = {};
- 
-  document.getElementById('reading-title').innerHTML = `📄 ${data.title}`;
-  document.getElementById('reading-passage').innerHTML = levelData.text.split('\n\n').map(p => `<p style="margin-bottom:14px;">${p}</p>`).join('');
- 
-  const qHTML = levelData.questions.map((q, i) => {
-    const opts = q.options.map((o, j) =>
-      `<button class="option" onclick="selectReading(${i},${j},this)">${o}</button>`
-    ).join('');
-    return `<div class="quiz-q" id="rq-${i}" style="margin-bottom:12px;">
-      <div class="q-text"><strong>Q${i+1}.</strong> ${q.q}</div>
-      <div class="options">${opts}</div>
-      <div class="feedback" id="rfb-${i}"></div>
-    </div>`;
-  }).join('');
- 
-  document.getElementById('reading-questions').innerHTML = qHTML;
-  document.getElementById('reading-score').style.display = 'none';
-  document.getElementById('reading-output').style.display = 'block';
-}
- 
-function selectReading(qIdx, optIdx, btn) {
-  if (readingAnswers[qIdx] !== undefined) return;
-  readingAnswers[qIdx] = optIdx;
-  document.querySelectorAll(`#rq-${qIdx} .option`).forEach(b => b.style.opacity = '0.6');
-  btn.style.opacity = '1';
-  btn.style.borderColor = 'var(--accent4)';
-  btn.style.color = 'var(--accent4)';
-}
- 
-function checkReading() {
-  if (!currentPassage) return;
-  let correct = 0;
-  currentPassage.questions.forEach((q, i) => {
-    const chosen = readingAnswers[i];
-    const isCorrect = chosen === q.answer;
-    if (isCorrect) correct++;
-    document.querySelectorAll(`#rq-${i} .option`).forEach((b, j) => {
+@@ -1121,102 +1111,115 @@ function checkReading() {
       b.disabled = true;
       b.style.opacity = '1';
       if (j === q.answer) { b.classList.add('correct'); b.style.borderColor=''; b.style.color=''; }
@@ -1146,6 +329,8 @@ function resetReading() {
 let currentLang = 'en';
 function toggleLang() {
   currentLang = currentLang === 'en' ? 'sq' : 'en';
+let currentLang = localStorage.getItem('el_lang') || 'en';
+function applyLang() {
   document.getElementById('lang-btn').textContent = currentLang === 'sq' ? '🇦🇱 SQ' : '🇬🇧 EN';
   document.querySelectorAll('.t').forEach(el => {
     const val = el.getAttribute(`data-${currentLang}`);
@@ -1155,6 +340,12 @@ function toggleLang() {
     const val = el.getAttribute(`data-${currentLang}`);
     if (val) el.textContent = val;
   });
+}
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'sq' : 'en';
+  localStorage.setItem('el_lang', currentLang);
+  applyLang();
+  showToast(currentLang === 'sq' ? 'Gjuha u ruajt' : 'Language saved');
 }
 let fcDeck = [], fcIndex = 0, fcRatings = {};
  
@@ -1193,6 +384,15 @@ function flipCard() { document.getElementById('flashcard').classList.toggle('fli
  
 function fcRate(rating) {
   fcRatings[fcIndex] = rating;
+  const word = fcDeck[fcIndex].w;
+  const p = getProgress();
+  p.review = p.review || {};
+  p.review[word] = {
+    rating,
+    nextDue: Date.now() + (rating === 'known' ? 7 : 1) * 86400000,
+    reviewedAt: Date.now()
+  };
+  saveProgressData(p);
   if (rating === 'known') {
     const word = fcDeck[fcIndex].w;
     const known = getKnownWords();
@@ -1220,281 +420,7 @@ const IRREGULAR_VERBS = [
   ['begin','began','begun'],['keep','kept','kept'],['hold','held','held'],['write','wrote','written'],
   ['stand','stood','stood'],['hear','heard','heard'],['let','let','let'],['mean','meant','meant'],
   ['set','set','set'],['meet','met','met'],['run','ran','run'],['pay','paid','paid'],
-  ['sit','sat','sat'],['speak','spoke','spoken'],['lie','lay','lain'],['lead','led','led'],
-  ['read','read','read'],['grow','grew','grown'],['lose','lost','lost'],['fall','fell','fallen'],
-  ['send','sent','sent'],['build','built','built'],['understand','understood','understood'],
-  ['draw','drew','drawn'],['break','broke','broken'],['spend','spent','spent'],['cut','cut','cut'],
-  ['rise','rose','risen'],['drive','drove','driven'],['buy','bought','bought'],['wear','wore','worn'],
-  ['choose','chose','chosen'],['win','won','won'],['catch','caught','caught'],['teach','taught','taught'],
-  ['sleep','slept','slept'],['sell','sold','sold'],['throw','threw','thrown'],['swim','swam','swum'],
-  ['ride','rode','ridden'],['fly','flew','flown'],['drink','drank','drunk'],['eat','ate','eaten'],
-  ['hit','hit','hit'],['bite','bit','bitten'],['hide','hid','hidden'],['shake','shook','shaken'],
-  ['wake','woke','woken'],['forget','forgot','forgotten'],['forgive','forgave','forgiven'],
-  ['freeze','froze','frozen'],['steal','stole','stolen'],['swing','swung','swung'],
-];
- 
-// Wrong past forms students commonly make (verb+ed on irregular)
-const WRONG_PAST = {
-  'goed':'went','comed':'came','runned':'ran','drived':'drove','taked':'took',
-  'buyed':'bought','catched':'caught','throwed':'threw','swimmed':'swam',
-  'speaked':'spoke','weared':'wore','drinked':'drank','ated':'ate','sitted':'sat',
-  'standed':'stood','leaved':'left','thinked':'thought','knowed':'knew',
-  'falled':'fell','writed':'wrote','hitted':'hit','finded':'found','sended':'sent',
-  'builded':'built','breaked':'broke','spended':'spent','teached':'taught',
-  'sleeped':'slept','selled':'sold','hided':'hid','waked':'woke','forgotted':'forgot',
-  'stealed':'stole','beated':'beat','bited':'bit','flied':'flew','rided':'rode',
-  'holded':'held','keeped':'kept','feeled':'felt','bringed':'brought','beginned':'began',
-  'losted':'lost','payed':'paid','meeted':'met','maked':'made','sayed':'said',
-  'telled':'told','putted':'put','letted':'let','readed':'read','growed':'grew',
-  'gaved':'gave','choosed':'chose','winned':'won','understanded':'understood',
-};
- 
-// Tense confusion patterns
-const TENSE_RULES = [
-  // Past simple with time markers but wrong tense
-  { re: /\b(yesterday|last\s+\w+|ago|\w+\s+ago)\b.*?\b(go|come|do|have|see|make|take|get|give|find|think|say|tell|leave|feel|bring|begin|keep|hold|write|stand|hear|run|pay|sit|speak|grow|lose|fall|send|build|break|spend|buy|wear|choose|win|catch|teach|sleep|sell|throw|swim|ride|fly|drink|eat)\b/gi,
-    msg: "Past time marker detected (e.g. 'yesterday', 'last week'). You may need the past simple tense here.", type: "tense", fix: null },
-  // Present continuous for habits (should be simple present)
-  { re: /\b(always|usually|often|sometimes|never|every\s+\w+)\b.*?\b(am|is|are)\s+\w+ing\b/gi,
-    msg: "Frequency adverbs (always, usually, often...) are used with the present simple, not continuous.", type: "tense", fix: null },
-  // Future: going to + past form
-  { re: /\b(going to|gonna)\s+(went|came|did|had|made|took|got|gave|found|thought|said|told|left|felt|brought|began|kept|held|wrote|stood|heard|ran|paid|sat|spoke|grew|lost|fell|sent|built|broke|spent|bought|wore|won|caught|taught|slept|sold|threw|swam|rode|flew|drank|ate)\b/gi,
-    msg: "After 'going to', use the base verb form (infinitive), not the past tense.", type: "tense", fix: null },
-  // Since/for confusion
-  { re: /\b(since)\s+\d+\s+(minutes?|hours?|days?|weeks?|months?|years?)\b/gi,
-    msg: "Use 'for' with a duration (for 3 days). Use 'since' with a point in time (since Monday).", type: "tense", fix: null },
-  // Used to + ing (wrong)
-  { re: /\bused to\s+\w+ing\b/gi,
-    msg: "'Used to' is followed by the base verb (infinitive), not -ing. E.g. 'used to play', not 'used to playing'.", type: "tense", fix: null },
-  // Will + past (mixing future and past)
-  { re: /\bwill\s+(went|came|did|had|made|took|got|gave|found|thought|said|told|left)\b/gi,
-    msg: "After 'will', use the base verb (infinitive), not a past form.", type: "tense", fix: null },
-  // Have/has + base verb (missing past participle)
-  { re: /\b(have|has)\s+(go|come|do|make|take|get|give|find|think|say|tell|leave|feel|bring|keep|hold|write|stand|hear|run|pay|sit|speak|grow|lose|fall|send|build|break|spend|buy|wear|choose|win|catch|teach|sleep|sell|throw|swim|ride|fly|drink|eat)\b/gi,
-    msg: "After 'have/has', use the past participle (e.g. 'have gone', not 'have go').", type: "tense", fix: null },
-];
- 
-const GRAMMAR_RULES = [
-  // Capitalisation
-  { re: /(?<![.!?]\s)\bi\b(?!')/g, fix: "I", msg: "The pronoun 'I' must always be capitalised.", type: "error" },
-  // Wrong irregular past forms
-  ...Object.entries(WRONG_PAST).map(([wrong, correct]) => ({
-    re: new RegExp(`\\b${wrong}\\b`, 'gi'),
-    fix: correct,
-    msg: `"${wrong}" is not a valid English word. The correct past tense of this verb is "${correct}".`,
-    type: "error"
-  })),
-  // a/an
-  { re: /\ba\s+([aeiouAEIOU])/g, fix: "an", msg: "Use 'an' before words beginning with a vowel sound (a, e, i, o, u).", type: "error" },
-  // Double comparatives
-  { re: /\bmore\s+\w+(er)\b/gi, fix: null, msg: "Avoid double comparatives like 'more faster'. Use either 'more fast' or 'faster', not both.", type: "error" },
-  { re: /\bmost\s+\w+(est)\b/gi, fix: null, msg: "Avoid double superlatives like 'most fastest'. Use either 'most fast' or 'fastest', not both.", type: "error" },
-  // Subject-verb agreement
-  { re: /\b(he|she|it)\s+are\b/gi, fix: "is", msg: "Subject-verb agreement error. Use 'is' with he/she/it, not 'are'.", type: "error" },
-  { re: /\b(they|we|you)\s+is\b/gi, fix: "are", msg: "Subject-verb agreement error. Use 'are' with they/we/you, not 'is'.", type: "error" },
-  { re: /\bi\s+am\s+not\b.*\bgoing\b|\bi\s+aren't\b/gi, fix: null, msg: "Use 'I am not' or 'I'm not' — 'I aren't' is incorrect.", type: "error" },
-  { re: /\bhe\s+don't\b|\bshe\s+don't\b|\bit\s+don't\b/gi, fix: "doesn't", msg: "Use 'doesn't' with he/she/it, not 'don't'.", type: "error" },
-  { re: /\bhe\s+have\b|\bshe\s+have\b|\bit\s+have\b/gi, fix: "has", msg: "Use 'has' with he/she/it, not 'have'.", type: "error" },
-  // Missing apostrophes
-  { re: /\b(dont|cant|wont|shouldnt|wouldnt|couldnt|doesnt|didnt|isnt|arent|wasnt|werent|havent|hasnt|hadnt|mustnt|neednt|shant)\b/gi, fix: null, msg: "Missing apostrophe in contraction. (e.g. 'dont' → 'don't')", type: "error" },
-  // Common spelling/usage
-  { re: /\balot\b/gi, fix: "a lot", msg: "'Alot' is not a word. Write it as two words: 'a lot'.", type: "error" },
-  { re: /\btheir\s+is\b|\btheir\s+are\b/gi, fix: "there is / there are", msg: "Use 'there is/are' to say something exists. 'Their' is possessive (their book).", type: "error" },
-  { re: /\byour\s+welcome\b/gi, fix: "you're welcome", msg: "'Your welcome' should be 'You're welcome' (you are welcome).", type: "error" },
-  { re: /\bshould\s+of\b|\bcould\s+of\b|\bwould\s+of\b|\bmust\s+of\b/gi, fix: "should have / could have / would have", msg: "Use 'have' not 'of' after modal verbs. E.g. 'should have gone', not 'should of gone'.", type: "error" },
-  { re: /\bto\s+\w+\s+to\b/gi, fix: null, msg: "Check your use of 'to' — you may have a double 'to' or a word order issue.", type: "style" },
-  // Style
-  { re: /\b(very very|really really|quite quite|very|really)\s+(very|really)\b/gi, fix: null, msg: "Avoid repeating intensifiers. Try a stronger single word instead (e.g. 'extremely', 'incredibly').", type: "style" },
-  { re: /\b(stuff|things)\b/gi, fix: null, msg: "Vague word detected. Try to be more specific — what 'stuff' or 'things' exactly?", type: "style" },
-  { re: /\bgot\s+got\b/gi, fix: null, msg: "Repeated word: 'got got'. Check this phrase.", type: "error" },
-  { re: /\s{2,}/g, fix: " ", msg: "Extra space detected.", type: "style" },
-];
- 
-function checkGrammar() {
-  const text = document.getElementById('grammar-input').value.trim();
-  if (!text) { alert('Please enter some text first.'); return; }
- 
-  const seen = new Set();
-  const issues = [];
- 
-  // Check tense rules first
-  TENSE_RULES.forEach(rule => {
-    const matches = text.match(rule.re);
-    if (matches) {
-      matches.forEach(m => {
-        const key = rule.msg;
-        if (!seen.has(key)) { seen.add(key); issues.push({ original: m.trim(), fix: rule.fix, msg: rule.msg, type: rule.type }); }
-      });
-    }
-  });
- 
-  // Check grammar rules
-  GRAMMAR_RULES.forEach(rule => {
-    const matches = text.match(rule.re);
-    if (matches) {
-      matches.forEach(m => {
-        const key = m.toLowerCase() + rule.msg;
-        if (!seen.has(key)) { seen.add(key); issues.push({ original: m.trim(), fix: rule.fix, msg: rule.msg, type: rule.type }); }
-      });
-    }
-  });
- 
-  // Sentence length
-  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 4);
-  sentences.forEach(s => {
-    if (s.trim().split(/\s+/).length > 35) {
-      issues.push({ original: s.trim().substring(0,45)+'...', fix: null, msg: "This sentence is very long. Consider splitting it into two shorter sentences.", type: "style" });
-    }
-  });
- 
-  // Count errors vs style
-  const errors = issues.filter(i => i.type === 'error');
-  const tense = issues.filter(i => i.type === 'tense');
-  const style = issues.filter(i => i.type === 'style');
- 
-  const out = document.getElementById('grammar-output');
-  if (!issues.length) {
-    out.innerHTML = `<div class="grammar-result"><div class="grammar-item good"><div class="grammar-label good">✓ Looking Good!</div><div class="grammar-text">No obvious errors detected. Your writing looks clear and correct!</div></div></div>`;
-  } else {
-    let html = `<div class="grammar-result">
-      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-        ${errors.length ? `<span class="badge badge-danger">⚠ ${errors.length} grammar error${errors.length>1?'s':''}</span>` : ''}
-        ${tense.length ? `<span class="badge badge-warn">⏱ ${tense.length} tense issue${tense.length>1?'s':''}</span>` : ''}
-        ${style.length ? `<span class="badge badge-accent">✦ ${style.length} style tip${style.length>1?'s':''}</span>` : ''}
-      </div>`;
-    issues.forEach(issue => {
-      const icon = issue.type === 'error' ? '⚠' : issue.type === 'tense' ? '⏱' : '✦';
-      const label = issue.type === 'error' ? 'Grammar Error' : issue.type === 'tense' ? 'Tense' : 'Style Tip';
-      html += `<div class="grammar-item${issue.type==='style'?' style-item':''}">
-        <div class="grammar-label${issue.type==='style'?' good':''}">${icon} ${label}: <em>"${issue.original}"</em></div>
-        <div class="grammar-text">${issue.msg}</div>
-        ${issue.fix ? `<div class="grammar-fix">→ Correction: "${issue.fix}"</div>` : ''}
-      </div>`;
-    });
-    html += '</div>';
-    out.innerHTML = html;
-  }
-  logActivity('grammar', 'Grammar check', `${issues.length} issues found`, null);
-}
- 
-function grammarExample() {
-  const examples = [
-    "Yesterday i goed to the store and buyed alot of apple. She don't know their going to the park.",
-    "He have been working since 3 hours and he are very tired. I should of called him.",
-    "She always is eating pizza on Friday. They is going to the cinema last night.",
-    "I have go to school yesterday. He catched the ball and throwed it to his friend.",
-    "We was playing football when it started raining. I am going to went to London next week.",
-    "She speaked to the teacher and telled him she forgotted her homework.",
-  ];
-  document.getElementById('grammar-input').value = examples[Math.floor(Math.random()*examples.length)];
-}
- 
-// ======== WORD GAMES ========
-let currentGame = 'hangman';
-let gameWord = '', gameGuesses = [], gameMistakes = 0;
-let scrambleWord = '', scrambleAnswer = '';
- 
-function selectGame(game) {
-  currentGame = game;
-  document.querySelectorAll('.game-card').forEach(c => c.classList.remove('active'));
-  document.getElementById('gc-' + game).classList.add('active');
-}
- 
-function startGame() {
-  const topicName = document.getElementById('game-topic').value;
-  if (!topicName) { alert('Pick a topic!'); return; }
-  const tData = getTopicData(topicName);
-  const words = tData.words.map(w => w.w).filter(w => !w.includes(' '));
-  const picked = words[Math.floor(Math.random() * words.length)] || tData.words[0].w;
-  if (currentGame === 'hangman') startHangman(picked);
-  else startScramble(picked);
-}
- 
-// HANGMAN
-const BODY_PARTS = [
-  '<line x1="90" y1="20" x2="90" y2="60"/>',  // head placeholder
-  '<circle cx="90" cy="40" r="20" fill="none"/>',
-  '<line x1="90" y1="60" x2="90" y2="120"/>',
-  '<line x1="90" y1="70" x2="60" y2="100"/>',
-  '<line x1="90" y1="70" x2="120" y2="100"/>',
-  '<line x1="90" y1="120" x2="60" y2="155"/>',
-  '<line x1="90" y1="120" x2="120" y2="155"/>',
-];
- 
-function startHangman(word) {
-  gameWord = word.toLowerCase();
-  gameGuesses = []; gameMistakes = 0;
-  renderHangman();
-}
- 
-function renderHangman() {
-  const won = gameWord.split('').every(l => gameGuesses.includes(l));
-  const lost = gameMistakes >= BODY_PARTS.length;
-  let svgParts = `<line x1="20" y1="170" x2="160" y2="170"/><line x1="50" y1="170" x2="50" y2="10"/><line x1="50" y1="10" x2="90" y2="10"/><line x1="90" y1="10" x2="90" y2="20"/>`;
-  for (let i = 0; i < gameMistakes; i++) svgParts += BODY_PARTS[i];
- 
-  const blanks = gameWord.split('').map(l =>
-    `<div class="letter-blank">${gameGuesses.includes(l) || lost ? l.toUpperCase() : ''}</div>`).join('');
- 
-  const keyboard = 'abcdefghijklmnopqrstuvwxyz'.split('').map(l => {
-    const hit = gameGuesses.includes(l) && gameWord.includes(l);
-    const miss = gameGuesses.includes(l) && !gameWord.includes(l);
-    return `<button class="key${hit?' hit':''}${miss?' miss':''}" onclick="guessLetter('${l}')" ${gameGuesses.includes(l)||won||lost?'disabled':''}>${l.toUpperCase()}</button>`;
-  }).join('');
- 
-  const status = won ? `<p style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">🎉 You got it!</p>`
-    : lost ? `<p style="color:var(--accent2);font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0;">💀 The word was: <em>${gameWord}</em></p>` : '';
- 
-  document.getElementById('game-area').innerHTML = `
-    <div class="card hangman-area">
-      <svg class="hangman-svg" viewBox="0 0 180 180">${svgParts}</svg>
-      <div class="word-display">${blanks}</div>
-      ${status}
-      <div class="keyboard" style="margin:14px 0;">${keyboard}</div>
-      <p style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;">${BODY_PARTS.length - gameMistakes} attempts remaining</p>
-    </div>`;
-  if (won) logActivity('game', 'Hangman — Won!', gameWord, 100);
-  if (lost) logActivity('game', 'Hangman — Lost', gameWord, 0);
-}
- 
-function guessLetter(l) {
-  if (gameGuesses.includes(l)) return;
-  gameGuesses.push(l);
-  if (!gameWord.includes(l)) gameMistakes++;
-  renderHangman();
-}
- 
-// SCRAMBLE
-function startScramble(word) {
-  scrambleAnswer = word.toLowerCase();
-  let arr = word.split('');
-  do { arr.sort(() => Math.random() - .5); } while (arr.join('') === word);
-  scrambleWord = arr.join('').toUpperCase();
-  document.getElementById('game-area').innerHTML = `
-    <div class="card scramble-area">
-      <p style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:10px;">Unscramble this word:</p>
-      <div class="scrambled-word">${scrambleWord}</div>
-      <input type="text" class="scramble-input" id="scramble-ans" placeholder="Your answer..." onkeydown="if(event.key==='Enter')checkScramble()"/>
-      <div class="btn-row" style="justify-content:center;">
-        <button class="btn btn-primary" onclick="checkScramble()">✦ Check</button>
-        <button class="btn btn-secondary" onclick="startGame()">🔀 New Word</button>
-        <button class="btn btn-ghost" onclick="speak('${scrambleAnswer}')">🔊 Hear it</button>
-      </div>
-      <div id="scramble-feedback" style="margin-top:14px;font-family:'DM Mono',monospace;font-size:13px;text-align:center;"></div>
-    </div>`;
-}
- 
-function checkScramble() {
-  const ans = document.getElementById('scramble-ans').value.trim().toLowerCase();
-  const fb = document.getElementById('scramble-feedback');
-  if (ans === scrambleAnswer) {
-    fb.innerHTML = `<span style="color:var(--accent)">✓ Correct! The word is "${scrambleAnswer}".</span>`;
-    speak('Correct!');
-    logActivity('game', 'Word Scramble — Won!', scrambleAnswer, 100);
-  } else {
-    fb.innerHTML = `<span style="color:var(--accent2)">✗ Try again!</span>`;
-  }
-}
+@@ -1498,86 +1501,120 @@ function checkScramble() {
  
 // ======== PROGRESS (localStorage) ========
 function getProgress() { return JSON.parse(localStorage.getItem('el_progress') || '{"history":[],"stats":{}}'); }
@@ -1520,6 +446,7 @@ function renderProgress() {
   const quizSessions = p.history.filter(h => h.type === 'quiz' && h.score !== null);
   const avgScore = quizSessions.length ? Math.round(quizSessions.reduce((a,h) => a+h.score,0)/quizSessions.length) : 0;
  
+  const dueWords = getDueWords();
   document.getElementById('stat-grid').innerHTML = `
     <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">activities</div></div>
     <div class="stat-card"><div class="stat-num">${p.stats.lesson||0}</div><div class="stat-label">lessons</div></div>
@@ -1527,6 +454,7 @@ function renderProgress() {
     <div class="stat-card"><div class="stat-num">${known.length}</div><div class="stat-label">words known</div></div>
     <div class="stat-card"><div class="stat-num">${avgScore}%</div><div class="stat-label">avg quiz score</div></div>
     <div class="stat-card"><div class="stat-num">${p.stats.game||0}</div><div class="stat-label">games played</div></div>
+    <div class="stat-card"><div class="stat-num">${dueWords.length}</div><div class="stat-label">review due</div></div>
   `;
  
   // History
@@ -1556,6 +484,38 @@ function renderProgress() {
   }
 }
  
+function getDueWords() {
+  const p = getProgress();
+  const now = Date.now();
+  return Object.entries(p.review || {}).filter(([, v]) => (v.nextDue || 0) <= now).map(([word]) => word);
+}
+function exportProgress() {
+  const payload = { exportedAt: new Date().toISOString(), progress: getProgress(), known: getKnownWords(), theme: localStorage.getItem('el_theme'), lang: localStorage.getItem('el_lang') };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `englishlab-progress-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Progress exported');
+}
+function importProgress(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (data.progress) saveProgressData(data.progress);
+      if (Array.isArray(data.known)) saveKnownWords(data.known);
+      if (data.theme) localStorage.setItem('el_theme', data.theme);
+      if (data.lang) localStorage.setItem('el_lang', data.lang);
+      renderProgress();
+      showToast('Progress imported');
+    } catch { alert('That file is not a valid EnglishLab export.'); }
+  };
+  reader.readAsText(file);
+}
 function clearProgress() {
   if (confirm('Reset all progress? This cannot be undone.')) {
     localStorage.removeItem('el_progress');
@@ -1581,15 +541,7 @@ async function lookupWord() {
 }
  
 function renderDict(entry, container) {
-  const phonetic = entry.phonetics?.find(p => p.text)?.text || '';
-  let html = `<div class="dict-result">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-      <div class="dict-word">${entry.word}</div>
-      <button class="btn btn-secondary" style="padding:6px 12px;font-size:11px;" onclick="speak('${entry.word}')">🔊 Pronounce</button>
-    </div>
-    <div class="dict-phonetic">${phonetic}</div>`;
-  entry.meanings?.slice(0,3).forEach(m => {
-    html += `<div style="margin-bottom:14px;"><span class="pos-tag">${m.partOfSpeech}</span>`;
+@@ -1593,30 +1630,35 @@ function renderDict(entry, container) {
     m.definitions?.slice(0,2).forEach(d => {
       html += `<div class="dict-def">• ${d.definition}</div>`;
       if (d.example) html += `<div class="dict-ex">"${d.example}"</div>`;
@@ -1615,8 +567,13 @@ async function loadWOTD() {
 }
  
 // ======== INIT ========
+applyTheme();
+applyLang();
 initTopics();
 renderProgress();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
 </script>
 </body>
 </html>
